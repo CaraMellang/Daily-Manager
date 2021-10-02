@@ -1,13 +1,13 @@
 import logo from './logo.svg';
 import './App.css';
 import {createGlobalStyle} from 'styled-components'
-import SignIn from './pages/SignIn'
+import SignForm from './pages/SignForm'
 
 function App() {
   return (
     <div className="App">
     <GlobalStyled />
-    <SignIn />
+    <SignForm />
     </div>
   );
 }
