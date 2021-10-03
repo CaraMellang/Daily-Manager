@@ -1,16 +1,19 @@
-import logo from './logo.svg';
-import './App.css';
-import {createGlobalStyle} from 'styled-components'
-import SignForm from './pages/SignForm'
+import logo from "./logo.svg";
+import "./App.css";
+import { createGlobalStyle } from "styled-components";
+import SignForm from "./pages/SignForm";
+import { BrowserRouter, Route } from "react-router-dom";
+import { useState } from "react";
+import Main from "./pages/Main";
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-    <GlobalStyled />
-    <SignForm />
-    </div>
+    <BrowserRouter>
+      <GlobalStyled />
+      <Main />
+    </BrowserRouter>
   );
-}
+};
 
 const GlobalStyled = createGlobalStyle`
 html , body , #root{

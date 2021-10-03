@@ -1,7 +1,11 @@
-import React from 'react'
+import React from "react";
 
-const SignUp = ()=>{
-    return
+interface SignIUpProps {
+  onSignInToggle(): void;
 }
+
+const SignUp = ({ onSignInToggle }: SignIUpProps) => {
+  return <div>사인업임니다람쥐</div>;
+};
 
 export default SignUp;
