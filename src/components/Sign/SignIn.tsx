@@ -41,7 +41,7 @@ const SignIn = ({ onSignInToggle, onSignHandler }: SignInProps) => {
   };
 
   return (
-    <LoginBox>
+    <SignInBox>
       <div className="login-box">
         <div className="form">
           <form
@@ -64,7 +64,7 @@ const SignIn = ({ onSignInToggle, onSignHandler }: SignInProps) => {
               value={inputPw}
               onChange={handleOnChange}
             />
-            <input type="submit" className="submit" value="LOGIN" />
+            <input type="submit" className="submit" value="Sign In" />
             <p className="message">
               Not registerd?{`\u00a0`}
               <span className="create-account" onClick={onSignInToggle}>
@@ -74,11 +74,11 @@ const SignIn = ({ onSignInToggle, onSignHandler }: SignInProps) => {
           </form>
         </div>
       </div>
-    </LoginBox>
+    </SignInBox>
   );
 };
 
-const LoginBox = styled.div`
+const SignInBox = styled.div`
   .login-box {
     position: relative;
     background-color: white;
