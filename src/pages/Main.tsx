@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Route } from "react-router";
-import Home from "./Homt";
+import Home from "./Home";
 import SignForm from "./SignForm";
 
 const Main = () => {
