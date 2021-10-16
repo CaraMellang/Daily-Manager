@@ -1303,6 +1303,29 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
+"@fullcalendar/common@~5.10.0":
+  version "5.10.0"
+  resolved "https://registry.yarnpkg.com/@fullcalendar/common/-/common-5.10.0.tgz#8b30f3e77691eb70befb25a0edf3d9abec3a853e"
+  integrity sha512-se2N8QlV07igYrJpzn4sB1C53U2NkVwdbrZ9gca15iZWjq5EyKMryghxxfLIIt6nDuKEnL5IN/EN8JX5aU45VA==
+  dependencies:
+    tslib "^2.1.0"
+
+"@fullcalendar/daygrid@^5.10.0":
+  version "5.10.0"
+  resolved "https://registry.yarnpkg.com/@fullcalendar/daygrid/-/daygrid-5.10.0.tgz#1dffcb6884859f0048755a428ff911906150a1af"
+  integrity sha512-KsPwyV6JF5zmcv0XVTbhTsDRbH7PQ9F7Jj2UuqS+rVh2gkpTZqkxKgFEUcRAwVQBymrRPTXzZXh04pvb6/FXIQ==
+  dependencies:
+    "@fullcalendar/common" "~5.10.0"
+    tslib "^2.1.0"
+
+"@fullcalendar/react@^5.10.0":
+  version "5.10.0"
+  resolved "https://registry.yarnpkg.com/@fullcalendar/react/-/react-5.10.0.tgz#c7a0fa4d531a2231400e00eddc0b16cd4b2d413d"
+  integrity sha512-AayWCkt31ertFa+MLM4z1HFNQ1zHg1iUNjvaE2AgzN8YUjZGVo6QA3rhaUEI8JoA8ZNWpQ33pLYBt3yuLA9rfQ==
+  dependencies:
+    "@fullcalendar/common" "~5.10.0"
+    tslib "^2.1.0"
+
 "@hapi/address@2.x.x":
   version "2.1.4"
   resolved "https://registry.yarnpkg.com/@hapi/address/-/address-2.1.4.tgz#5d67ed43f3fd41a69d4b9ff7b56e7c0d1d0a81e5"
@@ -10931,6 +10954,11 @@ tslib@^2.0.3:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.1.0.tgz#da60860f1c2ecaa5703ab7d39bc05b6bf988b97a"
   integrity sha512-hcVC3wYEziELGGmEEXue7D75zbwIIVUMWAVbHItGPx0ziyXxrOMQx4rQEVEV45Ut/1IotuEvwqPopzIOkDMf0A==
+
+tslib@^2.1.0:
+  version "2.3.1"
+  resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.3.1.tgz#e8a335add5ceae51aa261d32a490158ef042ef01"
+  integrity sha512-77EbyPPpMz+FRFRuAFlWMtmgUWGe9UOG2Z25NqCwiIjRhOf5iKGuzSe5P2w1laq+FkRy4p+PCuVkJSGkzTEKVw==
 
 tsutils@^3.17.1:
   version "3.20.0"
