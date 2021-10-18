@@ -12,6 +12,7 @@ const SignIn = ({ onSignInToggle, onSignHandler }: SignInProps) => {
   const [inputPw, setInputPw] = useState("");
 
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    console.log(e.target);
     const {
       target: { value, name },
     } = e;

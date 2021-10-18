@@ -4,7 +4,7 @@ import Home from "./Home";
 import SignForm from "./SignForm";
 
 const Main = () => {
-  const [isSign, setIsSign] = useState(true);
+  const [isSign, setIsSign] = useState(false);
 
   const onSignHandler = () => {
     setIsSign(false);

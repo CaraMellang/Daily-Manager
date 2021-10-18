@@ -10,6 +10,7 @@ const Home = () => {
     notice("클릭!!").then(() => console.log("꺼짐"));
   };
 
+
   console.log(new Date().getDay());
   return (
     <HomeWrap>
@@ -29,13 +30,9 @@ const Home = () => {
       <button
         type="button"
         className="example-button"
-        onClick={() =>
-          notice("Congrats! Your upload successfully done").then(() =>
-            console.log("closed")
-          )
-        }
+        onClick={() => notice("나가")}
       >
-        notice
+        <div>notice</div>
       </button>
       <Calendar></Calendar>
     </HomeWrap>
