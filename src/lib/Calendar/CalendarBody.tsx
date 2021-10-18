@@ -19,7 +19,8 @@ const CalendarBody = ({ currentMonth, setCurrentMonth }: CalendarBodyProps) => {
   const dummy = {
     date: 18,
     month: 10,
-    fulldate: "2021-10-18",
+    fulldate: "2021-10-05",
+    title: "기분좋은 오늘의하루!",
     descrition: "추가됨?",
   };
   const [dates, setDates] = useState([
@@ -29,7 +30,7 @@ const CalendarBody = ({ currentMonth, setCurrentMonth }: CalendarBodyProps) => {
   const daysArray = ["일", "월", "화", "수", "목", "금", "토"];
 
   const paintCalendar = () => {
-    const dateArray: Array<DateInfo> = [];
+    let dateArray: Array<DateInfo> = [];
 
     dayjs(currentMonth).set("date", 0).get("date");
     const prevLastDay = dayjs(currentMonth).set("date", 0).get("day");
@@ -40,10 +41,15 @@ const CalendarBody = ({ currentMonth, setCurrentMonth }: CalendarBodyProps) => {
         fulldate: currentMonth.format("YYYY-MM-DD"),
         descrition: "공란날짜임",
       };
-      if (i === prevLastDay + 1) {
+      dateArray.push(data);
+      if (i === 6) {
+        console.log("첫줄 캇!");
+        dateArray = [];
+      }
+      if (i === prevLastDay) {
+        console.log(prevLastDay);
         break;
       }
-      dateArray.push(data);
     }
     // firtsRow();
     for (
@@ -129,8 +135,14 @@ const CalendarBody = ({ currentMonth, setCurrentMonth }: CalendarBodyProps) => {
             return (
               <div className="date-box" key={index}>
                 <div className="date" onClick={dateClick} title={i.fulldate}>
-                  <div>{i.date}</div>
-                  <div>{dummy.descrition}</div>
+                  <div className={`ddate red`}>
+                    <div>{i.date}</div>
+                    <div>
+                      {dummy.title.slice(0, 12) !== ""
+                        ? dummy.title.slice(0, 12)
+                        : dummy.title}
+                    </div>
+                  </div>
                 </div>
               </div>
             );
@@ -138,7 +150,9 @@ const CalendarBody = ({ currentMonth, setCurrentMonth }: CalendarBodyProps) => {
           return (
             <div className="date-box" key={index}>
               <div className="date" onClick={dateClick} title={i.fulldate}>
-                <div>{i.date}</div>
+                <div className="ddate">
+                  <div>{i.date}</div>
+                </div>
               </div>
             </div>
           );
@@ -168,6 +182,7 @@ const CalendarDayarray = styled.div`
 const CalendarDates = styled.div`
   display: flex;
   flex-wrap: wrap;
+  color: white;
   .date-box {
     cursor: pointer;
     width: calc(100% / 7);
@@ -177,12 +192,20 @@ const CalendarDates = styled.div`
     box-sizing: border-box;
     padding-right: 0.1rem;
     padding-left: 0.1rem;
+    padding-top: 0.1rem;
+    padding-bottom: 0.1rem;
     height: 100%;
-    z-index: 211;
+  }
+  .ddate {
+    background-color: #302f2f;
+    height: 100%;
   }
   .date-box-non {
     background-color: #9aa0a6;
     height: 100%;
+  }
+  .red {
+    background-color: red;
   }
 `;
 

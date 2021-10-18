@@ -37,7 +37,7 @@ const CalendarHeader = ({
           <path d="M368 64L144 256l224 192V64z"></path>
         </svg> */}
       </button>
-      <div>{currentMonth.format("YYYY - MM - DD")}</div>
+      <div>{currentMonth.format("M월")}</div>
       <button onClick={nextClick}>
         {" "}
         {`>`}
