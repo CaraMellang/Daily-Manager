@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { Route } from "react-router";
+import ModalPortal from "../components/Modal/ModalPortal";
+import MyModal from "../components/Modal/MyModal";
 import Home from "./Home";
 import SignForm from "./SignForm";
 
