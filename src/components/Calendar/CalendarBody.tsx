@@ -26,7 +26,7 @@ const CalendarBody = ({ currentMonth, setCurrentMonth }: CalendarBodyProps) => {
   const [dates, setDates] = useState([
     { date: 1, month: 2, fulldate: "string", descrition: "string" },
   ]);
-  const [toggle, setToggle] = useState(false);
+  // const [toggle, setToggle] = useState(false);
   const daysArray = ["일", "월", "화", "수", "목", "금", "토"];
 
   const paintCalendar = () => {
@@ -93,10 +93,15 @@ const CalendarBody = ({ currentMonth, setCurrentMonth }: CalendarBodyProps) => {
     // if (e.target !== e.currentTarget) {
     //   return;
     // }
+    console.log(e);
     const yValue = window.scrollY;
     // document.body.style.cssText = `position: fixed; top: -${yValue}px`;
+    const text =
+      dummy.fulldate === e.currentTarget.title ? dummy.descrition : "";
     document.body.style.overflow = "hidden";
-    notice(`클릭하신 날짜는 ${e.currentTarget.title} 입니다.`).then(() => {
+    notice(
+      `클릭하신 날짜는 ${e.currentTarget.title} 입니다. ${`\n` + text}`
+    ).then(() => {
       // document.body.style.cssText = `position: unset ; top: -${yValue}px`; //모바일도 대응 근데 좀 손봐야함
       document.body.style.overflow = "unset";
     });

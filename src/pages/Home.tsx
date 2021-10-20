@@ -15,9 +15,9 @@ const Home = () => {
   console.log(new Date().getDay());
   return (
     <HomeWrap>
-      {/* <ModalPortal>
+      <ModalPortal>
         <MyModal />
-      </ModalPortal> */}
+      </ModalPortal>
       <FullCalendar
         plugins={[dayGridPlugin]}
         initialView="dayGridMonth"
@@ -44,7 +44,7 @@ const Home = () => {
 };
 
 const HomeWrap = styled.div`
-  background-color: white;
+  /* background-color: white; */
   padding-top: 10rem;
   padding-left: 20rem;
   padding-right: 20rem;
