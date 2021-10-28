@@ -67,7 +67,7 @@ const SignIn = ({ onSignInToggle, onSignHandler }: SignInProps) => {
               type="text"
               className="input-box"
               name="email"
-              placeholder="email"
+              placeholder="Email"
               value={inputEmail}
               onChange={handleOnChange}
             />
