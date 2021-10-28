@@ -1,31 +1,44 @@
+import axios from "axios";
 import React, { useState } from "react";
 import styled from "styled-components";
 
 interface SignIUpProps {
   onSignInToggle(): void;
+  onSignHandler(): void;
 }
 
-const SignUp = ({ onSignInToggle }: SignIUpProps) => {
+const SignUp = ({ onSignInToggle, onSignHandler }: SignIUpProps) => {
   const [inputEmail, setInputEmail] = useState("");
-  const [inputId, setInputId] = useState("");
+  // const [inputId, setInputId] = useState("");
   const [inputPw, setInputPw] = useState("");
 
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const {
       target: { value, name },
     } = e;
-    if (name === "id") {
-      setInputId(value);
+    if (name === "email") {
+      setInputEmail(value);
     }
     if (name === "pw") {
       setInputPw(value);
     }
-    if (name === "email") {
-      setInputEmail(value);
-    }
   };
-  const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const data = {
+      username: inputEmail,
+      password: inputPw,
+    };
+    await axios
+      .post("http://localhost:5000/auth/signup", data)
+      .then((res) => {
+        console.log(res);
+        window.alert("회원가입이 완료되었습니다. 로그인을 해주시기 바랍니다.");
+        onSignInToggle();
+      })
+      .catch((e) => {
+        console.log(e);
+      });
   };
   return (
     <SignUpBox>
@@ -43,14 +56,14 @@ const SignUp = ({ onSignInToggle }: SignIUpProps) => {
               value={inputEmail}
               onChange={handleOnChange}
             />
-            <input
+            {/* <input
               type="text"
               className="input-box"
               name="id"
               placeholder="Id"
               value={inputId}
               onChange={handleOnChange}
-            />
+            /> */}
             <input
               type="password"
               className="input-box"

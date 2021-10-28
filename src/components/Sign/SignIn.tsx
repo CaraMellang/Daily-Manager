@@ -10,7 +10,7 @@ interface SignInProps {
 }
 
 const SignIn = ({ onSignInToggle, onSignHandler }: SignInProps) => {
-  const [inputId, setInputId] = useState("");
+  const [inputEmail, setInputEmail] = useState("");
   const [inputPw, setInputPw] = useState("");
   const [cookiesToken, setCookieToken, removeCookieToken] = useCookies([
     "rememberToken",
@@ -21,8 +21,8 @@ const SignIn = ({ onSignInToggle, onSignHandler }: SignInProps) => {
     const {
       target: { value, name },
     } = e;
-    if (name === "id") {
-      setInputId(value);
+    if (name === "email") {
+      setInputEmail(value);
     }
     if (name === "pw") {
       setInputPw(value);
@@ -31,14 +31,14 @@ const SignIn = ({ onSignInToggle, onSignHandler }: SignInProps) => {
 
   const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (inputId === "" || inputPw === "") {
+    if (inputEmail === "" || inputPw === "") {
       window.alert("ID, PW중 틀린 입력입니다.");
-      setInputId("");
+      setInputEmail("");
       setInputPw("");
       return;
     }
     const data = {
-      username: inputId,
+      username: inputEmail,
       password: inputPw,
     };
     await axios
@@ -66,9 +66,9 @@ const SignIn = ({ onSignInToggle, onSignHandler }: SignInProps) => {
             <input
               type="text"
               className="input-box"
-              name="id"
-              placeholder="Id"
-              value={inputId}
+              name="email"
+              placeholder="email"
+              value={inputEmail}
               onChange={handleOnChange}
             />
             <input

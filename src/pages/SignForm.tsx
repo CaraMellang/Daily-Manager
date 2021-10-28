@@ -19,7 +19,7 @@ const SignForm = ({ onSignHandler }: SignFormProps) => {
       {signInToggle ? (
         <SignIn onSignInToggle={onSignInToggle} onSignHandler={onSignHandler} />
       ) : (
-        <SignUp onSignInToggle={onSignInToggle} />
+        <SignUp onSignInToggle={onSignInToggle} onSignHandler={onSignHandler} />
       )}
     </SignFormWrap>
   );
