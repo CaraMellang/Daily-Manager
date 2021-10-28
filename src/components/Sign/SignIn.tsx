@@ -1,4 +1,6 @@
+import axios from "axios";
 import React, { useState } from "react";
+import { useCookies } from "react-cookie";
 import styled from "styled-components";
 import { dummyProfile } from "../../lib/dummy";
 
@@ -10,6 +12,9 @@ interface SignInProps {
 const SignIn = ({ onSignInToggle, onSignHandler }: SignInProps) => {
   const [inputId, setInputId] = useState("");
   const [inputPw, setInputPw] = useState("");
+  const [cookiesToken, setCookieToken, removeCookieToken] = useCookies([
+    "rememberToken",
+  ]);
 
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     console.log(e.target);
@@ -23,7 +28,8 @@ const SignIn = ({ onSignInToggle, onSignHandler }: SignInProps) => {
       setInputPw(value);
     }
   };
-  const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+
+  const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (inputId === "" || inputPw === "") {
       window.alert("ID, PW중 틀린 입력입니다.");
@@ -31,14 +37,22 @@ const SignIn = ({ onSignInToggle, onSignHandler }: SignInProps) => {
       setInputPw("");
       return;
     }
-    window.alert(`ID : ${inputId} \nPW: ****** \n입력완료!`);
-    if (inputId === dummyProfile.id && inputPw === dummyProfile.pw) {
-      window.alert("맞았어용!!");
-      onSignHandler();
-    } else {
-      window.alert("틀렸어용!!");
-      setInputPw("");
-    }
+    const data = {
+      username: inputId,
+      password: inputPw,
+    };
+    await axios
+      .post("http://localhost:5000/auth/signin", data)
+      .then((res) => {
+        console.log(res);
+        console.log(res.data.accessToken);
+        setCookieToken(`rememberToken`, res.data.accessToken);
+        onSignHandler();
+      })
+      .catch((e) => {
+        console.log(e);
+        window.alert("오류!!");
+      });
   };
 
   return (

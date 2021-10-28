@@ -1,36 +1,32 @@
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled, { keyframes } from "styled-components";
 import { toast, notice, check, Tooltip } from "react-interaction";
 import Calendar from "../components/Calendar/Calendar";
 import ModalPortal from "../components/Modal/ModalPortal";
 import MyModal from "../components/Modal/MyModal";
+import axios from "axios";
 
 const Home = () => {
-  const onClick = (e: any) => {
-    notice("클릭!!").then(() => console.log("꺼짐"));
+  const [toggle, setToggle] = useState(false);
+
+  const toggleOn = () => {
+    setToggle((prev) => !prev);
   };
 
   console.log(new Date().getDay());
+
+  
+
   return (
     <HomeWrap>
-      <ModalPortal>
-        <MyModal />
-      </ModalPortal>
-      <FullCalendar
-        plugins={[dayGridPlugin]}
-        initialView="dayGridMonth"
-        events={[
-          { title: "event 1sadasd아이아이", date: "2021-10-01" },
-          { title: "event 1", date: "2021-10-01" },
-          { title: "event 1", date: "2021-10-01" },
-          { title: "event 1", date: "2021-10-01" },
-          { title: "event 1", date: "2021-10-01" },
-          { title: "event 2", date: "2021-10-02" },
-        ]}
-        eventClick={onClick}
-      />
+      {toggle && (
+        <ModalPortal>
+          <MyModal toggleOn={toggleOn} toggle={toggle} />
+        </ModalPortal>
+      )}
+
       <button
         type="button"
         className="example-button"
@@ -38,6 +34,7 @@ const Home = () => {
       >
         <div>notice</div>
       </button>
+      <button onClick={toggleOn}>보여주기</button>
       <Calendar></Calendar>
     </HomeWrap>
   );
