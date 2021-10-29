@@ -7,9 +7,14 @@ import { dummyProfile } from "../../lib/dummy";
 interface SignInProps {
   onSignInToggle(): void;
   onSignHandler(): void;
+  userProfile(username: string, createdAt: string): void;
 }
 
-const SignIn = ({ onSignInToggle, onSignHandler }: SignInProps) => {
+const SignIn = ({
+  onSignInToggle,
+  onSignHandler,
+  userProfile,
+}: SignInProps) => {
   const [inputEmail, setInputEmail] = useState("");
   const [inputPw, setInputPw] = useState("");
   const [cookiesToken, setCookieToken, removeCookieToken] = useCookies([
@@ -17,7 +22,7 @@ const SignIn = ({ onSignInToggle, onSignHandler }: SignInProps) => {
   ]);
 
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target);
+    // console.log(e.target);
     const {
       target: { value, name },
     } = e;
@@ -44,9 +49,9 @@ const SignIn = ({ onSignInToggle, onSignHandler }: SignInProps) => {
     await axios
       .post("http://localhost:5000/auth/signin", data)
       .then((res) => {
-        console.log(res);
-        console.log(res.data.accessToken);
+        console.log("ㅎㅇ", res);
         setCookieToken(`rememberToken`, res.data.accessToken);
+        userProfile(res.data.username, res.data.createdAt);
         onSignHandler();
       })
       .catch((e) => {

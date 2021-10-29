@@ -5,9 +5,10 @@ import SignUp from "../components/Sign/SignUp";
 
 interface SignFormProps {
   onSignHandler(): void;
+  userProfile(username: string, createdAt: string): void;
 }
 
-const SignForm = ({ onSignHandler }: SignFormProps) => {
+const SignForm = ({ onSignHandler, userProfile }: SignFormProps) => {
   const [signInToggle, setSignInToggle] = useState(true);
 
   const onSignInToggle = () => {
@@ -17,7 +18,7 @@ const SignForm = ({ onSignHandler }: SignFormProps) => {
   return (
     <SignFormWrap>
       {signInToggle ? (
-        <SignIn onSignInToggle={onSignInToggle} onSignHandler={onSignHandler} />
+        <SignIn onSignInToggle={onSignInToggle} onSignHandler={onSignHandler} userProfile={userProfile} />
       ) : (
         <SignUp onSignInToggle={onSignInToggle} onSignHandler={onSignHandler} />
       )}

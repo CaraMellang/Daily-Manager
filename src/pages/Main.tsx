@@ -1,4 +1,5 @@
 import axios from "axios";
+import dayjs from "dayjs";
 import React, { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
 import { Route } from "react-router-dom";
@@ -10,10 +11,13 @@ import Home from "./Home";
 import SignForm from "./SignForm";
 
 const Main = () => {
+  const currentDate = new Date();
   const [isSign, setIsSign] = useState(true);
   const [loadingSpin, setLoadingSpin] = useState(true);
-  const [profile, setProfile] = useState({ username: "ss", createdAt: "dd" });
-
+  const [profile, setProfile] = useState<{
+    username: string;
+    createdAt: string;
+  }>({ username: "ss", createdAt: "20220129" });
   const [cookiesToken, setCookieToken, removeCookieToken] = useCookies([
     "rememberToken",
   ]);
@@ -21,6 +25,15 @@ const Main = () => {
   const onSignHandler = () => {
     setIsSign(false);
   };
+
+  const userProfile = (username: string, createdAt: string) => {
+    const newDate = new Date(createdAt);
+    const dayjsDate = dayjs(newDate);
+    console.log("createAt: ", dayjsDate.format(`YYYY-MM-DD`));
+    setProfile({ username, createdAt: dayjsDate.format(`YYYY-MM-DD`) });
+    console.log("실행완료");
+  };
+
   const postSign = async () => {
     await axios
       .post(`http://localhost:5000/auth/test`, ".", {
@@ -56,7 +69,9 @@ const Main = () => {
       {isSign ? (
         <Route
           path={`/`}
-          render={() => <SignForm onSignHandler={onSignHandler} />}
+          render={() => (
+            <SignForm onSignHandler={onSignHandler} userProfile={userProfile} />
+          )}
           exact
         />
       ) : (
