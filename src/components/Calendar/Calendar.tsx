@@ -9,12 +9,20 @@ const Calendar = () => {
   const [currentMonth, setCurrentMonth] = useState(dayjs(currentDate));
   return (
     <CalendarWrap>
-      <CalendarHeader currentMonth={currentMonth} setCurrentMonth={setCurrentMonth} />
-      <CalendarBody currentMonth={currentMonth} setCurrentMonth={setCurrentMonth} />
+      <CalendarHeader
+        currentMonth={currentMonth}
+        setCurrentMonth={setCurrentMonth}
+      />
+      <CalendarBody
+        currentMonth={currentMonth}
+        setCurrentMonth={setCurrentMonth}
+      />
     </CalendarWrap>
   );
 };
 
-const CalendarWrap = styled.div``;
+const CalendarWrap = styled.div`
+  width: 768px;
+`;
 
 export default Calendar;

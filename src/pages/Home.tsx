@@ -17,8 +17,6 @@ const Home = () => {
 
   console.log(new Date().getDay());
 
-  
-
   return (
     <HomeWrap>
       {toggle && (
@@ -42,16 +40,8 @@ const Home = () => {
 
 const HomeWrap = styled.div`
   /* background-color: white; */
-  padding-top: 10rem;
-  padding-left: 20rem;
-  padding-right: 20rem;
+  width: 768px;
+  margin: auto;
 `;
-const keke = keyframes`
-0%{
-  opacity:0
-}
-100%{
-  opacity:1
-}`;
 
 export default Home;
