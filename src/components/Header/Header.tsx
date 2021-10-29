@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { useCookies } from "react-cookie";
+import DropDownMenu from "./DropDownMenu";
 
 interface HeaderProps {
   setIsSign: React.Dispatch<React.SetStateAction<boolean>>;
@@ -26,7 +27,7 @@ const Header = ({ setIsSign, profile }: HeaderProps) => {
               Charts
             </Link>
           </div>
-          <button
+          {/* <button
             className="signout"
             onClick={() => {
               window.alert("로그아웃완료");
@@ -36,7 +37,8 @@ const Header = ({ setIsSign, profile }: HeaderProps) => {
           >
             {profile.username}
             Sign out
-          </button>
+          </button> */}
+          <DropDownMenu setIsSign={setIsSign} profile={profile}  />
         </div>
       </div>
     </HeaderWrap>
