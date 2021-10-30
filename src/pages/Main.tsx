@@ -7,6 +7,7 @@ import Header from "../components/Header/Header";
 import Loading from "../components/Loading";
 import ModalPortal from "../components/Modal/ModalPortal";
 import MyModal from "../components/Modal/MyModal";
+import Charts from "./Charts";
 import Home from "./Home";
 import SignForm from "./SignForm";
 
@@ -78,7 +79,7 @@ const Main = () => {
         <>
           <Header setIsSign={setIsSign} profile={profile} />
           <Route path={`/`} component={Home} exact />
-          <Route path={`/charts`} component={Home} />
+          <Route path={`/charts`} component={Charts} />
         </>
       )}
     </div>

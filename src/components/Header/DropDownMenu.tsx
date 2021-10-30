@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useCookies } from "react-cookie";
 import styled from "styled-components";
+import { useDetectOutsideClick } from "../hooks/useDetectOutsideClick";
 
 interface DropDownMenuProps {
   setIsSign: React.Dispatch<React.SetStateAction<boolean>>;
@@ -9,23 +10,26 @@ interface DropDownMenuProps {
 
 const DropDownMenu = ({ setIsSign, profile }: DropDownMenuProps) => {
   const dropdownRef = useRef(null);
-  const [isActive, setActive] = useState(false);
-  const onClick = () => setActive(!isActive);
+  const [isActive, setIsActive] = useDetectOutsideClick(dropdownRef, false);
+  const onClick = () => setIsActive(!isActive);
   const [cookiesToken, setCookieToken, removeCookieToken] = useCookies([
     "rememberToken",
   ]);
 
-  useEffect(() => {
-    const pageClickEvent = (e: any) => {
-      console.log(e);
-    };
-    if (isActive) {
-      window.addEventListener("click", pageClickEvent);
-    }
-    return () => {
-      window.removeEventListener("click", pageClickEvent);
-    };
-  }, [isActive]);
+  // useEffect(() => {
+  //   const pageClickEvent = (e) => {
+  //     // If the active element exists and is clicked outside of
+  //     if (dropdownRef.current !== null && !dropdownRef.current.contains(e.target)) {
+  //       setIsActive(!isActive);
+  //     }
+  //   };
+  //   if (isActive) {
+  //     window.addEventListener("click", pageClickEvent);
+  //   }
+  //   return () => {
+  //     window.removeEventListener("click", pageClickEvent);
+  //   };
+  // }, [isActive]);
   return (
     <DropDownMenuWrap>
       <div className="menu-container">
