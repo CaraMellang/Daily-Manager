@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useCookies } from "react-cookie";
+import { useHistory } from "react-router";
 import styled from "styled-components";
 import { useDetectOutsideClick } from "../hooks/useDetectOutsideClick";
 
@@ -10,6 +11,7 @@ interface DropDownMenuProps {
 
 const DropDownMenu = ({ setIsSign, profile }: DropDownMenuProps) => {
   const dropdownRef = useRef(null);
+  const history = useHistory();
   const [isActive, setIsActive] = useDetectOutsideClick(dropdownRef, false);
   const onClick = () => setIsActive(!isActive);
   const [cookiesToken, setCookieToken, removeCookieToken] = useCookies([
@@ -54,6 +56,7 @@ const DropDownMenu = ({ setIsSign, profile }: DropDownMenuProps) => {
                   window.alert("로그아웃완료");
                   removeCookieToken("rememberToken");
                   setIsSign(true);
+                  history.push("/");
                 }}
               >
                 Sign out

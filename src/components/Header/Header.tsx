@@ -38,7 +38,7 @@ const Header = ({ setIsSign, profile }: HeaderProps) => {
             {profile.username}
             Sign out
           </button> */}
-          <DropDownMenu setIsSign={setIsSign} profile={profile}  />
+          <DropDownMenu setIsSign={setIsSign} profile={profile} />
         </div>
       </div>
     </HeaderWrap>
@@ -55,10 +55,15 @@ const HeaderWrap = styled.header`
     padding: 10px;
   }
   .header {
+    width: 768px;
     height: 100%;
     display: flex;
-    justify-content: space-evenly;
+    gap: 12rem;
+    margin: 0 auto;
     align-items: center;
+  }
+  .logo {
+    width: 130px;
   }
   .menu {
     display: flex;
