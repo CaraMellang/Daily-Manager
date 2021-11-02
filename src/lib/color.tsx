@@ -1,3 +1,3 @@
 export const color = {
-    textBlackColor:'black'
-}
+  textBlackColor: "black",
+};
