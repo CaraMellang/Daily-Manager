@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import DropDownMenu from "./DropDownMenu";
 
@@ -20,12 +20,21 @@ const Header = ({ setIsSign, profile }: HeaderProps) => {
         <div className="header">
           <div className="logo">Logo</div>
           <div className="menu">
-            <Link to={`/`} className="menu-item">
+            <NavLink
+              to={`/`}
+              activeClassName="page-toggle"
+              className="menu-item"
+              exact
+            >
               Calender
-            </Link>
-            <Link to={`/charts`} className="menu-item">
+            </NavLink>
+            <NavLink
+              to={`/charts`}
+              activeClassName="page-toggle"
+              className="menu-item"
+            >
               Charts
-            </Link>
+            </NavLink>
           </div>
           {/* <button
             className="signout"
@@ -49,6 +58,7 @@ const HeaderWrap = styled.header`
   color: black;
   background-color: white;
   height: 75px;
+  font-weight: bold;
   .padd {
     box-sizing: border-box;
     height: 100%;
@@ -68,6 +78,10 @@ const HeaderWrap = styled.header`
   .menu {
     display: flex;
     gap: 1rem;
+  }
+  .page-toggle {
+    padding-bottom: 0.25rem;
+    border-bottom: 5px solid black;
   }
 `;
 
