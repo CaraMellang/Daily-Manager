@@ -1,7 +1,7 @@
 import React from "react";
 import { Bar, Doughnut, Line } from "react-chartjs-2";
 import styled from "styled-components";
-import CenterRight from "../components/ChartsComponents/CenterRight";
+import CenterRightComponent from "../components/ChartsComponents/CenterRightComponent";
 import { color } from "../lib/color";
 
 const Charts = () => {
@@ -94,8 +94,8 @@ const Charts = () => {
                   </div>
                   <div className="center-item center-right-item padd05 ">
                     <div className=" col gap1">
-                      <CenterRight />
-                      <CenterRight />
+                      <CenterRightComponent title="오늘 완료 수" progress={5} />
+                      <CenterRightComponent title="오늘 남은 수" progress={19} />
                     </div>
                   </div>
                 </div>
