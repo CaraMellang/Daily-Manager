@@ -1,7 +1,8 @@
 import React from "react";
-import { Bar, Doughnut, Line } from "react-chartjs-2";
+import { Doughnut, Line } from "react-chartjs-2";
 import styled from "styled-components";
 import CenterRightComponent from "../components/ChartsComponents/CenterRightComponent";
+import TopComponent from "../components/ChartsComponents/TopComponent";
 import { color } from "../lib/color";
 
 const Charts = () => {
@@ -53,16 +54,13 @@ const Charts = () => {
               <div className="chart-top w-100">
                 <div className="gap1 row">
                   <div className="top-item">
-                    <div className="top-item-header">완료한 수</div>
-                    <div className="top-item-con">123,123</div>
+                    <TopComponent title={`총 완료 수`} data={11} />
                   </div>
                   <div className="top-item">
-                    <div className="top-item-header">현재까지 작성</div>
-                    <div className="top-item-con">123,123</div>
+                    <TopComponent title={`총 작성 수`} data={52} />
                   </div>
                   <div className="top-item">
-                    <div className="top-item-header">미해결 수?</div>
-                    <div className="top-item-con">123,123 </div>
+                    <TopComponent title={`총 남은 수`} data={12} />
                   </div>
                 </div>
               </div>
@@ -94,8 +92,16 @@ const Charts = () => {
                   </div>
                   <div className="center-item center-right-item padd05 ">
                     <div className=" col gap1">
-                      <CenterRightComponent title="오늘 완료 수" progress={5} />
-                      <CenterRightComponent title="오늘 남은 수" progress={19} />
+                      <CenterRightComponent
+                        title="오늘 완료 수"
+                        progress={5}
+                        order={1}
+                      />
+                      <CenterRightComponent
+                        title="오늘 남은 수"
+                        progress={19}
+                        order={2}
+                      />
                     </div>
                   </div>
                 </div>
@@ -137,7 +143,7 @@ const ChartsWrap = styled.div`
   text-align: center;
   font-weight: bold;
   .charts-background {
-    height: 90vh;
+    height: 100%;
     border-left: 1px solid white;
     border-right: 1px solid white;
   }
@@ -148,7 +154,13 @@ const ChartsWrap = styled.div`
     color: black;
     height: 700px;
     padding: 1rem;
-    background-color: white;
+    /* background-color: white; */
+    background: rgb(168, 237, 234);
+    background: linear-gradient(
+      0deg,
+      rgba(168, 237, 234, 1) 0%,
+      rgba(254, 214, 227, 1) 100%
+    );
     border-radius: 12px;
   }
   .col {
@@ -187,6 +199,8 @@ const ChartsWrap = styled.div`
   }
   .top-item-con {
     color: #2eb500;
+    background-color: white;
+    border-radius: 0 0 10px 10px;
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
   }
@@ -204,6 +218,8 @@ const ChartsWrap = styled.div`
     padding-top: 1rem;
     padding-bottom: 1rem;
     color: #2eb500;
+    background-color: white;
+    border-radius: 0 0 10px 10px;
   }
   /* .center-right-item-header {
     color: white;
@@ -235,6 +251,8 @@ const ChartsWrap = styled.div`
   .bottom-item-con {
     padding: 1rem;
     color: #2eb500;
+    background-color: white;
+    border-radius: 0 0 10px 10px;
   }
   .item-header {
     color: white;

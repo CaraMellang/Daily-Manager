@@ -19,7 +19,7 @@ const CalendarBody = ({ currentMonth, setCurrentMonth }: CalendarBodyProps) => {
   const dummy = {
     date: 18,
     month: 10,
-    fulldate: "2021-10-05",
+    fulldate: "2021-11-05",
     title: "기분좋은 오늘의하루!",
     descrition: "추가됨?",
   };
@@ -166,7 +166,15 @@ const CalendarBody = ({ currentMonth, setCurrentMonth }: CalendarBodyProps) => {
     </CalendarBodyWrap>
   );
 };
-const CalendarBodyWrap = styled.div``;
+const CalendarBodyWrap = styled.div`
+  padding: 1rem;
+  background: rgb(168, 237, 234);
+  background: linear-gradient(
+    0deg,
+    rgba(168, 237, 234, 1) 0%,
+    rgba(254, 214, 227, 1) 100%
+  );
+`;
 const CalendarDayarray = styled.div`
   display: flex;
   color: white;
@@ -181,7 +189,9 @@ const CalendarDayarray = styled.div`
     box-sizing: border-box;
     padding-top: 1rem;
     padding-bottom: 1rem;
-    background-color: #f20000;
+    background-color: none;
+    color: black;
+    font-weight: bold;
   }
 `;
 const CalendarDates = styled.div`
@@ -202,11 +212,17 @@ const CalendarDates = styled.div`
     height: 100%;
   }
   .ddate {
-    background-color: #302f2f;
+    background-color: rgba(0, 0, 0, 0.4);
+    border-radius: 6px;
+    padding: 0.25rem;
+    box-sizing: border-box;
     height: 100%;
   }
   .date-box-non {
-    background-color: #9aa0a6;
+    background-color: rgba(0, 0, 0, 0.4);
+    border-radius: 6px;
+    padding: 0.25rem;
+    box-sizing: border-box;
     height: 100%;
   }
   .red {

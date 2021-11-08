@@ -26,6 +26,14 @@ const Header = ({ setIsSign, profile }: HeaderProps) => {
               className="menu-item"
               exact
             >
+              Home
+            </NavLink>
+            <NavLink
+              to={`/calender`}
+              activeClassName="page-toggle"
+              className="menu-item"
+              exact
+            >
               Calender
             </NavLink>
             <NavLink

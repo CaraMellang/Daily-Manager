@@ -33,7 +33,7 @@ const Home = () => {
         <div>notice</div>
       </button>
       <button onClick={toggleOn}>보여주기</button>
-      <Calendar></Calendar>
+      <p>일정들을 보여줄거임</p>
     </HomeWrap>
   );
 };
