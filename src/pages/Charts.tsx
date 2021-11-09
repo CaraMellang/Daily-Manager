@@ -1,11 +1,13 @@
 import React from "react";
 import { Doughnut, Line } from "react-chartjs-2";
+import { connect } from "react-redux";
 import styled from "styled-components";
 import CenterRightComponent from "../components/ChartsComponents/CenterRightComponent";
 import TopComponent from "../components/ChartsComponents/TopComponent";
 import { color } from "../lib/color";
+import { signin } from "../modules/redux/SignIn";
 
-const Charts = () => {
+const Charts = ({ signInData, addSignIn }: any) => {
   const doughnutData = {
     labels: [`테스팅`, `gdgd`, `쿄쿄요쿄요`],
     datasets: [
@@ -44,6 +46,7 @@ const Charts = () => {
       },
     ],
   };
+  console.log(signInData);
 
   return (
     <ChartsWrap>
@@ -54,9 +57,11 @@ const Charts = () => {
               <div className="chart-top w-100">
                 <div className="gap1 row">
                   <div className="top-item">
+                    뭘봐{signInData.userSliceReducer.username} 입니다~~
                     <TopComponent title={`총 완료 수`} data={11} />
                   </div>
                   <div className="top-item">
+                    뭘봐{signInData.userSliceReducer.createdAt} 입니다~~
                     <TopComponent title={`총 작성 수`} data={52} />
                   </div>
                   <div className="top-item">
@@ -264,4 +269,20 @@ const ChartsWrap = styled.div`
   }
 `;
 
-export default Charts;
+//mapStateToProps(스토어에서 가져오는 State, OwnProps는 해당컴포넌트의 props)
+function mapStateToProps(state: any, OwnProps: any) {
+  return { signInData: state };
+  //리턴하면 해당 컴포넌트의 props가 됨
+  //왜냐하면 connect는 해당컴포넌트로 보내는 props에 추가될수 있도록 허용하기 때문
+}
+
+function mapDispatchToProps(dispatch: any, ownProps: any) {
+  // console.log(dispatch);
+  return {
+    // addToDo: (text) => dispatch(actionCreators.addToDo(text)),
+    addSignIn: (data: any) => dispatch(signin(data)), //createSlice사용
+  };
+  //리턴함녀 해당 컴포넌트 props로 쓸수있음
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Charts);
