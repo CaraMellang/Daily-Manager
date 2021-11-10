@@ -1,5 +1,5 @@
 import { combineReducers } from "redux";
-import userSliceReducer from "./redux/SignIn";
+import userSliceReducer from "./redux/User";
 import storage from "redux-persist/lib/storage";
 import persistReducer from "redux-persist/es/persistReducer";
 import sessionStorage from "redux-persist/es/storage/session";

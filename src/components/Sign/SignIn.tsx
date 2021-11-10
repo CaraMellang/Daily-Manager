@@ -1,25 +1,21 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
-import { connect, useDispatch } from "react-redux";
+import { connect, useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { dummyProfile } from "../../lib/dummy";
-import { signin } from "../../modules/redux/SignIn";
+import { SIGNIN_REQUEST } from "../../modules/redux/User";
 
 interface SignInProps {
   onSignInToggle(): void;
   onSignHandler(): void;
   userProfile(username: string, createdAt: string): void;
-  signInData: any;
-  addSignIn: any;
 }
 
 const SignIn = ({
   onSignInToggle,
   onSignHandler,
   userProfile,
-  signInData,
-  addSignIn,
 }: SignInProps) => {
   const [inputEmail, setInputEmail] = useState("");
   const [inputPw, setInputPw] = useState("");
@@ -27,6 +23,9 @@ const SignIn = ({
     "rememberToken",
   ]);
   const dispatch = useDispatch();
+  const sucessSelector: any = useSelector((state) => state);
+  // console.log(sucessSelector);
+  // console.log(sucessSelector.userSliceReducer.signinSucceed);
 
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     // console.log(e.target);
@@ -53,7 +52,9 @@ const SignIn = ({
       username: inputEmail,
       password: inputPw,
     };
-    dispatch(signin(data));
+
+    dispatch(SIGNIN_REQUEST(data));
+
     // await axios
     //   .post("http://localhost:5000/auth/signin", data)
     //   .then((res) => {
@@ -74,6 +75,15 @@ const SignIn = ({
     //     window.alert("오류!!");
     //   });
   };
+
+  useEffect(() => {
+    const { userSliceReducer }: any = sucessSelector;
+    console.log(userSliceReducer);
+    if (userSliceReducer.signinSucceed) {
+      setCookieToken(`rememberToken`, userSliceReducer.accessToken);
+      onSignHandler();
+    }
+  });
 
   return (
     <SignInBox>
@@ -156,19 +166,4 @@ const SignInBox = styled.div`
     color: #4caf50;
   }
 `;
-//mapStateToProps(스토어에서 가져오는 State, OwnProps는 해당컴포넌트의 props)
-function mapStateToProps(state: any, OwnProps: any) {
-  return { signInData: state };
-  //리턴하면 해당 컴포넌트의 props가 됨
-  //왜냐하면 connect는 해당컴포넌트로 보내는 props에 추가될수 있도록 허용하기 때문
-}
-
-function mapDispatchToProps(dispatch: any, ownProps: any) {
-  // console.log(dispatch);
-  return {
-    // addToDo: (text) => dispatch(actionCreators.addToDo(text)),
-    addSignIn: (data: any) => dispatch(signin(data)), //createSlice사용
-  };
-  //리턴함녀 해당 컴포넌트 props로 쓸수있음
-}
-export default connect(mapStateToProps, mapDispatchToProps)(SignIn);
+export default React.memo(SignIn);
