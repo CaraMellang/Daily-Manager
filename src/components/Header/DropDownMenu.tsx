@@ -1,15 +1,16 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useCookies } from "react-cookie";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import styled from "styled-components";
+import { SIGNOUT } from "../../modules/redux/User";
 import { useDetectOutsideClick } from "../hooks/useDetectOutsideClick";
 
 interface DropDownMenuProps {
   setIsSign: React.Dispatch<React.SetStateAction<boolean>>;
-  profile: any;
 }
 
-const DropDownMenu = ({ setIsSign, profile }: DropDownMenuProps) => {
+const DropDownMenu = ({ setIsSign }: DropDownMenuProps) => {
   const dropdownRef = useRef(null);
   const history = useHistory();
   const [isActive, setIsActive] = useDetectOutsideClick(dropdownRef, false);
@@ -17,6 +18,8 @@ const DropDownMenu = ({ setIsSign, profile }: DropDownMenuProps) => {
   const [cookiesToken, setCookieToken, removeCookieToken] = useCookies([
     "rememberToken",
   ]);
+  const dispatch = useDispatch();
+  const userSelector = useSelector((state: any) => state.userSliceReducer.user);
 
   // useEffect(() => {
   //   const pageClickEvent = (e) => {
@@ -36,7 +39,7 @@ const DropDownMenu = ({ setIsSign, profile }: DropDownMenuProps) => {
     <DropDownMenuWrap>
       <div className="menu-container">
         <button onClick={onClick} className="menu-trigger">
-          <span>{profile.username}</span>
+          <span>{userSelector.username}</span>
           <img
             src="https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/df/df7789f313571604c0e4fb82154f7ee93d9989c6.jpg"
             alt="User avatar"
@@ -54,6 +57,7 @@ const DropDownMenu = ({ setIsSign, profile }: DropDownMenuProps) => {
               <div
                 onClick={() => {
                   window.alert("로그아웃완료");
+                  dispatch(SIGNOUT());
                   removeCookieToken("rememberToken");
                   setIsSign(true);
                   history.push("/");

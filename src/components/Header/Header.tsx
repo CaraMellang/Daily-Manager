@@ -6,10 +6,9 @@ import DropDownMenu from "./DropDownMenu";
 
 interface HeaderProps {
   setIsSign: React.Dispatch<React.SetStateAction<boolean>>;
-  profile: any;
 }
 
-const Header = ({ setIsSign, profile }: HeaderProps) => {
+const Header = ({ setIsSign }: HeaderProps) => {
   const [cookiesToken, setCookieToken, removeCookieToken] = useCookies([
     "rememberToken",
   ]);
@@ -55,7 +54,7 @@ const Header = ({ setIsSign, profile }: HeaderProps) => {
             {profile.username}
             Sign out
           </button> */}
-          <DropDownMenu setIsSign={setIsSign} profile={profile} />
+          <DropDownMenu setIsSign={setIsSign} />
         </div>
       </div>
     </HeaderWrap>

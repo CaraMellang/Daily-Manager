@@ -16,24 +16,12 @@ const Main = () => {
   const currentDate = new Date();
   const [isSign, setIsSign] = useState(true);
   const [loadingSpin, setLoadingSpin] = useState(true);
-  const [profile, setProfile] = useState<{
-    username: string;
-    createdAt: string;
-  }>({ username: "ss", createdAt: "20220129" });
   const [cookiesToken, setCookieToken, removeCookieToken] = useCookies([
     "rememberToken",
   ]);
 
   const onSignHandler = () => {
     setIsSign(false);
-  };
-
-  const userProfile = (username: string, createdAt: string) => {
-    const newDate = new Date(createdAt);
-    const dayjsDate = dayjs(newDate);
-    console.log("createAt: ", dayjsDate.format(`YYYY-MM-DD`));
-    setProfile({ username, createdAt: dayjsDate.format(`YYYY-MM-DD`) });
-    console.log("실행완료");
   };
 
   const postSign = async () => {
@@ -43,7 +31,7 @@ const Main = () => {
       })
       .then((d) => {
         console.log("성공?", d);
-        setProfile({ username: d.data.username, createdAt: d.data.createdAt });
+        // setProfile({ username: d.data.username, createdAt: d.data.createdAt });
         setIsSign(false);
         setLoadingSpin(false);
       })
@@ -71,14 +59,12 @@ const Main = () => {
       {isSign ? (
         <Route
           path={`/`}
-          render={() => (
-            <SignForm onSignHandler={onSignHandler} userProfile={userProfile} />
-          )}
+          render={() => <SignForm onSignHandler={onSignHandler} />}
           exact
         />
       ) : (
         <>
-          <Header setIsSign={setIsSign} profile={profile} />
+          <Header setIsSign={setIsSign} />
           <Route path={`/`} component={Home} exact />
           <Route path={`/calender`} component={Calender} />
           <Route path={`/charts`} component={Charts} />

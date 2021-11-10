@@ -9,21 +9,16 @@ import { SIGNIN_REQUEST } from "../../modules/redux/User";
 interface SignInProps {
   onSignInToggle(): void;
   onSignHandler(): void;
-  userProfile(username: string, createdAt: string): void;
 }
 
-const SignIn = ({
-  onSignInToggle,
-  onSignHandler,
-  userProfile,
-}: SignInProps) => {
+const SignIn = ({ onSignInToggle, onSignHandler }: SignInProps) => {
   const [inputEmail, setInputEmail] = useState("");
   const [inputPw, setInputPw] = useState("");
   const [cookiesToken, setCookieToken, removeCookieToken] = useCookies([
     "rememberToken",
   ]);
   const dispatch = useDispatch();
-  const sucessSelector: any = useSelector((state) => state);
+  const userSelector: any = useSelector((state) => state);
   // console.log(sucessSelector);
   // console.log(sucessSelector.userSliceReducer.signinSucceed);
 
@@ -77,7 +72,7 @@ const SignIn = ({
   };
 
   useEffect(() => {
-    const { userSliceReducer }: any = sucessSelector;
+    const { userSliceReducer }: any = userSelector;
     console.log(userSliceReducer);
     if (userSliceReducer.signinSucceed) {
       setCookieToken(`rememberToken`, userSliceReducer.accessToken);

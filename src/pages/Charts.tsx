@@ -1,12 +1,14 @@
 import React from "react";
 import { Doughnut, Line } from "react-chartjs-2";
-import { connect } from "react-redux";
+import { connect, useSelector } from "react-redux";
 import styled from "styled-components";
 import CenterRightComponent from "../components/ChartsComponents/CenterRightComponent";
 import TopComponent from "../components/ChartsComponents/TopComponent";
 import { color } from "../lib/color";
 
 const Charts = () => {
+  const userSelector = useSelector((state: any) => state.userSliceReducer.user);
+
   const doughnutData = {
     labels: [`테스팅`, `gdgd`, `쿄쿄요쿄요`],
     datasets: [
@@ -55,11 +57,11 @@ const Charts = () => {
               <div className="chart-top w-100">
                 <div className="gap1 row">
                   <div className="top-item">
-                    뭘봐{} 입니다~~
+                    뭘봐{userSelector.username} 입니다~~
                     <TopComponent title={`총 완료 수`} data={11} />
                   </div>
                   <div className="top-item">
-                    뭘봐{} 입니다~~
+                    뭘봐{userSelector.createdAt} 입니다~~
                     <TopComponent title={`총 작성 수`} data={52} />
                   </div>
                   <div className="top-item">

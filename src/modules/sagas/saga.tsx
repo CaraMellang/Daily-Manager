@@ -2,7 +2,7 @@ import axios from "axios";
 import { call, put, takeLatest } from "redux-saga/effects";
 import { SIGNIN_FAILED, SIGNIN_SUCCESS } from "../redux/User";
 
-const userRequestType = "userReducer/SIGNIN_REQUEST";
+const userSignInRequestType = "userReducer/SIGNIN_REQUEST";
 
 async function postUserData(data: any) {
   console.log("아 gg", data);
@@ -27,7 +27,7 @@ function* postUser(action: any): Generator {
 }
 
 function* mySaga() {
-  yield takeLatest(userRequestType, postUser);
+  yield takeLatest(userSignInRequestType, postUser);
 }
 
 export default mySaga;
