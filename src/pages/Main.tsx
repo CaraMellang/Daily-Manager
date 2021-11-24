@@ -2,6 +2,7 @@ import axios from "axios";
 import dayjs from "dayjs";
 import React, { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
+import { useDispatch } from "react-redux";
 import { Route } from "react-router-dom";
 import Header from "../components/Header/Header";
 import Loading from "../components/Loading";
@@ -11,6 +12,7 @@ import Calender from "./Calender";
 import Charts from "./Charts";
 import Home from "./Home";
 import SignForm from "./SignForm";
+import { SIGNIN_FAILED } from "../modules/redux/User";
 
 const Main = () => {
   const [isSign, setIsSign] = useState(true);
@@ -18,8 +20,9 @@ const Main = () => {
   const [cookiesToken, setCookieToken, removeCookieToken] = useCookies([
     "rememberToken",
   ]);
+  const dispatch = useDispatch();
   const onSignHandler = () => {
-    setIsSign(false);
+    setIsSign(false); //얘때문에 토큰있으면 그냥 프리패스당함.
   };
 
   const postSign = async () => {
@@ -36,6 +39,10 @@ const Main = () => {
       .catch((e) => {
         console.log("실패", e);
         setLoadingSpin(false);
+        window.alert("자동로그인 실패입니다.");
+        dispatch(SIGNIN_FAILED(e));
+        removeCookieToken(`rememberToken`);
+        setIsSign(true);
       });
   };
 
