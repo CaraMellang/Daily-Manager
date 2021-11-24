@@ -44,7 +44,7 @@ const SignIn = ({ onSignInToggle, onSignHandler }: SignInProps) => {
       return;
     }
     const data = {
-      username: inputEmail,
+      email: inputEmail,
       password: inputPw,
     };
 
@@ -75,7 +75,7 @@ const SignIn = ({ onSignInToggle, onSignHandler }: SignInProps) => {
     const { userSliceReducer }: any = userSelector;
     console.log(userSliceReducer);
     if (userSliceReducer.signinSucceed) {
-      setCookieToken(`rememberToken`, userSliceReducer.accessToken);
+      setCookieToken(`rememberToken`, userSliceReducer.user.accessToken);
       onSignHandler();
     }
   });

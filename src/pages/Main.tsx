@@ -13,20 +13,18 @@ import Home from "./Home";
 import SignForm from "./SignForm";
 
 const Main = () => {
-  const currentDate = new Date();
   const [isSign, setIsSign] = useState(true);
   const [loadingSpin, setLoadingSpin] = useState(true);
   const [cookiesToken, setCookieToken, removeCookieToken] = useCookies([
     "rememberToken",
   ]);
-
   const onSignHandler = () => {
     setIsSign(false);
   };
 
   const postSign = async () => {
     await axios
-      .post(`http://localhost:5000/auth/test`, ".", {
+      .post(`http://localhost:5000/auth/verify`, ".", {
         headers: { Authorization: `Bearer ${cookiesToken.rememberToken}` },
       })
       .then((d) => {
@@ -42,11 +40,12 @@ const Main = () => {
   };
 
   useEffect(() => {
-    if (!cookiesToken.rememberToken) {
-      setLoadingSpin(false);
-    }
-    if (cookiesToken.rememberToken) {
+    if (cookiesToken.rememberToken !== undefined) {
       postSign();
+      console.log("있어", cookiesToken.rememberToken);
+    } else {
+      setLoadingSpin(false);
+      console.log("없어", cookiesToken.rememberToken);
     }
   }, []);
 
