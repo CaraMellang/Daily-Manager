@@ -4,14 +4,21 @@ import { useCookies } from "react-cookie";
 import { connect, useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { dummyProfile } from "../../lib/dummy";
-import { SIGNIN_REQUEST } from "../../modules/redux/User";
+import { SIGNIN_REQUEST, SIGNIN_FAILED } from "../../modules/redux/User";
 
 interface SignInProps {
   onSignInToggle(): void;
   onSignHandler(): void;
+  isSignHandle(bool: boolean): void;
+  loadingSpinHandle(bool: boolean): void;
 }
 
-const SignIn = ({ onSignInToggle, onSignHandler }: SignInProps) => {
+const SignIn = ({
+  onSignInToggle,
+  onSignHandler,
+  isSignHandle,
+  loadingSpinHandle,
+}: SignInProps) => {
   const [inputEmail, setInputEmail] = useState("");
   const [inputPw, setInputPw] = useState("");
   const [cookiesToken, setCookieToken, removeCookieToken] = useCookies([
@@ -74,6 +81,14 @@ const SignIn = ({ onSignInToggle, onSignHandler }: SignInProps) => {
   useEffect(() => {
     const { userSliceReducer }: any = userSelector;
     console.log(userSliceReducer);
+
+    // if (cookiesToken.rememberToken !== undefined) {
+    //   postSign();
+    //   console.log("있어", cookiesToken.rememberToken);
+    // } else {
+    //   loadingSpinHandle(false);
+    //   console.log("없어", cookiesToken.rememberToken);
+    // }
     if (userSliceReducer.signinSucceed) {
       setCookieToken(`rememberToken`, userSliceReducer.user.accessToken);
       onSignHandler();

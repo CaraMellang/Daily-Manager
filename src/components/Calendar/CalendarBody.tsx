@@ -6,6 +6,7 @@ import styled from "styled-components";
 interface CalendarBodyProps {
   currentMonth: Dayjs;
   setCurrentMonth: React.Dispatch<React.SetStateAction<dayjs.Dayjs>>;
+  // getCurrentDates:
 }
 
 interface DateInfo {
@@ -19,7 +20,7 @@ const CalendarBody = ({ currentMonth, setCurrentMonth }: CalendarBodyProps) => {
   const dummy = {
     date: 18,
     month: 10,
-    fulldate: "2021-11-05",
+    fulldate: "2021-10-05",
     title: "기분좋은 오늘의하루!",
     descrition: "추가됨?",
   };
@@ -85,6 +86,7 @@ const CalendarBody = ({ currentMonth, setCurrentMonth }: CalendarBodyProps) => {
     console.log(dateArray);
     // console.log(dateArray);
     setDates(dateArray);
+    console.log(dates);
   };
 
   const dateClick = (e: any) => {

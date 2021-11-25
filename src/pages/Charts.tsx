@@ -57,11 +57,11 @@ const Charts = () => {
               <div className="chart-top w-100">
                 <div className="gap1 row">
                   <div className="top-item">
-                    뭘봐{userSelector.username} 입니다~~
+                    {/* 뭘봐{userSelector.username} 입니다~~ */}
                     <TopComponent title={`총 완료 수`} data={11} />
                   </div>
                   <div className="top-item">
-                    뭘봐{userSelector.createdAt} 입니다~~
+                    {/* 뭘봐{userSelector.createdAt} 입니다~~ */}
                     <TopComponent title={`총 작성 수`} data={52} />
                   </div>
                   <div className="top-item">

@@ -3,11 +3,9 @@ import dayjs from "dayjs";
 import React, { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
 import { useDispatch } from "react-redux";
-import { Route } from "react-router-dom";
+import { Route, useHistory } from "react-router-dom";
 import Header from "../components/Header/Header";
 import Loading from "../components/Loading";
-import ModalPortal from "../components/Modal/ModalPortal";
-import MyModal from "../components/Modal/MyModal";
 import Calender from "./Calender";
 import Charts from "./Charts";
 import Home from "./Home";
@@ -20,9 +18,17 @@ const Main = () => {
   const [cookiesToken, setCookieToken, removeCookieToken] = useCookies([
     "rememberToken",
   ]);
+  const history = useHistory();
   const dispatch = useDispatch();
   const onSignHandler = () => {
     setIsSign(false); //얘때문에 토큰있으면 그냥 프리패스당함.
+  };
+
+  const isSignHandle = (bool: boolean) => {
+    setIsSign(bool);
+  };
+  const loadingSpinHandle = (bool: boolean) => {
+    setLoadingSpin(bool);
   };
 
   const postSign = async () => {
@@ -43,6 +49,8 @@ const Main = () => {
         dispatch(SIGNIN_FAILED(e));
         removeCookieToken(`rememberToken`);
         setIsSign(true);
+        console.log(history);
+        history.push("/");
       });
   };
 
@@ -65,7 +73,13 @@ const Main = () => {
       {isSign ? (
         <Route
           path={`/`}
-          render={() => <SignForm onSignHandler={onSignHandler} />}
+          render={() => (
+            <SignForm
+              onSignHandler={onSignHandler}
+              isSignHandle={isSignHandle}
+              loadingSpinHandle={loadingSpinHandle}
+            />
+          )}
           exact
         />
       ) : (

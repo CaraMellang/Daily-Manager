@@ -10,6 +10,7 @@ interface SignIUpProps {
 const SignUp = ({ onSignInToggle, onSignHandler }: SignIUpProps) => {
   const [inputEmail, setInputEmail] = useState("");
   // const [inputId, setInputId] = useState("");
+  const [inputUsername, setInputUsername] = useState("");
   const [inputPw, setInputPw] = useState("");
 
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -19,6 +20,9 @@ const SignUp = ({ onSignInToggle, onSignHandler }: SignIUpProps) => {
     if (name === "email") {
       setInputEmail(value);
     }
+    if (name === "username") {
+      setInputUsername(value);
+    }
     if (name === "pw") {
       setInputPw(value);
     }
@@ -26,7 +30,8 @@ const SignUp = ({ onSignInToggle, onSignHandler }: SignIUpProps) => {
   const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const data = {
-      username: inputEmail,
+      email: inputEmail,
+      username: inputUsername,
       password: inputPw,
     };
     await axios
@@ -56,14 +61,14 @@ const SignUp = ({ onSignInToggle, onSignHandler }: SignIUpProps) => {
               value={inputEmail}
               onChange={handleOnChange}
             />
-            {/* <input
+            <input
               type="text"
               className="input-box"
-              name="id"
-              placeholder="Id"
-              value={inputId}
+              name="username"
+              placeholder="Username"
+              value={inputUsername}
               onChange={handleOnChange}
-            /> */}
+            />
             <input
               type="password"
               className="input-box"
