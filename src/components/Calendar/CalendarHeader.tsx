@@ -5,21 +5,25 @@ import dayjs, { Dayjs } from "dayjs";
 interface CalendarHeaderProps {
   currentMonth: Dayjs;
   setCurrentMonth: React.Dispatch<React.SetStateAction<dayjs.Dayjs>>;
+  completeHandle(bool: boolean): void;
 }
 
 const CalendarHeader = ({
   currentMonth,
   setCurrentMonth,
+  completeHandle,
 }: CalendarHeaderProps) => {
   const prevClick = () => {
     const prevDate = dayjs(currentMonth).subtract(1, "month");
     console.log(prevDate.format("YYYY - MM - DD"));
     setCurrentMonth(prevDate);
+    completeHandle(false);
   };
   const nextClick = () => {
     const nextDate = dayjs(currentMonth).add(1, "month");
     console.log(nextDate.format("YYYY - MM - DD"));
     setCurrentMonth(nextDate);
+    completeHandle(false);
   };
   return (
     <CalendarHeaderWrap>

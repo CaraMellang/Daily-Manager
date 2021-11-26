@@ -19,13 +19,19 @@ interface dataProps {
 const Calendar = () => {
   const currentDate = new Date();
   const [currentMonth, setCurrentMonth] = useState(dayjs(currentDate));
-  const [getCurrentDates, setGetCurrentDates] = useState([]);
+  const [getCurrDates, setGetCurrDates] = useState([]);
+  const [complete, setComplete] = useState(false);
   const userSelector: any = useSelector((state) => state);
   dayjs.extend(utc);
 
+
+  const completeHandle = (bool:boolean) =>{
+    setComplete(bool)
+  }
+
   const getCurMonthData = async (userSliceReducer: any) => {
     const { user } = userSliceReducer;
-    console.log(user.userId, dayjs(currentDate).toDate().getMonth());
+    // console.log(user.userId, dayjs(currentDate).toDate().getMonth());
     const data = {
       userId: user.userId,
       year: currentMonth.toDate().getFullYear(),
@@ -38,14 +44,32 @@ const Calendar = () => {
       "http://localhost:5000/todo/findcurrmonth",
       data
     );
-    console.log("실패했나,,,", todos.data.data);
-    const dd = todos.data.data[0];
-
     console.log(
-      `아이디: ${typeof dd._id} creatorId: ${typeof dd.creatorId} todo: ${typeof dd.todo} success: ${typeof dd.success} createdAt: ${dayjs(
-        new Date(dd.createdAt.slice(0, 19)) //slice안하면 9시간 추가됨.
-      ).format(`YYYY-MM-DDTHH:mm:ss.sssZ`)} updatedAt: ${typeof dd.updatedAt}`
+      "실패했나,,,",
+      todos.data.data,
+      " 길이",
+      todos.data.data.length
     );
+    if (todos.data.data.length === 0) {
+      console.log("얘! 데이터가 비어있단다!");
+      return;
+    }
+
+    const dd = todos.data.data[0];
+    // console.log(
+    //   `getCurMonthData 현재 날짜 월${
+    //     currentMonth.get(`month`) + 1
+    //   } 일: ${currentMonth.get(`date`)}`
+    // );
+
+    // console.log("아잉", dd.createdAt);
+    // console.log("슬라이스", dd.createdAt.slice(0, 19));
+    // console.log(
+    //   `아이디: ${typeof dd._id} creatorId: ${typeof dd.creatorId} todo: ${typeof dd.todo} success: ${typeof dd.success} createdAt: ${dayjs(
+    //     new Date(dd.createdAt.slice(0, 19)) //slice안하면 9시간 추가됨.
+    //   ).format(`YYYY-MM-DDTHH:mm:ss`)} updatedAt: ${typeof dd.updatedAt}`
+    // );
+
     // console.log(
     //   "아이진짜",
     //   dayjs.utc(new Date(dd.createdAt)).format(`YYYY-MM-DD HH:mm:ss`)
@@ -54,26 +78,27 @@ const Calendar = () => {
     // console.log(
     //   `아이디: ${typeof dd._id} creatorId: ${typeof dd.creatorId} todo: ${typeof dd.todo} success: ${typeof dd.success} createdAt: ${typeof dd.createdAt} updatedAt: ${typeof dd.updatedAt}`
     // );
-    setGetCurrentDates(todos.data.data);
+    setGetCurrDates(todos.data.data);
   };
 
   useEffect(() => {
-    const { userSliceReducer } = userSelector;
-    console.log(userSliceReducer);
-    getCurMonthData(userSliceReducer);
-    return () => {
-      return;
-    };
+    // const { userSliceReducer } = userSelector;
+    // console.log(userSliceReducer);
+    // getCurMonthData(userSliceReducer);
+    return () => {};
   }, [currentMonth]);
   return (
     <CalendarWrap>
       <CalendarHeader
         currentMonth={currentMonth}
         setCurrentMonth={setCurrentMonth}
+        completeHandle={completeHandle}
       />
       <CalendarBody
         currentMonth={currentMonth}
         setCurrentMonth={setCurrentMonth}
+        completeHandle={completeHandle}
+        complete={complete}
         // getCurrentDates={getCurrentDates}
       />
     </CalendarWrap>

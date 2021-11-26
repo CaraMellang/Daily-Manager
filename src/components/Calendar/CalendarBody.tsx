@@ -1,11 +1,15 @@
+import axios from "axios";
 import dayjs, { Dayjs } from "dayjs";
 import React, { useEffect, useState } from "react";
 import { notice } from "react-interaction";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
 
 interface CalendarBodyProps {
   currentMonth: Dayjs;
   setCurrentMonth: React.Dispatch<React.SetStateAction<dayjs.Dayjs>>;
+  completeHandle(bool: boolean): void;
+  complete: boolean;
   // getCurrentDates:
 }
 
@@ -14,24 +18,44 @@ interface DateInfo {
   month: number;
   fulldate: string;
   descrition: string;
+  todos?: Todo[];
+}
+interface Todo {
+  _id: string;
+  creatorId: string;
+  todo: string;
+  success: boolean;
+  createdAt: string;
+  updatedAt: string;
 }
 
-const CalendarBody = ({ currentMonth, setCurrentMonth }: CalendarBodyProps) => {
+const CalendarBody = ({
+  currentMonth,
+  setCurrentMonth,
+  completeHandle,
+  complete,
+}: CalendarBodyProps) => {
   const dummy = {
     date: 18,
-    month: 10,
-    fulldate: "2021-10-05",
+    month: 11,
+    fulldate: "2021-11-05",
     title: "기분좋은 오늘의하루!",
     descrition: "추가됨?",
   };
-  const [dates, setDates] = useState([
-    { date: 1, month: 2, fulldate: "string", descrition: "string" },
-  ]);
+  // const [dates, setDates] = useState<DateInfo[]>([
+  //   { date: 1, month: 2, fulldate: "지랄하네진짜", descrition: "string" },
+  // ]);
+  let dates: Array<DateInfo> = [];
+
+  const userSelector: any = useSelector((state) => state);
   // const [toggle, setToggle] = useState(false);
   const daysArray = ["일", "월", "화", "수", "목", "금", "토"];
 
-  const paintCalendar = () => {
+  const paintCalendar = async (userSliceReducer: any) => {
     let dateArray: Array<DateInfo> = [];
+
+    const todoDatas = await getCurMonthData(userSliceReducer);
+    console.log("투두뗴이팄", todoDatas);
 
     dayjs(currentMonth).set("date", 0).get("date");
     const prevLastDay = dayjs(currentMonth).set("date", 0).get("day");
@@ -59,12 +83,24 @@ const CalendarBody = ({ currentMonth, setCurrentMonth }: CalendarBodyProps) => {
       i++
     ) {
       // setDates((prevState) => [...prevState, i]);
-      let data = {
+
+      let data: DateInfo = {
         date: i,
         month: currentMonth.get("month"),
         fulldate: currentMonth.set("date", i).format("YYYY-MM-DD"),
         descrition: "잘됨",
+        todos: [],
       };
+      todoDatas?.forEach((arrData: any) => {
+        console.log("ㅅ바?", arrData);
+        console.log(
+          dayjs(new Date(arrData.createdAt.slice(0, 19))).get(`date`),
+          i
+        );
+        if (dayjs(new Date(arrData.createdAt.slice(0, 19))).get(`date`) === i) {
+          data.todos?.push(arrData);
+        }
+      });
       dateArray.push(data);
     }
     const thisLastDay = dayjs(currentMonth)
@@ -83,9 +119,14 @@ const CalendarBody = ({ currentMonth, setCurrentMonth }: CalendarBodyProps) => {
       }
     }
 
-    console.log(dateArray);
     // console.log(dateArray);
-    setDates(dateArray);
+    // console.log(dateArray);
+    // setDates(dateArray);
+    dates = dateArray;
+    completeHandle(true);
+    // setDates(dateArray);
+    console.log("tlqkffusdk", complete);
+    console.log(dateArray);
     console.log(dates);
   };
 
@@ -113,10 +154,70 @@ const CalendarBody = ({ currentMonth, setCurrentMonth }: CalendarBodyProps) => {
   // console.log(currentMonth.startOf("week").format("YYYY - MM - DD"));
   // console.log(dayjs("2021-11-00").format("DD/MM/YYYY"));
 
+  const getCurMonthData = async (userSliceReducer: any) => {
+    const { user } = userSliceReducer;
+    const data = {
+      userId: user.userId,
+      year: currentMonth.toDate().getFullYear(),
+      month: currentMonth.toDate().getMonth() + 1,
+      date: currentMonth.toDate().getDate(),
+      // date: dayjs(currentDate).toDate().getMonth() + 1,
+      gd: "???",
+    };
+    const todos = await axios.post(
+      "http://localhost:5000/todo/findcurrmonth",
+      data
+    );
+    console.log(
+      "실패했나,,,",
+      todos.data.data,
+      " 길이",
+      todos.data.data.length
+    );
+    if (todos.data.data.length === 0) {
+      console.log("얘! 데이터가 비어있단다!");
+      return;
+    }
+
+    const dd = todos.data.data[0];
+    console.log(
+      `getCurMonthData 현재 날짜 월${
+        currentMonth.get(`month`) + 1
+      } 일: ${currentMonth.get(`date`)}`
+    );
+
+    // console.log("아잉", dd.createdAt);
+    // console.log("슬라이스", dd.createdAt.slice(0, 19));
+    // console.log(
+    //   `아이디: ${typeof dd._id} creatorId: ${typeof dd.creatorId} todo: ${typeof dd.todo} success: ${typeof dd.success} createdAt: ${dayjs(
+    //     new Date(dd.createdAt.slice(0, 19)) //slice안하면 9시간 추가됨.
+    //   ).format(`YYYY-MM-DDTHH:mm:ss`)} updatedAt: ${typeof dd.updatedAt}`
+    // );
+
+    // console.log(
+    //   "아이진짜",
+    //   dayjs.utc(new Date(dd.createdAt)).format(`YYYY-MM-DD HH:mm:ss`)
+    // );
+    // console.log(new Date(), dd.createdAt);
+    // console.log(
+    //   `아이디: ${typeof dd._id} creatorId: ${typeof dd.creatorId} todo: ${typeof dd.todo} success: ${typeof dd.success} createdAt: ${typeof dd.createdAt} updatedAt: ${typeof dd.updatedAt}`
+    // );
+    // setGetCurrDates(todos.data.data);
+    return todos.data.data;
+  };
+
   useEffect(() => {
-    paintCalendar();
+    const { userSliceReducer } = userSelector;
+    console.log(userSliceReducer);
+    if (complete === false) {
+      paintCalendar(userSliceReducer);
+      console.log("컴플리트 실행");
+    }
     console.log("리렌더!");
-  }, [currentMonth]);
+    return () => {
+      console.log("사라짐");
+    };
+  }, [currentMonth, complete]);
 
   return (
     <CalendarBodyWrap>
@@ -232,4 +333,5 @@ const CalendarDates = styled.div`
   }
 `;
 
-export default React.memo(CalendarBody);
+export default CalendarBody;
+// export default React.memo(CalendarBody);
