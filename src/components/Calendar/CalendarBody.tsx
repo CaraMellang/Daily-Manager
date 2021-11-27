@@ -1,7 +1,8 @@
 import axios from "axios";
 import dayjs, { Dayjs } from "dayjs";
 import React, { useEffect, useState } from "react";
-import { notice } from "react-interaction";
+import ModalPortal from "../Modal/ModalPortal";
+import MyModal from "../Modal/MyModal";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 
@@ -35,18 +36,13 @@ const CalendarBody = ({
   completeHandle,
   complete,
 }: CalendarBodyProps) => {
-  const dummy = {
-    date: 25,
-    month: 11,
-    fulldate: "2021-11-25",
-    title: "기분좋은 오늘의하루!",
-    descrition: "추가됨?",
-  };
   const [dates, setDates] = useState<DateInfo[]>([
     { date: 1, month: 2, fulldate: "지s", descrition: "string", todos: [] },
   ]);
   // let dates: Array<DateInfo> = [];
 
+  const [dateModalToggle, setDateModalToggle] = useState(false);
+  const [clickDate, setClickDate] = useState(0);
   const userSelector: any = useSelector((state) => state);
   // const [toggle, setToggle] = useState(false);
   const daysArray = ["일", "월", "화", "수", "목", "금", "토"];
@@ -93,11 +89,6 @@ const CalendarBody = ({
         todos: [],
       };
       todoDatas?.forEach((arrData: any) => {
-        console.log("ㅅ바?", arrData);
-        console.log(
-          dayjs(new Date(arrData.createdAt.slice(0, 19))).get(`date`),
-          i
-        );
         if (dayjs(new Date(arrData.createdAt.slice(0, 19))).get(`date`) === i) {
           data.todos?.push(arrData);
         }
@@ -132,29 +123,35 @@ const CalendarBody = ({
     // console.log(dates);  비동기떄무에 자꾸 이상하게나와잉
   };
 
-  const dateClick = (e: any) => {
-    // console.log(e.target);
-    // console.log(e.currentTarget);
-    // if (e.target !== e.currentTarget) {
-    //   return;
-    // }
-    console.log(e);
-    const yValue = window.scrollY;
-    // document.body.style.cssText = `position: fixed; top: -${yValue}px`;
-    const text =
-      dummy.fulldate === e.currentTarget.title ? dummy.descrition : "";
-    document.body.style.overflow = "hidden";
-    notice(
-      `클릭하신 날짜는 ${e.currentTarget.title} 입니다. ${`\n` + text}`
-    ).then(() => {
-      // document.body.style.cssText = `position: unset ; top: -${yValue}px`; //모바일도 대응 근데 좀 손봐야함
-      document.body.style.overflow = "unset";
-    });
+  const toggleClick = () => {
+    setDateModalToggle(!dateModalToggle);
   };
 
-  // console.log(dayjs(currentMonth).set("date", 0).get("day"));
-  // console.log(currentMonth.startOf("week").format("YYYY - MM - DD"));
-  // console.log(dayjs("2021-11-00").format("DD/MM/YYYY"));
+  const dateClick = (e: any) => {
+    // // console.log(e.target);
+    // // console.log(e.currentTarget);
+    // // if (e.target !== e.currentTarget) {
+    // //   return;
+    // // }
+    // console.log(e);
+    // const yValue = window.scrollY;
+    // // document.body.style.cssText = `position: fixed; top: -${yValue}px`;
+    // const text =
+    //   dummy.fulldate === e.currentTarget.title ? dummy.descrition : "";
+    // document.body.style.overflow = "hidden";
+    // notice(
+    //   `클릭하신 날짜는 ${e.currentTarget.title} 입니다. ${`\n` + text}`
+    // ).then(() => {
+    //   // document.body.style.cssText = `position: unset ; top: -${yValue}px`; //모바일도 대응 근데 좀 손봐야함
+    //   document.body.style.overflow = "unset";
+    // });
+    const intVal = parseInt(e.currentTarget.dataset.value);
+    setClickDate(intVal);
+    setDateModalToggle(!dateModalToggle);
+    console.log("너 실행하냐?");
+    // console.log(e.currentTarget.dataset.value);
+    // console.log("eee", e.currentTarget);
+  };
 
   const getCurMonthData = async (userSliceReducer: any) => {
     const { user } = userSliceReducer;
@@ -181,30 +178,12 @@ const CalendarBody = ({
       return;
     }
 
-    const dd = todos.data.data[0];
     console.log(
       `getCurMonthData 현재 날짜 월${
         currentMonth.get(`month`) + 1
       } 일: ${currentMonth.get(`date`)}`
     );
 
-    // console.log("아잉", dd.createdAt);
-    // console.log("슬라이스", dd.createdAt.slice(0, 19));
-    // console.log(
-    //   `아이디: ${typeof dd._id} creatorId: ${typeof dd.creatorId} todo: ${typeof dd.todo} success: ${typeof dd.success} createdAt: ${dayjs(
-    //     new Date(dd.createdAt.slice(0, 19)) //slice안하면 9시간 추가됨.
-    //   ).format(`YYYY-MM-DDTHH:mm:ss`)} updatedAt: ${typeof dd.updatedAt}`
-    // );
-
-    // console.log(
-    //   "아이진짜",
-    //   dayjs.utc(new Date(dd.createdAt)).format(`YYYY-MM-DD HH:mm:ss`)
-    // );
-    // console.log(new Date(), dd.createdAt);
-    // console.log(
-    //   `아이디: ${typeof dd._id} creatorId: ${typeof dd.creatorId} todo: ${typeof dd.todo} success: ${typeof dd.success} createdAt: ${typeof dd.createdAt} updatedAt: ${typeof dd.updatedAt}`
-    // );
-    // setGetCurrDates(todos.data.data);
     return todos.data.data;
   };
 
@@ -244,26 +223,41 @@ const CalendarBody = ({
               </div>
             );
           }
-          if (i.fulldate === dummy.fulldate) {
+          if (i.todos.length !== 0) {
             return (
               <div className="date-box" key={index}>
-                <div className="date" onClick={dateClick} title={i.fulldate}>
+                <div
+                  className="date"
+                  onClick={dateClick}
+                  title={i.fulldate}
+                  data-value={i.date}
+                >
                   <div className={`ddate red`}>
                     <div>{i.date}</div>
                     <div>
-                      {/* {dummy.title.slice(0, 12) !== ""
-                        ? dummy.title.slice(0, 12)
-                        : dummy.title} */}
-                      {i.todos[1]?._id}
+                      투두가 있습니다!
+                      {dateModalToggle && clickDate === i.date ? (
+                        <ModalPortal>
+                          <MyModal
+                            toggleClick={toggleClick}
+                            dateModalToggle={dateModalToggle}
+                            datas={i}
+                            completeHandle={completeHandle}
+                          />
+                        </ModalPortal>
+                      ) : (
+                        ""
+                      )}
                     </div>
                   </div>
                 </div>
               </div>
             );
           }
+
           return (
             <div className="date-box" key={index}>
-              <div className="date" onClick={dateClick} title={i.fulldate}>
+              <div className="date" title={i.fulldate}>
                 <div className="ddate">
                   <div>{i.date}</div>
                 </div>
