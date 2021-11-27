@@ -18,7 +18,7 @@ interface DateInfo {
   month: number;
   fulldate: string;
   descrition: string;
-  todos?: Todo[];
+  todos: Todo[];
 }
 interface Todo {
   _id: string;
@@ -36,23 +36,23 @@ const CalendarBody = ({
   complete,
 }: CalendarBodyProps) => {
   const dummy = {
-    date: 18,
+    date: 25,
     month: 11,
-    fulldate: "2021-11-05",
+    fulldate: "2021-11-25",
     title: "기분좋은 오늘의하루!",
     descrition: "추가됨?",
   };
-  // const [dates, setDates] = useState<DateInfo[]>([
-  //   { date: 1, month: 2, fulldate: "지랄하네진짜", descrition: "string" },
-  // ]);
-  let dates: Array<DateInfo> = [];
+  const [dates, setDates] = useState<DateInfo[]>([
+    { date: 1, month: 2, fulldate: "지s", descrition: "string", todos: [] },
+  ]);
+  // let dates: Array<DateInfo> = [];
 
   const userSelector: any = useSelector((state) => state);
   // const [toggle, setToggle] = useState(false);
   const daysArray = ["일", "월", "화", "수", "목", "금", "토"];
 
   const paintCalendar = async (userSliceReducer: any) => {
-    let dateArray: Array<DateInfo> = [];
+    let dateArray: DateInfo[] = [];
 
     const todoDatas = await getCurMonthData(userSliceReducer);
     console.log("투두뗴이팄", todoDatas);
@@ -60,11 +60,12 @@ const CalendarBody = ({
     dayjs(currentMonth).set("date", 0).get("date");
     const prevLastDay = dayjs(currentMonth).set("date", 0).get("day");
     for (let i = 0; i <= 6; i++) {
-      let data = {
+      let data: DateInfo = {
         date: 404,
         month: currentMonth.get("month"),
         fulldate: currentMonth.format("YYYY-MM-DD"),
         descrition: "공란날짜임",
+        todos: [],
       };
       dateArray.push(data);
       if (i === 6) {
@@ -109,11 +110,12 @@ const CalendarBody = ({
       .get("day");
     for (let i = 0; i <= 6; i++) {
       if (thisLastDay < i) {
-        let data = {
+        let data: DateInfo = {
           date: 404,
           month: currentMonth.get("month"),
           fulldate: currentMonth.format("YYYY-MM-DD"),
           descrition: "공란날짜임",
+          todos: [],
         };
         dateArray.push(data);
       }
@@ -121,13 +123,13 @@ const CalendarBody = ({
 
     // console.log(dateArray);
     // console.log(dateArray);
-    // setDates(dateArray);
-    dates = dateArray;
+    setDates(dateArray);
+    // dates = dateArray;
     completeHandle(true);
     // setDates(dateArray);
     console.log("tlqkffusdk", complete);
     console.log(dateArray);
-    console.log(dates);
+    // console.log(dates);  비동기떄무에 자꾸 이상하게나와잉
   };
 
   const dateClick = (e: any) => {
@@ -206,6 +208,7 @@ const CalendarBody = ({
     return todos.data.data;
   };
 
+
   useEffect(() => {
     const { userSliceReducer } = userSelector;
     console.log(userSliceReducer);
@@ -213,6 +216,7 @@ const CalendarBody = ({
       paintCalendar(userSliceReducer);
       console.log("컴플리트 실행");
     }
+    console.log("ddd", dates);
     console.log("리렌더!");
     return () => {
       console.log("사라짐");
@@ -230,6 +234,7 @@ const CalendarBody = ({
       </CalendarDayarray>
       <CalendarDates>
         {dates.map((i, index) => {
+          // console.log(i.todos[0].creatorId);
           if (i.date === 404) {
             return (
               <div className="date-box " key={index}>
@@ -246,9 +251,10 @@ const CalendarBody = ({
                   <div className={`ddate red`}>
                     <div>{i.date}</div>
                     <div>
-                      {dummy.title.slice(0, 12) !== ""
+                      {/* {dummy.title.slice(0, 12) !== ""
                         ? dummy.title.slice(0, 12)
-                        : dummy.title}
+                        : dummy.title} */}
+                      {i.todos[1]?._id}
                     </div>
                   </div>
                 </div>
