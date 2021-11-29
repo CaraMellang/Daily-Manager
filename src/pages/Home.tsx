@@ -5,7 +5,7 @@ import styled, { keyframes } from "styled-components";
 import { toast, notice, check, Tooltip } from "react-interaction";
 import Calendar from "../components/Calendar/Calendar";
 import ModalPortal from "../components/Modal/ModalPortal";
-import MyModal from "../components/Modal/MyModal";
+import Modal from "../components/Modal/Modal";
 import axios from "axios";
 
 const Home = () => {

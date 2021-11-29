@@ -2,7 +2,7 @@ import axios from "axios";
 import dayjs, { Dayjs } from "dayjs";
 import React, { useEffect, useState } from "react";
 import ModalPortal from "../Modal/ModalPortal";
-import MyModal from "../Modal/MyModal";
+import Modal from "../Modal/Modal";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 
@@ -238,7 +238,7 @@ const CalendarBody = ({
                       투두가 있습니다!
                       {dateModalToggle && clickDate === i.date ? (
                         <ModalPortal>
-                          <MyModal
+                          <Modal
                             toggleClick={toggleClick}
                             dateModalToggle={dateModalToggle}
                             DateInfo={i}

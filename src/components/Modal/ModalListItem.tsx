@@ -8,9 +8,16 @@ import { cloneDeep } from "lodash";
 interface ModalListItemProps {
   DateInfo: DateInfo;
   completeHandle(bool: boolean): void;
+  clickListToggleHandle(bool: boolean): void;
+  onClickListHandle(data: any): void;
 }
 
-function ModalListItem({ DateInfo, completeHandle }: ModalListItemProps) {
+function ModalListItem({
+  DateInfo,
+  completeHandle,
+  clickListToggleHandle,
+  onClickListHandle,
+}: ModalListItemProps) {
   const clone = cloneDeep(DateInfo);
   const [cloneState, setCloneState] = useState(clone.todos);
   const userSelector: any = useSelector((state) => state);
@@ -35,50 +42,65 @@ function ModalListItem({ DateInfo, completeHandle }: ModalListItemProps) {
       });
     completeHandle(false);
   };
-  const checkedHandle = (e: any) => {
-    const cloneTodos = cloneDeep(DateInfo.todos);
-    console.log("체크핸들", e);
-    const imuCloneState = cloneTodos.map((arr) => {
-      if (arr._id === e.target.name) {
-        console.log(arr, arr._id, e.target.name);
-        return {
-          _id: arr._id,
-          todo: arr.todo,
-          success: !arr.success,
-          createdAt: arr.createdAt,
-          updatedAt: arr.updatedAt,
-        };
-      }
-      return {
-        _id: arr._id,
-        todo: arr.todo,
-        success: !arr.success,
-        createdAt: arr.createdAt,
-        updatedAt: arr.updatedAt,
-      };
-    });
-    console.log(imuCloneState);
+  const checkedHandle = async (e: any) => {
+    console.log("체크핸들", e.target.name);
+    console.log("체크핸들", !e.target.checked);
+    const data = {
+      token: userSelector.userSliceReducer.user.accessToken,
+      todoId: e.target.name,
+      success: !e.target.checked,
+    };
+    await axios
+      .patch(`http://localhost:5000/todo/updatesuc`, data)
+      .then((res) => {
+        console.log("상태패치완료", res);
+        completeHandle(false);
+      })
+      .catch((e) => {
+        console.log(e);
+        window.alert("얘! 상태오류란다!");
+      });
   };
+
+  const onClickTodo = (todoId: string, todo: string, createdAt: string) => {
+    console.log(todoId, todo, createdAt);
+    const data = { todoId, todo, createdAt };
+    console.log(typeof data);
+    onClickListHandle(data);
+    clickListToggleHandle(true);
+  };
+
+  const stopBubbling = (e: any) => {
+    e.stopPropagation();
+  };
+
   return (
     <ModalListItemWrap>
       {DateInfo.todos.map((arr) => {
         return (
-          <div style={{ display: "flex" }} key={arr._id}>
-            <input
-              type="checkbox"
-              defaultChecked={arr.success}
-              name={arr._id}
-              onChange={checkedHandle}
-            />
-            <div>{arr._id}</div>
-            <div className={arr.success ? `font-line-through` : ``}>
-              {arr.todo}
+          <div
+            style={{ cursor: "pointer" }}
+            key={arr._id}
+            onClick={() => onClickTodo(arr._id, arr.todo, arr.createdAt)}
+          >
+            <div onClick={stopBubbling} style={{ display: "flex" }}>
+              <input
+                type="checkbox"
+                // defaultChecked={arr.success}
+                name={arr._id}
+                checked={arr.success}
+                onChange={checkedHandle}
+              />
+              {/* <div>{arr._id}</div> */}
+              <div className={arr.success ? `font-line-through` : ``}>
+                {arr.todo}
+              </div>
+              <div>{arr.createdAt}</div>
+              <div>{`${arr.success}`}</div>
+              <button onClick={deleteClick} value={arr._id}>
+                삭제
+              </button>
             </div>
-            <div>{arr.createdAt}</div>
-            <div>{`${arr.success}`}</div>
-            <button onClick={deleteClick} value={arr._id}>
-              삭제
-            </button>
           </div>
         );
       })}

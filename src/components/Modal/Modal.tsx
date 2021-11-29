@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import styled from "styled-components";
 import { DateInfo } from "../Calendar/CalendarBody";
 import DetailItem from "./DetailItem";
-import ModalListItem from "./ModalListItem";
+import ModalList from "./ModalList";
 
 interface MymodalProps {
   toggleClick(): void;
@@ -17,40 +17,42 @@ interface stProps {
   dateModalToggle: boolean;
 }
 
-const MyModal = ({
+const Modal = ({
   toggleClick,
   dateModalToggle,
   DateInfo,
   completeHandle,
 }: MymodalProps) => {
-  const [checked, setChecked] = useState(false);
-  const [clickList, setClickList] = useState(true);
+  const [clickListToggle, setClickListToggle] = useState(false);
+  const [clickList, setClickList] = useState();
   const stopBubbling = (e: any) => {
     e.stopPropagation();
   };
-  const checkedHandle = () => {
-    setChecked(!checked);
+  const clickListToggleHandle = (bool: boolean) => {
+    setClickListToggle(bool);
+  };
+  const onClickListHandle = (data: any) => {
+    setClickList(data);
   };
 
-  useEffect(() => {});
   return (
     <MyModalWrap dateModalToggle={dateModalToggle}>
       <div className="MyModal" onClick={stopBubbling}>
-        <div className={`modalbox `}>
-          <div className="content">
-            <h1>Today's List</h1>
-            <ModalListItem
-              DateInfo={DateInfo}
-              completeHandle={completeHandle}
-            />
-          </div>
-          <div className="clickbox">
-            <button className="modalbutton">작성</button>
-          </div>
-        </div>
+        {clickListToggle ? (
+          <DetailItem
+            clickListToggleHandle={clickListToggleHandle}
+            clickList={clickList}
+          />
+        ) : (
+          <ModalList
+            DateInfo={DateInfo}
+            completeHandle={completeHandle}
+            clickListToggleHandle={clickListToggleHandle}
+            onClickListHandle={onClickListHandle}
+          />
+        )}
         <div className="modalback" onClick={toggleClick}></div>
       </div>
-      {clickList && <DetailItem />}
     </MyModalWrap>
   );
 };
@@ -93,41 +95,12 @@ const MyModalWrap = styled.div<stProps>`
   .MyModal .modalbox {
     z-index: 1000;
     background: white;
-    width: 40%;
     height: auto;
   }
   .modalbox {
-    z-index: 100000;
+    z-index: 100;
     border-radius: 12px;
-  }
-  .content {
-    padding: 1rem;
-  }
-  .clickbox {
-    display: flex;
-    text-align: center;
-  }
-  .modalbutton {
-    display: block;
-    font-size: 18px;
-    font-weight: bold;
-    background-color: #fff;
-    outline: 0;
-    border: 0;
-    padding: 20px 5px;
-    cursor: pointer;
-    width: 100%;
-    border-radius: 0 0 12px 12px;
-  }
-  .modaltextarea {
-    font-weight: bold;
-    font-size: 24px;
-    box-sizing: border-box;
-    width: 100%;
-    height: 200px;
-    resize: none;
-    transition: height 1s;
   }
 `;
 
-export default MyModal;
+export default Modal;
