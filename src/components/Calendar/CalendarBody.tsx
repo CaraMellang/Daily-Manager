@@ -14,7 +14,7 @@ interface CalendarBodyProps {
   // getCurrentDates:
 }
 
-interface DateInfo {
+export interface DateInfo {
   date: number;
   month: number;
   fulldate: string;
@@ -241,7 +241,7 @@ const CalendarBody = ({
                           <MyModal
                             toggleClick={toggleClick}
                             dateModalToggle={dateModalToggle}
-                            datas={i}
+                            DateInfo={i}
                             completeHandle={completeHandle}
                           />
                         </ModalPortal>

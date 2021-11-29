@@ -19,11 +19,11 @@ const Home = () => {
 
   return (
     <HomeWrap>
-      {toggle && (
+      {/* {toggle && (
         <ModalPortal>
           <MyModal toggleOn={toggleOn} toggle={toggle} />
         </ModalPortal>
-      )}
+      )} */}
 
       <button
         type="button"

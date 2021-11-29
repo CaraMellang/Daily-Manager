@@ -2,6 +2,16 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
+import { DateInfo } from "../Calendar/CalendarBody";
+import DetailItem from "./DetailItem";
+import ModalListItem from "./ModalListItem";
+
+interface MymodalProps {
+  toggleClick(): void;
+  dateModalToggle: boolean;
+  completeHandle(bool: boolean): void;
+  DateInfo: DateInfo;
+}
 
 interface stProps {
   dateModalToggle: boolean;
@@ -10,37 +20,18 @@ interface stProps {
 const MyModal = ({
   toggleClick,
   dateModalToggle,
-  datas,
+  DateInfo,
   completeHandle,
-}: any) => {
-  const userSelector: any = useSelector((state) => state);
-  const [text, setText] = useState("초기값");
-  console.log(`데이탓스${datas.date}`);
-  console.log(`데이탓스${datas.todos[0]._id}`);
-  console.log(`데이탓스`, datas);
-  const onChangeText = (e: any) => {
-    console.log(e.target.value);
-    setText(e.target.value);
-  };
+}: MymodalProps) => {
+  const [checked, setChecked] = useState(false);
+  const [clickList, setClickList] = useState(true);
   const stopBubbling = (e: any) => {
     e.stopPropagation();
   };
-  const deleteClick = async (e: any) => {
-    console.log(e.target.value);
-    const data = {
-      token: userSelector.userSliceReducer.user.accessToken,
-      todoId: e.target.value,
-    };
-    await axios
-      .delete(`http://localhost:5000/todo/delete`, { data })
-      .then((rr) => {
-        console.log("완료", rr);
-      })
-      .catch((e) => {
-        console.log("아이", e);
-      });
-    completeHandle(false);
+  const checkedHandle = () => {
+    setChecked(!checked);
   };
+
   useEffect(() => {});
   return (
     <MyModalWrap dateModalToggle={dateModalToggle}>
@@ -48,39 +39,18 @@ const MyModal = ({
         <div className={`modalbox `}>
           <div className="content">
             <h1>Today's List</h1>
-            {/* <textarea
-              className="modaltextarea"
-              value={text}
-              onChange={onChangeText}
-            /> */}
-            <div className="col">
-              {datas.todos.map((item: any) => {
-                return (
-                  <div key={item._id}>
-                    <input type="checkbox" />
-                    {`체크 _id:${item._id} todo: `}
-                    <span
-                      className={
-                        item.success === true ? `font-line-through` : ``
-                      }
-                    >{`${item.todo}`}</span>
-                    {` createdAt: ${item.createdAt} ${item.success} `}
-                    <button onClick={deleteClick} value={item._id}>
-                      삭제
-                    </button>
-                  </div>
-                );
-              })}
-            </div>
+            <ModalListItem
+              DateInfo={DateInfo}
+              completeHandle={completeHandle}
+            />
           </div>
           <div className="clickbox">
             <button className="modalbutton">작성</button>
           </div>
         </div>
-        <div className="modalback" onClick={toggleClick}>
-          아 시발련아 진짜
-        </div>
+        <div className="modalback" onClick={toggleClick}></div>
       </div>
+      {clickList && <DetailItem />}
     </MyModalWrap>
   );
 };
