@@ -1,5 +1,6 @@
 import { combineReducers } from "redux";
 import userSliceReducer from "./redux/User";
+import todosSliceReducer from "./redux/Todos";
 import storage from "redux-persist/lib/storage";
 import persistReducer from "redux-persist/es/persistReducer";
 import sessionStorage from "redux-persist/es/storage/session";
@@ -14,6 +15,6 @@ const persistConfig = {
   // blacklist -> 그것만 제외합니다
 };
 
-const rootReducer = combineReducers({ userSliceReducer });
+const rootReducer = combineReducers({ userSliceReducer, todosSliceReducer });
 
 export default persistReducer(persistConfig, rootReducer);

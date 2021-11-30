@@ -51,7 +51,7 @@ const CalendarBody = ({
     let dateArray: DateInfo[] = [];
 
     const todoDatas = await getCurMonthData(userSliceReducer);
-    console.log("투두뗴이팄", todoDatas);
+    // console.log("투두뗴이팄", todoDatas);
 
     dayjs(currentMonth).set("date", 0).get("date");
     const prevLastDay = dayjs(currentMonth).set("date", 0).get("day");
@@ -118,9 +118,8 @@ const CalendarBody = ({
     // dates = dateArray;
     completeHandle(true);
     // setDates(dateArray);
-    console.log("tlqkffusdk", complete);
-    console.log(dateArray);
-    // console.log(dates);  비동기떄무에 자꾸 이상하게나와잉
+    // console.log("tlqkffusdk", complete);
+    // console.log(dateArray);
   };
 
   const toggleClick = () => {
@@ -148,7 +147,7 @@ const CalendarBody = ({
     const intVal = parseInt(e.currentTarget.dataset.value);
     setClickDate(intVal);
     setDateModalToggle(!dateModalToggle);
-    console.log("너 실행하냐?");
+    // console.log("너 실행하냐?");
     // console.log(e.currentTarget.dataset.value);
     // console.log("eee", e.currentTarget);
   };
@@ -167,14 +166,9 @@ const CalendarBody = ({
       "http://localhost:5000/todo/findcurrmonth",
       data
     );
-    console.log(
-      "실패했나,,,",
-      todos.data.data,
-      " 길이",
-      todos.data.data.length
-    );
+    // console.log("실패했나,,,",todos.data.data," 길이",todos.data.data.length);
     if (todos.data.data.length === 0) {
-      console.log("얘! 데이터가 비어있단다!");
+      // console.log("얘! 데이터가 비어있단다!");
       return;
     }
 
@@ -189,12 +183,12 @@ const CalendarBody = ({
 
   useEffect(() => {
     const { userSliceReducer } = userSelector;
-    console.log(userSliceReducer);
+    // console.log(userSliceReducer);
     if (complete === false) {
       paintCalendar(userSliceReducer);
       console.log("컴플리트 실행");
     }
-    console.log("ddd", dates);
+    // console.log("ddd", dates);
     console.log("리렌더!");
     return () => {
       console.log("사라짐");

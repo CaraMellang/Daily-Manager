@@ -2,8 +2,9 @@ import axios from "axios";
 import dayjs, { Dayjs } from "dayjs";
 import utc from "dayjs/plugin/utc";
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
+import { TODOS_REQUEST } from "../../modules/redux/Todos";
 import CalendarBody from "./CalendarBody";
 import CalendarHeader from "./CalendarHeader";
 
@@ -21,13 +22,13 @@ const Calendar = () => {
   const [currentMonth, setCurrentMonth] = useState(dayjs(currentDate));
   const [getCurrDates, setGetCurrDates] = useState([]);
   const [complete, setComplete] = useState(false);
-  const userSelector: any = useSelector((state) => state);
+  const selector: any = useSelector((state) => state);
+  const dispatch = useDispatch();
   dayjs.extend(utc);
 
-
-  const completeHandle = (bool:boolean) =>{
-    setComplete(bool)
-  }
+  const completeHandle = (bool: boolean) => {
+    setComplete(bool);
+  };
 
   const getCurMonthData = async (userSliceReducer: any) => {
     const { user } = userSliceReducer;
@@ -82,6 +83,11 @@ const Calendar = () => {
   };
 
   useEffect(() => {
+    const token = selector.userSliceReducer.user.accessToken;
+    const userId = selector.userSliceReducer.user.userId;
+    dispatch(TODOS_REQUEST({ token, userId }));
+    console.log("ㄹ릴낟달;ㅇ?", selector.todosSliceReducer.todos);
+
     // const { userSliceReducer } = userSelector;
     // console.log(userSliceReducer);
     // getCurMonthData(userSliceReducer);
