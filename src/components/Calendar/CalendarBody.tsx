@@ -187,7 +187,6 @@ const CalendarBody = ({
     return todos.data.data;
   };
 
-
   useEffect(() => {
     const { userSliceReducer } = userSelector;
     console.log(userSliceReducer);
@@ -235,7 +234,6 @@ const CalendarBody = ({
                   <div className={`ddate red`}>
                     <div>{i.date}</div>
                     <div>
-                      투두가 있습니다!
                       {dateModalToggle && clickDate === i.date ? (
                         <ModalPortal>
                           <Modal
@@ -257,9 +255,28 @@ const CalendarBody = ({
 
           return (
             <div className="date-box" key={index}>
-              <div className="date" title={i.fulldate}>
-                <div className="ddate">
+              <div
+                className="date"
+                onClick={dateClick}
+                title={i.fulldate}
+                data-value={i.date}
+              >
+                <div className={`ddate`}>
                   <div>{i.date}</div>
+                  <div>
+                    {dateModalToggle && clickDate === i.date ? (
+                      <ModalPortal>
+                        <Modal
+                          toggleClick={toggleClick}
+                          dateModalToggle={dateModalToggle}
+                          DateInfo={i}
+                          completeHandle={completeHandle}
+                        />
+                      </ModalPortal>
+                    ) : (
+                      ""
+                    )}
+                  </div>
                 </div>
               </div>
             </div>

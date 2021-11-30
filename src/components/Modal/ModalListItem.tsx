@@ -62,10 +62,16 @@ function ModalListItem({
       });
   };
 
-  const onClickTodo = (todoId: string, todo: string, createdAt: string) => {
-    console.log(todoId, todo, createdAt);
-    const data = { todoId, todo, createdAt };
-    console.log(typeof data);
+  const onClickTodo = (
+    todoId: string,
+    todo: string,
+    createdAt: string,
+    success: boolean,
+    updatedAt: string
+  ) => {
+    console.log(todoId, todo, createdAt, success, updatedAt);
+    const data = { todoId, todo, createdAt, success, updatedAt };
+    console.log(data);
     onClickListHandle(data);
     clickListToggleHandle(true);
   };
@@ -78,12 +84,11 @@ function ModalListItem({
     <ModalListItemWrap>
       {DateInfo.todos.map((arr) => {
         return (
-          <div
-            style={{ cursor: "pointer" }}
-            key={arr._id}
-            onClick={() => onClickTodo(arr._id, arr.todo, arr.createdAt)}
-          >
-            <div onClick={stopBubbling} style={{ display: "flex" }}>
+          <div style={{ cursor: "pointer" }} key={arr._id}>
+            <div
+              // onClick={stopBubbling}
+              style={{ display: "flex" }}
+            >
               <input
                 type="checkbox"
                 // defaultChecked={arr.success}
@@ -92,11 +97,20 @@ function ModalListItem({
                 onChange={checkedHandle}
               />
               {/* <div>{arr._id}</div> */}
-              <div className={arr.success ? `font-line-through` : ``}>
+              <div
+                className={arr.success ? `font-line-through` : ``}
+                onClick={() =>
+                  onClickTodo(
+                    arr._id,
+                    arr.todo,
+                    arr.createdAt,
+                    arr.success,
+                    arr.updatedAt
+                  )
+                }
+              >
                 {arr.todo}
               </div>
-              <div>{arr.createdAt}</div>
-              <div>{`${arr.success}`}</div>
               <button onClick={deleteClick} value={arr._id}>
                 삭제
               </button>

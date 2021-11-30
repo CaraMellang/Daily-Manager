@@ -24,7 +24,12 @@ const Modal = ({
   completeHandle,
 }: MymodalProps) => {
   const [clickListToggle, setClickListToggle] = useState(false);
-  const [clickList, setClickList] = useState();
+  const [clickList, setClickList] = useState<{
+    todoId: string;
+    todo: string;
+    createdAt: string;
+    success: string;
+  }>();
   const stopBubbling = (e: any) => {
     e.stopPropagation();
   };
@@ -40,8 +45,10 @@ const Modal = ({
       <div className="MyModal" onClick={stopBubbling}>
         {clickListToggle ? (
           <DetailItem
+            clickListToggle={clickListToggle}
             clickListToggleHandle={clickListToggleHandle}
             clickList={clickList}
+            completeHandle={completeHandle}
           />
         ) : (
           <ModalList

@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { DateInfo } from "../Calendar/CalendarBody";
+import CreateTodo from "./CreateTodo";
 import ModalListItem from "./ModalListItem";
 
 interface modalListProps {
@@ -8,21 +9,30 @@ interface modalListProps {
   //   dateModalToggle: boolean;
   completeHandle(bool: boolean): void;
   DateInfo: DateInfo;
-  clickListToggleHandle(bool:boolean):void
-  onClickListHandle(data:any) :void
+  clickListToggleHandle(bool: boolean): void;
+  onClickListHandle(data: any): void;
 }
 
-function ModalList({ DateInfo, completeHandle ,clickListToggleHandle,onClickListHandle}: modalListProps) {
+function ModalList({
+  DateInfo,
+  completeHandle,
+  clickListToggleHandle,
+  onClickListHandle,
+}: modalListProps) {
   return (
     <ModalListWrap>
       <div className={`modalbox `}>
         <div className="content">
-          <h1>Today's List</h1>
-          <ModalListItem DateInfo={DateInfo} completeHandle={completeHandle} clickListToggleHandle={clickListToggleHandle} onClickListHandle={onClickListHandle}/>
+          <h1>Today's List ({DateInfo.date}일)</h1>
+          {DateInfo.todos.length === 0 ? "아무것도,,,없군요,," : ""}
+          <ModalListItem
+            DateInfo={DateInfo}
+            completeHandle={completeHandle}
+            clickListToggleHandle={clickListToggleHandle}
+            onClickListHandle={onClickListHandle}
+          />
         </div>
-        <div className="clickbox">
-          <button className="modalbutton">작성</button>
-        </div>
+        <CreateTodo completeHandle={completeHandle} DateInfo={DateInfo} />
       </div>
     </ModalListWrap>
   );
@@ -62,6 +72,7 @@ const ModalListWrap = styled.div`
     outline: 0;
     border: 0;
     padding: 20px 5px;
+    padding-top: 0px;
     cursor: pointer;
     width: 100%;
     border-radius: 0 0 12px 12px;

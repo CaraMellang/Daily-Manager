@@ -28,6 +28,9 @@ a, a:link, a:visited , a:hover , a:focus{
   text-decoration:none;
   color:unset
 }
+input:focus{
+  outline:none;
+}
   body::-webkit-scrollbar {
     width: 6px;
     /* border-radius: 10px; */
