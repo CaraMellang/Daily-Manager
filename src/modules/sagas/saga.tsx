@@ -1,11 +1,14 @@
 import axios from "axios";
 import { call, put, takeLatest } from "redux-saga/effects";
 import { SIGNIN_FAILED, SIGNIN_SUCCESS } from "../redux/User";
-import { postTodoSaga } from "./todoSaga";
+import { postGetTodoSaga } from "./todoSaga";
 import { postUser } from "./userSaga";
 
 const userSignInRequestType = "userReducer/SIGNIN_REQUEST";
-const todoPostReadRequestType = "todosReducer/TODOS_REQUEST";
+const todoPostReadRequestType = "todosReducer/TODOS_REQUEST"; //read
+// const todoPostReadRequestType = "todosReducer/TODOS_CREATE_REQUEST"; //create
+// const todoPostReadRequestType = "todosReducer/TODOS_CREATE_REQUEST"; //update
+// const todoPostReadRequestType = "todosReducer/TODOS_CREATE_REQUEST"; //remove
 
 // async function postUserData(data: any) {
 //   console.log("아 gg", data);
@@ -31,7 +34,7 @@ const todoPostReadRequestType = "todosReducer/TODOS_REQUEST";
 
 function* mySaga() {
   yield takeLatest(userSignInRequestType, postUser);
-  yield takeLatest(todoPostReadRequestType, postTodoSaga);
+  yield takeLatest(todoPostReadRequestType, postGetTodoSaga);
 }
 
 export default mySaga;

@@ -32,7 +32,7 @@ function ModalList({
             onClickListHandle={onClickListHandle}
           />
         </div>
-        <CreateTodo completeHandle={completeHandle} DateInfo={DateInfo} />
+        {/* <CreateTodo completeHandle={completeHandle} DateInfo={DateInfo} /> */}
       </div>
     </ModalListWrap>
   );

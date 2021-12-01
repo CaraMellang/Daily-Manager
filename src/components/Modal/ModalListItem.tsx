@@ -127,6 +127,7 @@ const ModalListItemWrap = styled.div`
   flex-direction: column;
   .font-line-through {
     text-decoration: line-through;
+    color: gray;
   }
 `;
 

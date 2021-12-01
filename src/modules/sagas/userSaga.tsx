@@ -1,8 +1,7 @@
 import axios from "axios";
-import { call, put, takeLatest } from "redux-saga/effects";
+import { call, put } from "redux-saga/effects";
 import { SIGNIN_FAILED, SIGNIN_SUCCESS } from "../redux/User";
 
-const userSignInRequestType = "userReducer/SIGNIN_REQUEST";
 
 async function postUserData(data: any) {
   console.log("아 gg", data);

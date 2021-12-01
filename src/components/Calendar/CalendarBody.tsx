@@ -3,8 +3,9 @@ import dayjs, { Dayjs } from "dayjs";
 import React, { useEffect, useState } from "react";
 import ModalPortal from "../Modal/ModalPortal";
 import Modal from "../Modal/Modal";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
+import { TODOS_REQUEST } from "../../modules/redux/Todos";
 
 interface CalendarBodyProps {
   currentMonth: Dayjs;
@@ -44,6 +45,7 @@ const CalendarBody = ({
   const [dateModalToggle, setDateModalToggle] = useState(false);
   const [clickDate, setClickDate] = useState(0);
   const userSelector: any = useSelector((state) => state);
+  const dispatch = useDispatch();
   // const [toggle, setToggle] = useState(false);
   const daysArray = ["일", "월", "화", "수", "목", "금", "토"];
 
@@ -182,11 +184,30 @@ const CalendarBody = ({
   };
 
   useEffect(() => {
-    const { userSliceReducer } = userSelector;
+    const { userSliceReducer, todosSliceReducer } = userSelector;
     // console.log(userSliceReducer);
     if (complete === false) {
       paintCalendar(userSliceReducer);
       console.log("컴플리트 실행");
+
+      const token = userSliceReducer.user.accessToken;
+      const userId = userSliceReducer.user.userId;
+      dispatch(TODOS_REQUEST({ token, userId }));
+      console.log(
+        todosSliceReducer.todosSucceed,
+        todosSliceReducer.todosLoading
+      );
+      if (todosSliceReducer.todosSucceed) {
+        console.log(
+          "ㄹ릴낟달;ㅇ?",
+          todosSliceReducer.todos[0].createdAt,
+          todosSliceReducer.todos[0].todo,
+          // typeof todosSliceReducer.todos[0].createdAt,
+          dayjs(
+            new Date(todosSliceReducer.todos[0].createdAt.slice(0, 19))
+          ).format("YYYY-MM-DD HH:mm:ss")
+        );
+      }
     }
     // console.log("ddd", dates);
     console.log("리렌더!");
