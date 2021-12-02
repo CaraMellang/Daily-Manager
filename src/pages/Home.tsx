@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { TODOS_REQUEST } from "../modules/redux/Todos";
 import Loading from "../components/Loading";
 import dayjs from "dayjs";
+import Clock from "../components/Clock";
 
 const Home = () => {
   let dd: any[] = [];
@@ -67,6 +68,9 @@ const Home = () => {
         >
           <div>notice</div>
         </button>
+        <div>
+          <Clock />
+        </div>
         <p>일정들을 보여줄거임</p>
         <div className="row">
           <div className="col">
@@ -77,9 +81,7 @@ const Home = () => {
                   <div key={arr._id} className="row ">
                     <div>{arr.todo}</div>
                     <div>
-                      <span>
-                        {dayjs(arr.createdAt).format("YYYY-MM-DD HH:mm:ss")}
-                      </span>
+                      <span>{dayjs(arr.createdAt).format("HH:mm:ss")}</span>
                     </div>
                   </div>
                 );
@@ -94,9 +96,7 @@ const Home = () => {
                   <div key={arr._id} className="row ">
                     <div>{arr.todo}</div>
                     <div>
-                      <span>
-                        {dayjs(arr.createdAt).format("YYYY-MM-DD HH:mm:ss")}
-                      </span>
+                      <span>{dayjs(arr.createdAt).format("HH:mm:ss")}</span>
                     </div>
                   </div>
                 );
