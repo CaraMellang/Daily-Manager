@@ -37,57 +37,29 @@ const todosSlice = createSlice({
   initialState,
   reducers: {
     TODOS_REQUEST: (state, action) => {
-      console.log("리퀘스트발생!!!!");
+      // console.log("리퀘스트발생!!!!");
       state.todosLoading = true;
       state.todosSuccess = false;
       state.todosError = "";
+      state.todos = [];
     },
     TODOS_SUCCESS: (state, action) => {
-      console.log("액션", action);
+      // console.log("액션", action);
 
-      state.todos = [];
       action.payload.forEach((arr: any) => {
-        console.log(arr);
+        // console.log(arr);
         const data = {
           ...arr,
-          // _id: arr._id,
-          // createdAt: arr.createdAt,
-          // creatorId: {
-          //   _id: arr.creatorId._id,
-          //   name: arr.creatorId.name,
-          //   email: arr.creatorId.email,
-          //   password: arr.creatorId.password,
-          //   createdAt: arr.creatorId.createdAt,
-          // },
-          // success: arr.success,
-          // todo: arr.todo,
-          // updatedAt: arr.updatedAt,
-        };
-        // const data = {
-        //   _id: arr._id,
-        //   createdAt: arr.createdAt,
-        //   // createdAt: new Date(arr.createdAt.slice(0, 19)),
-        //   creatorId: {
-        //     _id: arr.creatorId._id,
-        //     name: arr.creatorId.name,
-        //     email: arr.creatorId.email,
-        //     password: arr.creatorId.password,
-        //     createdAt: arr.creatorId.createdAt,
-        //   },
-        //   success: arr.success,
-        //   todo: arr.todo,
-        //   updatedAt: arr.updatedAt,
-        //   //   updatedAt: new Date(arr.updatedAt.slice(0, 19)),
-        // };
+        }
         state.todos.push(data);
       });
-      console.log("버근가?", state.todos);
+      // console.log("버근가?", state.todos);
       state.todosLoading = false;
       state.todosSuccess = true;
       state.todosError = "";
     },
     TODOS_FAILED: (state, action) => {
-      console.log("액션", action);
+      // console.log("액션", action);
       state.todosLoading = false;
       state.todosSuccess = false;
       state.todosError = ""; //몰?루

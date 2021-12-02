@@ -4,7 +4,6 @@ import utc from "dayjs/plugin/utc";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
-import { TODOS_REQUEST } from "../../modules/redux/Todos";
 import CalendarBody from "./CalendarBody";
 import CalendarHeader from "./CalendarHeader";
 import CreateTodo from "./CreateTodo";

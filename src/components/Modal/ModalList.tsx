@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import { DateInfo } from "../Calendar/CalendarBody";
-import CreateTodo from "./CreateTodo";
 import ModalListItem from "./ModalListItem";
 
 interface modalListProps {

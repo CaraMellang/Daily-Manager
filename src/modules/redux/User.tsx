@@ -26,7 +26,7 @@ const userSlice = createSlice({
     },
     SIGNIN_SUCCESS: (state: any, action: any) => {
       console.log("SIGNIN_SUCCESS Reducer");
-      console.log(action.payload.data);
+      // console.log(action.payload.data);
       state.signinLoading = false;
       state.signinSucceed = true;
       // state.username = action.payload.username;

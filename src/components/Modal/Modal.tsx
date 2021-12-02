@@ -1,6 +1,5 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+
+import React, {  useState } from "react";
 import styled from "styled-components";
 import { DateInfo } from "../Calendar/CalendarBody";
 import DetailItem from "./DetailItem";

@@ -1,10 +1,9 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
-import { connect, useDispatch, useSelector } from "react-redux";
+import {  useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
-import { dummyProfile } from "../../lib/dummy";
-import { SIGNIN_REQUEST, SIGNIN_FAILED } from "../../modules/redux/User";
+import { SIGNIN_REQUEST} from "../../modules/redux/User";
 
 interface SignInProps {
   onSignInToggle(): void;

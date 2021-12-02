@@ -9,14 +9,11 @@ async function postGetTodoData(data: any) {
 }
 
 export function* postGetTodoSaga(action: any): Generator {
-  console.log(action);
   try {
     const {
       data: { data },
     }: any = yield call(postGetTodoData, action.payload);
-    console.log("todos", data);
     const result = data.map((arr: any) => {
-      console.log("아니", typeof arr.createdAt);
       const createdAt = dayjs(new Date(arr.createdAt))
         .add(-9, "hour")
         .format("YYYY-MM-DDTHH:mm:ss");

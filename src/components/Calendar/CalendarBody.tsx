@@ -45,6 +45,11 @@ const CalendarBody = ({
   const [dateModalToggle, setDateModalToggle] = useState(false);
   const [clickDate, setClickDate] = useState(0);
   const userSelector: any = useSelector((state) => state);
+  const Selector: any = useSelector((state) => state);
+  const { todosSuccess }: any = useSelector(
+    (state: any) => state.todosSliceReducer.todosSuccess
+  );
+  
   const dispatch = useDispatch();
   // const [toggle, setToggle] = useState(false);
   const daysArray = ["일", "월", "화", "수", "목", "금", "토"];
@@ -190,25 +195,11 @@ const CalendarBody = ({
       paintCalendar(userSliceReducer);
       console.log("컴플리트 실행");
 
-      const token = userSliceReducer.user.accessToken;
-      const userId = userSliceReducer.user.userId;
-      dispatch(TODOS_REQUEST({ token, userId }));
-      console.log(
-        todosSliceReducer.todosSucceed,
-        todosSliceReducer.todosLoading
-      );
-      if (todosSliceReducer.todosSucceed) {
-        console.log(
-          "ㄹ릴낟달;ㅇ?",
-          todosSliceReducer.todos[0].createdAt,
-          todosSliceReducer.todos[0].todo,
-          // typeof todosSliceReducer.todos[0].createdAt,
-          dayjs(
-            new Date(todosSliceReducer.todos[0].createdAt.slice(0, 19))
-          ).format("YYYY-MM-DD HH:mm:ss")
-        );
-      }
+      // const token = userSliceReducer.user.accessToken;
+      // const userId = userSliceReducer.user.userId;
+      // dispatch(TODOS_REQUEST({ token, userId }));
     }
+
     // console.log("ddd", dates);
     console.log("리렌더!");
     return () => {

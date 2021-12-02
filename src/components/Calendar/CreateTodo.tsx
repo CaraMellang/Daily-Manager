@@ -2,7 +2,6 @@ import axios from "axios";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
-import { DateInfo } from "../Calendar/CalendarBody";
 
 interface CreateTodoProps {
   completeHandle(bool: boolean): void;
