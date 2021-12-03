@@ -50,89 +50,91 @@ const Charts = () => {
 
   return (
     <ChartsWrap>
-      <div className="charts-background">
-        <div className="charts-padd">
-          <div className="charts">
-            <div className="charts-form col gap1">
-              <div className="chart-top w-100">
-                <div className="gap1 row">
-                  <div className="top-item">
-                    {/* 뭘봐{userSelector.username} 입니다~~ */}
-                    <TopComponent title={`총 완료 수`} data={11} />
-                  </div>
-                  <div className="top-item">
-                    {/* 뭘봐{userSelector.createdAt} 입니다~~ */}
-                    <TopComponent title={`총 작성 수`} data={52} />
-                  </div>
-                  <div className="top-item">
-                    <TopComponent title={`총 남은 수`} data={12} />
+      <div className="content">
+        <div className="charts-background">
+          <div className="charts-padd">
+            <div className="charts">
+              <div className="charts-form col gap1">
+                <div className="chart-top w-100">
+                  <div className="gap1 row">
+                    <div className="top-item">
+                      {/* 뭘봐{userSelector.username} 입니다~~ */}
+                      <TopComponent title={`총 완료 수`} data={11} />
+                    </div>
+                    <div className="top-item">
+                      {/* 뭘봐{userSelector.createdAt} 입니다~~ */}
+                      <TopComponent title={`총 작성 수`} data={52} />
+                    </div>
+                    <div className="top-item">
+                      <TopComponent title={`총 남은 수`} data={12} />
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div className="chart-center w-100">
-                <div className="center row gap1">
-                  <div className="center-item">
-                    <div className="center-left-item-header">헤더</div>
-                    <div className="center-left-item-con">
-                      <Doughnut
-                        data={doughnutData}
-                        options={{
-                          // reponsive: false,
-                          // reponsive: true,
-                          maintainAspectRatio: false,
+                <div className="chart-center w-100">
+                  <div className="center row gap1">
+                    <div className="center-item">
+                      <div className="center-left-item-header">헤더</div>
+                      <div className="center-left-item-con">
+                        <Doughnut
+                          data={doughnutData}
+                          options={{
+                            // reponsive: false,
+                            // reponsive: true,
+                            maintainAspectRatio: false,
 
-                          plugins: {
-                            legend: {
-                              display: true,
-                              position: "right",
+                            plugins: {
+                              legend: {
+                                display: true,
+                                position: "right",
+                              },
                             },
-                          },
-                          animation: {
-                            // duration: aniToggle,
-                            // onComplete: animationHandler,
-                          },
-                        }}
-                      ></Doughnut>
+                            animation: {
+                              // duration: aniToggle,
+                              // onComplete: animationHandler,
+                            },
+                          }}
+                        ></Doughnut>
+                      </div>
                     </div>
-                  </div>
-                  <div className="center-item center-right-item padd05 ">
-                    <div className=" col gap1">
-                      <CenterRightComponent
-                        title="오늘 완료 수"
-                        progress={5}
-                        order={1}
-                      />
-                      <CenterRightComponent
-                        title="오늘 남은 수"
-                        progress={19}
-                        order={2}
-                      />
+                    <div className="center-item center-right-item padd05 ">
+                      <div className=" col gap1">
+                        <CenterRightComponent
+                          title="오늘 완료 수"
+                          progress={5}
+                          order={1}
+                        />
+                        <CenterRightComponent
+                          title="오늘 남은 수"
+                          progress={19}
+                          order={2}
+                        />
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-              <div className="chart-bottom w-100 bottom-item">
-                <div className="bottom-item-header">헤더</div>
-                <div className="bottom-item-con">
-                  <Line
-                    data={barData}
-                    options={{
-                      // reponsive: false,
-                      // reponsive: true,
-                      maintainAspectRatio: false,
+                <div className="chart-bottom w-100 bottom-item">
+                  <div className="bottom-item-header">헤더</div>
+                  <div className="bottom-item-con">
+                    <Line
+                      data={barData}
+                      options={{
+                        // reponsive: false,
+                        // reponsive: true,
+                        maintainAspectRatio: false,
 
-                      plugins: {
-                        legend: {
-                          display: true,
-                          position: "top",
+                        plugins: {
+                          legend: {
+                            display: true,
+                            position: "top",
+                          },
                         },
-                      },
-                      animation: {
-                        // duration: aniToggle,
-                        // onComplete: animationHandler,
-                      },
-                    }}
-                  ></Line>
+                        animation: {
+                          // duration: aniToggle,
+                          // onComplete: animationHandler,
+                        },
+                      }}
+                    ></Line>
+                  </div>
                 </div>
               </div>
             </div>
@@ -143,29 +145,38 @@ const Charts = () => {
   );
 };
 const ChartsWrap = styled.div`
-  width: 768px;
-  margin: auto;
   text-align: center;
   font-weight: bold;
+  background: rgb(241, 147, 147);
+  background: linear-gradient(
+    180deg,
+    rgba(19, 68, 88, 1) 10%,
+    rgba(182, 114, 114, 1) 100%
+  );
+  height: 92.5vh;
+  .content {
+    width: 768px;
+    margin: auto;
+  }
   .charts-background {
     height: 100%;
-    border-left: 1px solid white;
-    border-right: 1px solid white;
   }
   .charts-padd {
     padding: 2rem;
+    opacity: 1;
   }
+  /* 134458 */
   .charts {
     color: black;
     height: 700px;
     padding: 1rem;
-    /* background-color: white; */
-    background: rgb(168, 237, 234);
+    background-color: rgba(62, 62, 62, 0.4);
+    /* background: rgb(168, 237, 234);
     background: linear-gradient(
       0deg,
       rgba(168, 237, 234, 1) 0%,
       rgba(254, 214, 227, 1) 100%
-    );
+    ); */
     border-radius: 12px;
   }
   .col {

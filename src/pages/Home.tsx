@@ -6,11 +6,17 @@ import { TODOS_REQUEST } from "../modules/redux/Todos";
 import Loading from "../components/Loading";
 import dayjs from "dayjs";
 import Clock from "../components/Clock";
+import NotCompleteTodo from "../Home/NotCompleteTodo";
+import { Todo } from "../components/Calendar/CalendarBody";
+import CompleteTodo from "../Home/CompleteTodo";
+import CitySvg from "../svgs/cityscape.svg";
+import CityPng from "../svgs/cityscape.png";
+import CityJpg from "../svgs/cityscape.jpg";
 
 const Home = () => {
   let dd: any[] = [];
-  let completeArray: any[] = [];
-  let notCompleteArray: any[] = [];
+  let completeArray: Todo[] = [];
+  let notCompleteArray: Todo[] = [];
   const dispatch = useDispatch();
   const selector: any = useSelector((state) => state);
   const { userSliceReducer } = selector;
@@ -61,49 +67,47 @@ const Home = () => {
   if (selector.todosSliceReducer.todosSuccess) {
     return (
       <HomeWrap>
-        <button
-          type="button"
-          className="example-button"
-          onClick={() => notice("나가")}
-        >
-          <div>notice</div>
-        </button>
-        <div>
-          <Clock />
-        </div>
-        <p>일정들을 보여줄거임</p>
-        <div className="row">
-          <div className="col">
-            <div>오늘의 할일들</div>
-            <div>
-              {notCompleteArray.map((arr) => {
-                return (
-                  <div key={arr._id} className="row ">
-                    <div>{arr.todo}</div>
-                    <div>
-                      <span>{dayjs(arr.createdAt).format("HH:mm:ss")}</span>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
+        <div className="content">
+          <button
+            type="button"
+            className="example-button"
+            onClick={() => notice("나가")}
+          >
+            <div>notice</div>
+          </button>
+          <div>
+            <Clock />
           </div>
-          <div className="col">
-            <div>오늘 완료한 일들</div>
-            <div>
-              {completeArray.map((arr) => {
-                return (
-                  <div key={arr._id} className="row ">
-                    <div>{arr.todo}</div>
-                    <div>
-                      <span>{dayjs(arr.createdAt).format("HH:mm:ss")}</span>
+          <p>Good Day, {userSliceReducer.user.username}</p>
+          <div className="row">
+            <div className="col">
+              <div>오늘의 할일들</div>
+              <div>
+                {notCompleteArray.map((arr) => {
+                  console.log(arr);
+                  return (
+                    <div key={arr._id}>
+                      <NotCompleteTodo Todo={arr} />
                     </div>
-                  </div>
-                );
-              })}
+                  );
+                })}
+              </div>
+            </div>
+            <div className="col">
+              <div>오늘 완료한 일들</div>
+              <div>
+                {completeArray.map((arr) => {
+                  return (
+                    <div key={arr._id} className="row ">
+                      <CompleteTodo Todo={arr} />
+                    </div>
+                  );
+                })}
+              </div>
             </div>
           </div>
         </div>
+        {/* <img src={citySvg} /> */}
       </HomeWrap>
     );
   }
@@ -111,9 +115,23 @@ const Home = () => {
 };
 
 const HomeWrap = styled.div`
-  background-color: gray;
-  width: 768px;
-  margin: auto;
+  /* background-color: gray; */
+  /* background-size: 100% 100%; */
+  /* background-image: url(${CitySvg}); */
+  /* background-image: url(${CityPng});
+  background-repeat: no-repeat; */
+  background: rgb(241, 147, 147);
+  background: linear-gradient(
+    180deg,
+    rgba(19, 68, 88, 1) 10%,
+    rgba(182, 114, 114, 1) 100%
+  );
+  height: 92.5vh;
+  .content {
+    width: 768px;
+    /* height: 2000px; */
+    margin: auto;
+  }
   .row {
     display: flex;
   }

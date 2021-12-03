@@ -22,7 +22,7 @@ export interface DateInfo {
   descrition: string;
   todos: Todo[];
 }
-interface Todo {
+export interface Todo {
   _id: string;
   creatorId: string;
   todo: string;
@@ -49,7 +49,7 @@ const CalendarBody = ({
   const { todosSuccess }: any = useSelector(
     (state: any) => state.todosSliceReducer.todosSuccess
   );
-  
+
   const dispatch = useDispatch();
   // const [toggle, setToggle] = useState(false);
   const daysArray = ["일", "월", "화", "수", "목", "금", "토"];
@@ -294,12 +294,12 @@ const CalendarBody = ({
 };
 const CalendarBodyWrap = styled.div`
   padding: 1rem;
-  background: rgb(168, 237, 234);
+  /* background: rgb(168, 237, 234);
   background: linear-gradient(
     0deg,
     rgba(168, 237, 234, 1) 0%,
     rgba(254, 214, 227, 1) 100%
-  );
+  ); */
 `;
 const CalendarDayarray = styled.div`
   display: flex;
@@ -316,7 +316,7 @@ const CalendarDayarray = styled.div`
     padding-top: 1rem;
     padding-bottom: 1rem;
     background-color: none;
-    color: black;
+    /* color: black; */
     font-weight: bold;
   }
 `;

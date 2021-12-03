@@ -63,9 +63,9 @@ const CalendarHeader = ({
 const CalendarHeaderWrap = styled.div`
   display: flex;
   justify-content: space-evenly;
-  path {
+  /* path {
     display: block;
-  }
+  } */
 `;
 
 export default CalendarHeader;
