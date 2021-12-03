@@ -9,9 +9,7 @@ import Clock from "../components/Clock";
 import NotCompleteTodo from "../Home/NotCompleteTodo";
 import { Todo } from "../components/Calendar/CalendarBody";
 import CompleteTodo from "../Home/CompleteTodo";
-import CitySvg from "../svgs/cityscape.svg";
-import CityPng from "../svgs/cityscape.png";
-import CityJpg from "../svgs/cityscape.jpg";
+import CurrentDay from "../components/CurrentDay";
 
 const Home = () => {
   let dd: any[] = [];
@@ -68,46 +66,59 @@ const Home = () => {
     return (
       <HomeWrap>
         <div className="content">
-          <button
+          {/* <button
             type="button"
             className="example-button"
             onClick={() => notice("나가")}
           >
             <div>notice</div>
-          </button>
-          <div>
-            <Clock />
+          </button> */}
+
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-around",
+              marginTop: "2rem",
+            }}
+          >
+            <CurrentDay fullDay={new Date()} />
+            <div style={{ marginTop: "2rem" }}>
+              <Clock />
+            </div>
           </div>
           <p>Good Day, {userSliceReducer.user.username}</p>
           <div className="row">
-            <div className="col">
-              <div>오늘의 할일들</div>
-              <div>
-                {notCompleteArray.map((arr) => {
-                  console.log(arr);
-                  return (
-                    <div key={arr._id}>
-                      <NotCompleteTodo Todo={arr} />
-                    </div>
-                  );
-                })}
+            <div className="w50per padd ">
+              <div className="col back-blur radius12px">
+                <div>오늘의 할일들</div>
+                <div>
+                  {notCompleteArray.map((arr) => {
+                    console.log(arr);
+                    return (
+                      <div key={arr._id}>
+                        <NotCompleteTodo Todo={arr} />
+                      </div>
+                    );
+                  })}
+                </div>
               </div>
             </div>
-            <div className="col">
-              <div>오늘 완료한 일들</div>
-              <div>
-                {completeArray.map((arr) => {
-                  return (
-                    <div key={arr._id} className="row ">
-                      <CompleteTodo Todo={arr} />
-                    </div>
-                  );
-                })}
+            <div className="w50per padd ">
+              <div className=" col back-blur radius12px">
+                <div>오늘 완료한 일들</div>
+                <div>
+                  {completeArray.map((arr) => {
+                    return (
+                      <div key={arr._id} className="row ">
+                        <CompleteTodo Todo={arr} />
+                      </div>
+                    );
+                  })}
+                </div>
               </div>
             </div>
           </div>
         </div>
-        {/* <img src={citySvg} /> */}
       </HomeWrap>
     );
   }
@@ -117,16 +128,12 @@ const Home = () => {
 const HomeWrap = styled.div`
   /* background-color: gray; */
   /* background-size: 100% 100%; */
-  /* background-image: url(${CitySvg}); */
-  /* background-image: url(${CityPng});
-  background-repeat: no-repeat; */
-  background: rgb(241, 147, 147);
-  background: linear-gradient(
-    180deg,
-    rgba(19, 68, 88, 1) 10%,
-    rgba(182, 114, 114, 1) 100%
-  );
-  height: 92.5vh;
+
+  /* height: 92.5vh; */
+  p {
+    font-weight: bold;
+    text-align: center;
+  }
   .content {
     width: 768px;
     /* height: 2000px; */
@@ -138,8 +145,20 @@ const HomeWrap = styled.div`
   .col {
     display: flex;
     flex-direction: column;
-    width: 50%;
     align-items: center;
+  }
+  .padd {
+    padding: 0.5rem;
+  }
+  .w50per {
+    width: 50%;
+  }
+  .radius12px {
+    border-radius: 12px;
+  }
+  .back-blur {
+    background-color: rgba(255, 255, 255, 0.2);
+    /* background-color: rgba(62, 62, 62, 0.3); */
   }
 `;
 

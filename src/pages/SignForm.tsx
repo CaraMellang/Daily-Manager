@@ -35,11 +35,11 @@ const SignFormWrap = styled.div`
   height: 100vh;
   font-weight: bold;
   text-align: center;
-  background: rgb(155, 199, 130);
+  background: rgb(241, 147, 147);
   background: linear-gradient(
-    90deg,
-    rgba(155, 199, 130, 1) 0%,
-    rgba(126, 185, 93, 1) 100%
+    180deg,
+    rgba(19, 68, 88, 1) 10%,
+    rgba(182, 114, 114, 1) 100%
   );
   .width-100 {
     width: 100%;

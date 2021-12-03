@@ -147,13 +147,12 @@ const Charts = () => {
 const ChartsWrap = styled.div`
   text-align: center;
   font-weight: bold;
-  background: rgb(241, 147, 147);
+  /* background: rgb(241, 147, 147);
   background: linear-gradient(
     180deg,
     rgba(19, 68, 88, 1) 10%,
     rgba(182, 114, 114, 1) 100%
-  );
-  height: 92.5vh;
+  ); */
   .content {
     width: 768px;
     margin: auto;
@@ -168,9 +167,8 @@ const ChartsWrap = styled.div`
   /* 134458 */
   .charts {
     color: black;
-    height: 700px;
     padding: 1rem;
-    background-color: rgba(62, 62, 62, 0.4);
+    background-color: rgba(255, 255, 255, 0.2);
     /* background: rgb(168, 237, 234);
     background: linear-gradient(
       0deg,

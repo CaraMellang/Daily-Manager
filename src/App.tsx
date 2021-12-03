@@ -18,7 +18,14 @@ const App = () => {
 const GlobalStyled = createGlobalStyle`
 html , body , #root{
   /* height:100%; */
-  background: #181818;
+  /* background: #181818; */
+  background: rgb(241, 147, 147);
+  background: linear-gradient(
+    180deg,
+    rgba(19, 68, 88, 1) 10%,
+    rgba(182, 114, 114, 1) 100%
+  );
+  background-repeat:no-repeat;
   /* background: #181818; */
   /* #121212 */
   color:white;

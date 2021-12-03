@@ -64,7 +64,8 @@ const Header = ({ setIsSign }: HeaderProps) => {
 const HeaderWrap = styled.header`
   color: black;
   background-color: white;
-  height: 7.5vh;
+  height: 70px;
+  /* height: 7.5vh; */
   font-weight: bold;
   .padd {
     box-sizing: border-box;

@@ -13,13 +13,6 @@ const Calender = () => {
 };
 
 const CalenderWrap = styled.div`
-  background: rgb(241, 147, 147);
-  background: linear-gradient(
-    180deg,
-    rgba(19, 68, 88, 1) 10%,
-    rgba(182, 114, 114, 1) 100%
-  );
-  height: 92.5vh;
   .content {
     width: 768px;
     margin: auto;
