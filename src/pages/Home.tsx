@@ -82,7 +82,7 @@ const Home = () => {
             }}
           >
             <CurrentDay fullDay={new Date()} />
-            <div style={{ marginTop: "2rem" }}>
+            <div style={{ marginTop: "3rem" }}>
               <Clock />
             </div>
           </div>
@@ -91,30 +91,18 @@ const Home = () => {
             <div className="w50per padd ">
               <div className="col back-blur radius12px">
                 <div>오늘의 할일들</div>
-                <div>
-                  {notCompleteArray.map((arr) => {
-                    console.log(arr);
-                    return (
-                      <div key={arr._id}>
-                        <NotCompleteTodo Todo={arr} />
-                      </div>
-                    );
-                  })}
-                </div>
+                {notCompleteArray.map((arr) => {
+                  console.log(arr);
+                  return <NotCompleteTodo key={arr._id} Todo={arr} />;
+                })}
               </div>
             </div>
             <div className="w50per padd ">
               <div className=" col back-blur radius12px">
                 <div>오늘 완료한 일들</div>
-                <div>
-                  {completeArray.map((arr) => {
-                    return (
-                      <div key={arr._id} className="row ">
-                        <CompleteTodo Todo={arr} />
-                      </div>
-                    );
-                  })}
-                </div>
+                {completeArray.map((arr) => {
+                  return <CompleteTodo key={arr._id} Todo={arr} />;
+                })}
               </div>
             </div>
           </div>
@@ -145,10 +133,10 @@ const HomeWrap = styled.div`
   .col {
     display: flex;
     flex-direction: column;
-    align-items: center;
   }
   .padd {
     padding: 0.5rem;
+    box-sizing: border-box;
   }
   .w50per {
     width: 50%;
