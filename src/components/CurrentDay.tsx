@@ -8,7 +8,7 @@ interface CurrentDayProps {
 }
 
 function CurrentDay({ fullDay }: CurrentDayProps) {
-  const [day, setDay] = useState(dayjs(new Date("9999-12-12")));
+  const [day, setDay] = useState(dayjs(new Date()));
 
   useEffect(() => {
     setDay(dayjs(fullDay));
@@ -27,7 +27,7 @@ function CurrentDay({ fullDay }: CurrentDayProps) {
 const CurrentDayWrap = styled.div`
   display: flex;
   font-weight: bold;
-  justify-content: center;
+  /* justify-content: center; */
   .date {
     font-size: 4rem;
   }

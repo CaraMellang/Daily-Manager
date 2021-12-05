@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components";
+import { calendarDates } from "../../lib/DateArrays";
 import { DateInfo } from "../Calendar/CalendarBody";
+import CurrentDay from "../CurrentDay";
 import ModalListItem from "./ModalListItem";
 
 interface modalListProps {
@@ -20,19 +22,27 @@ function ModalList({
 }: modalListProps) {
   return (
     <ModalListWrap>
-      <div className={`modalbox `}>
-        <div className="content">
-          <h1>Today's List ({DateInfo.date}일)</h1>
-          {DateInfo.todos.length === 0 ? "아무것도,,,없군요,," : ""}
+      <div className="row modal-title">
+        <div className="fulldate">
+          <CurrentDay fullDay={new Date(DateInfo.fulldate)} />
+        </div>
+        <div className="day">
+          {calendarDates[new Date(DateInfo.fulldate).getDay()]}
+        </div>
+      </div>
+      {DateInfo.todos.length === 0 ? "아무것도,,,없군요,," : ""}
+      {DateInfo.todos.map((arr) => {
+        return (
           <ModalListItem
-            DateInfo={DateInfo}
+            key={arr._id}
+            Todos={arr}
+            fulldate={DateInfo.fulldate}
             completeHandle={completeHandle}
             clickListToggleHandle={clickListToggleHandle}
             onClickListHandle={onClickListHandle}
           />
-        </div>
-        {/* <CreateTodo completeHandle={completeHandle} DateInfo={DateInfo} /> */}
-      </div>
+        );
+      })}
     </ModalListWrap>
   );
 }
@@ -40,6 +50,20 @@ function ModalList({
 const ModalListWrap = styled.div`
   z-index: 1000;
   width: 30%;
+  .modal-title {
+    font-weight: bold;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding: 2rem;
+    padding-left: 4rem;
+    padding-right: 4rem;
+    .fulldate {
+    }
+    .day {
+      color: rgba(182, 114, 114, 1);
+      font-size: 1.5rem;
+    }
+  }
 
   /* .MyModal {
     z-index: 1000;
@@ -54,14 +78,10 @@ const ModalListWrap = styled.div`
     justify-content: center;
   } */
 
-  .modalbox {
-    background: white;
-    height: auto;
-  }
-  .modalbox {
-    z-index: 100000;
-    border-radius: 12px;
-  }
+  background: white;
+  height: auto;
+  z-index: 100000;
+  border-radius: 12px;
 
   .modalbutton {
     display: block;

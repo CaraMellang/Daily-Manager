@@ -1,5 +1,4 @@
-
-import React, {  useState } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { DateInfo } from "../Calendar/CalendarBody";
 import DetailItem from "./DetailItem";
@@ -65,8 +64,9 @@ const Modal = ({
 
 const MyModalWrap = styled.div<stProps>`
   color: black;
-  h1 {
-    text-align: center;
+
+  .row {
+    display: flex;
   }
   .col {
     display: flex;

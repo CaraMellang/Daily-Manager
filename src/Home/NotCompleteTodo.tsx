@@ -2,28 +2,57 @@ import dayjs from "dayjs";
 import React from "react";
 import styled from "styled-components";
 import { Todo } from "../components/Calendar/CalendarBody";
-import { notice, check } from "react-interaction";
+import { check } from "react-interaction";
+import { faTrash, faTools } from "@fortawesome/free-solid-svg-icons";
+import axios from "axios";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 interface NotCompleteTodoProps {
   Todo: Todo;
+  token: string;
+  completeHandle(bool: boolean): void;
 }
 
-function NotCompleteTodo({ Todo }: NotCompleteTodoProps) {
-  const conDeleteClick = () => {
-    check("정말로 삭제할꺼얌?", { dimmedClassName: "my-check-dimmed" }).then(
-      (r) => window.alert(`${r} 아이`)
-    );
+function NotCompleteTodo({
+  Todo,
+  token,
+  completeHandle,
+}: NotCompleteTodoProps) {
+  console.log(token);
+  const conDeleteClick = async () => {
+    let yesClick;
+
+    await check("정말로 삭제할꺼얌?", {
+      dimmedClassName: "my-check-dimmed",
+    }).then((r) => (yesClick = r));
+    if (yesClick) {
+      const data = {
+        token: token,
+        todoId: Todo._id,
+      };
+      await axios
+        .delete(`http://localhost:5000/todo/delete`, { data })
+        .then((rr) => {
+          console.log("야호", rr);
+          completeHandle(false);
+        })
+        .catch((e) => {
+          console.log("왜안되는데", e);
+        });
+    }
   };
   return (
     <NotCompleteTodoWrap className="padd">
       <div className="col item-block">
         <div className="row dd">
-          <div className="">{Todo.todo}</div>
-          <div className="">
-            <button className="fix-but">수정</button>
-            <button className="del-but" onClick={conDeleteClick}>
-              삭제
-            </button>
+          <div>{Todo.todo}</div>
+          <div>
+            <FontAwesomeIcon className="fix-but" icon={faTools} />
+            <FontAwesomeIcon
+              className="del-but"
+              icon={faTrash}
+              onClick={conDeleteClick}
+            />
           </div>
         </div>
         <div style={{ textAlign: "right" }}>
@@ -43,11 +72,15 @@ const NotCompleteTodoWrap = styled.div`
     position: relative;
     opacity: 0;
     top: 6px;
+    cursor: pointer;
+    padding-right: 0.5rem;
   }
   .del-but {
     position: relative;
     opacity: 0;
     top: 6px;
+    cursor: pointer;
+    padding-right: 0.25rem;
   }
   .item-block {
     background-color: rgba(0, 0, 0, 0.2);
@@ -74,7 +107,7 @@ const NotCompleteTodoWrap = styled.div`
       animation-fill-mode: forwards; //애니메이션 마지막상태유지
     }
     .del-but {
-      animation: fade 0.2s 0.2s;
+      animation: fade 0.2s 0.1s;
       animation-fill-mode: forwards;
     }
   }

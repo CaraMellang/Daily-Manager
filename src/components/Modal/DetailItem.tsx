@@ -3,6 +3,8 @@ import dayjs from "dayjs";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
+import { calendarDates } from "../../lib/DateArrays";
+import CurrentDay from "../CurrentDay";
 
 interface DetailItemProps {
   clickListToggleHandle(bool: boolean): void;
@@ -71,7 +73,14 @@ function DetailItem({
     <DetailItemWrap clickListToggle={clickListToggle}>
       <div className={`modalbox `}>
         <div className="content">
-          <h1>Today's List</h1>
+          <div className="row modal-title">
+            <div className="fulldate">
+              <CurrentDay fullDay={new Date(clickList.fulldate)} />
+            </div>
+            <div className="day">
+              {calendarDates[new Date(clickList.fulldate).getDay()]}
+            </div>
+          </div>
           <div>생성시간: {createdAt}</div>
           <div>업뎃시간: {updatedAt}</div>
           <input
@@ -119,6 +128,20 @@ const DetailItemWrap = styled.div<{ clickListToggle: boolean }>`
     cursor: pointer;
     width: 100%;
     border-radius: 0 0 12px 12px;
+  }
+  .modal-title {
+    font-weight: bold;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding: 2rem;
+    padding-left: 4rem;
+    padding-right: 4rem;
+    .fulldate {
+    }
+    .day {
+      color: rgba(182, 114, 114, 1);
+      font-size: 1.5rem;
+    }
   }
 `;
 

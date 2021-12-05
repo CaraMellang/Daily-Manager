@@ -15,6 +15,7 @@ const Home = () => {
   let dd: any[] = [];
   let completeArray: Todo[] = [];
   let notCompleteArray: Todo[] = [];
+  const [complete, setComplete] = useState(false);
   const dispatch = useDispatch();
   const selector: any = useSelector((state) => state);
   const { userSliceReducer } = selector;
@@ -42,6 +43,10 @@ const Home = () => {
     console.log("comp", completeArray, "notcomp", notCompleteArray);
   }
 
+  const completeHandle = (bool: boolean) => {
+    setComplete((prev) => !prev);
+  };
+
   useEffect(() => {
     console.log("gds");
 
@@ -60,7 +65,7 @@ const Home = () => {
     //   todosArray = [];
     //   todosArray.push(selector.todosSliceReducer.todos);
     // }
-  }, []);
+  }, [complete]);
 
   if (selector.todosSliceReducer.todosSuccess) {
     return (
@@ -89,20 +94,52 @@ const Home = () => {
           <p>Good Day, {userSliceReducer.user.username}</p>
           <div className="row">
             <div className="w50per padd ">
+              <div className="todo-title">
+                <span className="title1">오늘의 할일들</span>
+              </div>
               <div className="col back-blur radius12px">
-                <div>오늘의 할일들</div>
-                {notCompleteArray.map((arr) => {
-                  console.log(arr);
-                  return <NotCompleteTodo key={arr._id} Todo={arr} />;
-                })}
+                {notCompleteArray.length !== 0 ? (
+                  notCompleteArray.map((arr) => {
+                    console.log(arr);
+                    return (
+                      <NotCompleteTodo
+                        key={arr._id}
+                        Todo={arr}
+                        token={userSliceReducer.user.accessToken}
+                        completeHandle={completeHandle}
+                      />
+                    );
+                  })
+                ) : (
+                  <div className="not-found">
+                    <div>아무것도 없는거 같네요..</div>
+                    <div>오늘의 할 일을 등록해보세요!</div>
+                  </div>
+                )}
               </div>
             </div>
             <div className="w50per padd ">
+              <div className="todo-title">
+                <span className="title2">오늘 완료한 일들</span>
+              </div>
               <div className=" col back-blur radius12px">
-                <div>오늘 완료한 일들</div>
-                {completeArray.map((arr) => {
-                  return <CompleteTodo key={arr._id} Todo={arr} />;
-                })}
+                {completeArray.length !== 0 ? (
+                  completeArray.map((arr) => {
+                    return (
+                      <CompleteTodo
+                        key={arr._id}
+                        Todo={arr}
+                        token={userSliceReducer.user.accessToken}
+                        completeHandle={completeHandle}
+                      />
+                    );
+                  })
+                ) : (
+                  <div className="not-found">
+                    <div>완료된 투두가 없어요!</div>
+                    <div>오늘의 할일이 있다면 빠르게 끝내보죠!</div>
+                  </div>
+                )}
               </div>
             </div>
           </div>
@@ -147,6 +184,42 @@ const HomeWrap = styled.div`
   .back-blur {
     background-color: rgba(255, 255, 255, 0.2);
     /* background-color: rgba(62, 62, 62, 0.3); */
+  }
+  .not-found {
+    box-sizing: border-box;
+    padding: 1rem;
+    font-weight: bold;
+    color: #000;
+    opacity: 0.4;
+  }
+  .todo-title {
+    padding-bottom: 0.5rem;
+    text-align: center;
+    @keyframes fade {
+      0% {
+        opacity: 0;
+        top: -20px;
+      }
+      75% {
+        opacity: 0.8;
+      }
+      100% {
+        opacity: 1;
+        top: 0px;
+      }
+    }
+    .title1 {
+      position: relative;
+      top: -20px;
+      animation: fade 0.4s;
+      animation-fill-mode: forwards; //애니메이션 마지막상태유지
+    }
+    .title2 {
+      position: relative;
+      top: -20px;
+      animation: fade 0.4s 0.1s;
+      animation-fill-mode: forwards;
+    }
   }
 `;
 
