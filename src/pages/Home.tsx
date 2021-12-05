@@ -28,9 +28,14 @@ const Home = () => {
 
   if (selector.todosSliceReducer.todosSuccess) {
     console.log(
-      (dd = selector.todosSliceReducer.todos.filter(
-        (arr: any) => arr.createdAt.getDate() === new Date().getDate()
-      ))
+      (dd = selector.todosSliceReducer.todos.filter((arr: any) => {
+        if (
+          arr.createdAt.getDate() === new Date().getDate() &&
+          arr.createdAt.getMonth() === new Date().getMonth()
+        ) {
+          return arr;
+        }
+      }))
     );
     dd.forEach((arr) => {
       if (arr.success) {
@@ -142,6 +147,7 @@ const Home = () => {
                 )}
               </div>
             </div>
+            {/* <div>최근 업데이트</div> */}
           </div>
         </div>
       </HomeWrap>

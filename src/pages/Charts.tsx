@@ -8,6 +8,7 @@ import { color } from "../lib/color";
 
 const Charts = () => {
   const userSelector = useSelector((state: any) => state.userSliceReducer.user);
+  const selector = useSelector((state: any) => state);
 
   const doughnutData = {
     labels: [`테스팅`, `gdgd`, `쿄쿄요쿄요`],
@@ -63,7 +64,7 @@ const Charts = () => {
                     </div>
                     <div className="top-item">
                       {/* 뭘봐{userSelector.createdAt} 입니다~~ */}
-                      <TopComponent title={`총 작성 수`} data={52} />
+                      <TopComponent title={`총 작성 수`} data={selector.todosSliceReducer.todos.length} />
                     </div>
                     <div className="top-item">
                       <TopComponent title={`총 남은 수`} data={12} />
