@@ -3,6 +3,8 @@ import React, { useEffect } from "react";
 import { Doughnut, Line } from "react-chartjs-2";
 import { connect, useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
+import BottomComponent from "../components/ChartsComponents/BottomComponent";
+import CenterRightBottomComponent from "../components/ChartsComponents/CenterRightBottomComponent";
 import CenterRightComponent from "../components/ChartsComponents/CenterRightComponent";
 import TopComponent from "../components/ChartsComponents/TopComponent";
 import { color } from "../lib/color";
@@ -10,11 +12,9 @@ import { ChartLineData } from "../lib/DateArrays";
 import { TODOS_REQUEST } from "../modules/redux/Todos";
 
 const Charts = () => {
-  const userSelector = useSelector((state: any) => state.userSliceReducer.user);
   const selector = useSelector((state: any) => state);
   const { userSliceReducer } = selector;
   const dispatch = useDispatch();
-  const { lineDatas } = ChartLineData(selector.todosSliceReducer.todos);
 
   const doughnutData = {
     labels: [`테스팅`, `gdgd`, `쿄쿄요쿄요`],
@@ -32,60 +32,8 @@ const Charts = () => {
       },
     ],
   };
-  const barData = {
-    labels: [
-      `${dayjs(new Date()).add(-6, "day").get("date")}일`,
-      `${dayjs(new Date()).add(-5, "day").get("date")}일`,
-      `${dayjs(new Date()).add(-4, "day").get("date")}일`,
-      `${dayjs(new Date()).add(-3, "day").get("date")}일`,
-      `${dayjs(new Date()).add(-2, "day").get("date")}일`,
-      `${dayjs(new Date()).add(-1, "day").get("date")}일`,
-      `${dayjs(new Date()).get("date")}일(오늘)`,
-    ],
-    datasets: [
-      {
-        label: "완료수",
-        data: [
-          lineDatas[6].compleData.length,
-          lineDatas[5].compleData.length,
-          lineDatas[4].compleData.length,
-          lineDatas[3].compleData.length,
-          lineDatas[2].compleData.length,
-          lineDatas[1].compleData.length,
-          lineDatas[0].compleData.length,
-        ],
-        fill: false,
-        backgroundColor: "rgb(75, 192, 192)",
-        borderColor: "rgb(75, 192, 192)",
-        tension: 0.1,
-        borderWidth: 3,
-      },
-      {
-        label: "목표수",
-        data: [
-          lineDatas[6].planData.length,
-          lineDatas[5].planData.length,
-          lineDatas[4].planData.length,
-          lineDatas[3].planData.length,
-          lineDatas[2].planData.length,
-          lineDatas[1].planData.length,
-          lineDatas[0].planData.length,
-        ],
-        fill: false,
-        backgroundColor: "rgb(52, 152, 219)",
-        borderColor: "rgb(52, 152, 219)",
-        tension: 0.1,
-      },
-    ],
-  };
 
-  useEffect(() => {
-    console.log("디스패치!");
-
-    const token = userSliceReducer.user.accessToken;
-    const userId = userSliceReducer.user.userId;
-    dispatch(TODOS_REQUEST({ token, userId }));
-  }, []);
+  useEffect(() => {}, []);
 
   return (
     <ChartsWrap>
@@ -162,42 +110,40 @@ const Charts = () => {
                       <div className=" col gap1">
                         <CenterRightComponent
                           title="오늘 달성률"
-                          progress={5}
+                          progress={Math.round(
+                            (selector.todosSliceReducer.todos.filter(
+                              (arr: any) =>
+                                arr.createdAt.getDate() ===
+                                  new Date().getDate() &&
+                                arr.createdAt.getMonth() ===
+                                  new Date().getMonth() &&
+                                arr.createdAt.getFullYear() ===
+                                  new Date().getFullYear() &&
+                                arr.success === true
+                            ).length *
+                              100) /
+                              selector.todosSliceReducer.todos.filter(
+                                (arr: any) =>
+                                  arr.createdAt.getDate() ===
+                                    new Date().getDate() &&
+                                  arr.createdAt.getMonth() ===
+                                    new Date().getMonth() &&
+                                  arr.createdAt.getFullYear() ===
+                                    new Date().getFullYear()
+                              ).length
+                          )}
                           order={1}
                         />
-                        <CenterRightComponent
+                        <CenterRightBottomComponent
                           title="전일대비 달성률"
-                          progress={19}
+                          progressa={19}
                           order={2}
                         />
                       </div>
                     </div>
                   </div>
                 </div>
-                <div className="chart-bottom w-100 bottom-item">
-                  <div className="bottom-item-header">헤더</div>
-                  <div className="bottom-item-con">
-                    <Line
-                      data={barData}
-                      options={{
-                        // reponsive: false,
-                        // reponsive: true,
-                        maintainAspectRatio: false,
-
-                        plugins: {
-                          legend: {
-                            display: true,
-                            position: "top",
-                          },
-                        },
-                        animation: {
-                          // duration: aniToggle,
-                          // onComplete: animationHandler,
-                        },
-                      }}
-                    ></Line>
-                  </div>
-                </div>
+                <BottomComponent />
               </div>
             </div>
           </div>

@@ -3,24 +3,28 @@ import styled from "styled-components";
 
 interface CenterRightComponentProps {
   title: string;
-  progress: number;
+  progressa: number;
   order: number;
 }
 
 const CenterRightComponent = ({
   title,
-  progress,
+  progressa,
   order,
 }: CenterRightComponentProps) => {
   const [time, setTime] = useState(0);
+  const [allow, setAllow] = useState(false);
   const [fadein, setFadein] = useState(0);
-  console.log("dd", progress);
+  console.log("", progressa);
+  //   setTimeout(() => {
+  //     setAllow(true);
+  //   }, 500);
   setTimeout(() => {
     setFadein(1);
   }, order * 100);
-  setTimeout(() => {
-    setTime(1);
-  }, order * 200);
+  //   setTimeout(() => {
+  //     setTime(1);
+  //   }, order * 200);
   useEffect(() => {
     // if (allow === true) {
     //   const progressBar = setInterval(() => {
@@ -43,13 +47,13 @@ const CenterRightComponent = ({
       time={time}
       fadein={fadein}
       order={order}
-      progress={progress}
+      progress={progressa}
     >
       <div>{title}</div>
       <div>
-        <div className="count-per">{progress}%</div>
+        <div className="count-per">이런 시부랄{progressa}%</div>
         <div className="progress-back">
-          <div className="progress-bar" />
+          <div className="progress-bar2" />
         </div>
       </div>
     </CenterRightComponentWrap>
@@ -92,7 +96,7 @@ const CenterRightComponentWrap = styled.div<{
       rgba(255, 255, 255, 1) 100%
     );
   }
-  .progress-bar {
+  .progress-bar2 {
     position: absolute;
     width: 0;
     @keyframes prog {
