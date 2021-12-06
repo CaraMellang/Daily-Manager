@@ -77,7 +77,7 @@ function BottomComponent() {
   return (
     <BottomComponentWrap>
       <div className="chart-bottom w-100 bottom-item">
-        <div className="bottom-item-header">헤더</div>
+        <div className="bottom-item-header">7일간의 기록</div>
         <div className="bottom-item-con">
           <Line
             data={barData}

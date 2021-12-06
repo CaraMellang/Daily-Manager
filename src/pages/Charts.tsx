@@ -1,7 +1,7 @@
 import dayjs from "dayjs";
 import React, { useEffect } from "react";
-import { Doughnut, Line } from "react-chartjs-2";
-import { connect, useDispatch, useSelector } from "react-redux";
+import { Bar, Doughnut, Line } from "react-chartjs-2";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import BottomComponent from "../components/ChartsComponents/BottomComponent";
 import CenterRightBottomComponent from "../components/ChartsComponents/CenterRightBottomComponent";
@@ -9,8 +9,6 @@ import CenterRightComponent from "../components/ChartsComponents/CenterRightComp
 import TopComponent from "../components/ChartsComponents/TopComponent";
 import Loading from "../components/Loading";
 import { Progress } from "../lib/ChartRight";
-import { color } from "../lib/color";
-import { ChartLineData } from "../lib/DateArrays";
 import { TODOS_REQUEST } from "../modules/redux/Todos";
 
 const Charts = () => {
@@ -18,22 +16,7 @@ const Charts = () => {
   const { userSliceReducer } = selector;
   const dispatch = useDispatch();
 
-  const doughnutData = {
-    labels: [`테스팅`, `gdgd`, `쿄쿄요쿄요`],
-    datasets: [
-      {
-        data: [50, 90, 204],
-        borderWidth: 2,
-        hoverBorderWidth: 3,
-        borderColor: ["rgba(0,0,0,0)", "rgba(0,0,0,0)", "rgba(0,0,0,0)"],
-        backgroundColor: [
-          "rgba(98,181,229,1)",
-          "rgba(255,99,132,1)",
-          "rgba(78, 214, 113,1)",
-        ],
-      },
-    ],
-  };
+  
 
   useEffect(() => {
     console.log("디스패치!");
@@ -49,6 +32,44 @@ const Charts = () => {
     );
     console.log(selector.todosSliceReducer.todos);
     console.log("몇퍼?", dayToDayCompletePer);
+    
+    const doughnutData = {
+      labels: [`미완료`, `완료`, `목표`],
+      datasets: [
+        {
+          data: [
+            selector.todosSliceReducer.todos.filter(
+              (arr: any) =>
+                arr.createdAt.getDate() === new Date().getDate() &&
+                arr.createdAt.getMonth() === new Date().getMonth() &&
+                arr.createdAt.getFullYear() === new Date().getFullYear() &&
+                arr.success == false
+            ).length,
+            selector.todosSliceReducer.todos.filter(
+              (arr: any) =>
+                arr.createdAt.getDate() === new Date().getDate() &&
+                arr.createdAt.getMonth() === new Date().getMonth() &&
+                arr.createdAt.getFullYear() === new Date().getFullYear() &&
+                arr.success === true
+            ).length,
+            selector.todosSliceReducer.todos.filter(
+              (arr: any) =>
+                arr.createdAt.getDate() === new Date().getDate() &&
+                arr.createdAt.getMonth() === new Date().getMonth() &&
+                arr.createdAt.getFullYear() === new Date().getFullYear()
+            ).length,
+          ],
+          borderWidth: 2,
+          hoverBorderWidth: 3,
+          borderColor: ["rgba(0,0,0,0)", "rgba(0,0,0,0)", "rgba(0,0,0,0)"],
+          backgroundColor: [
+            "rgba(255,99,132,1)",
+            "rgba(98,181,229,1)",
+            "rgba(78, 214, 113,1)",
+          ],
+        },
+      ],
+    };
 
     return (
       <ChartsWrap>
@@ -98,9 +119,11 @@ const Charts = () => {
                   <div className="chart-center w-100">
                     <div className="center row gap1">
                       <div className="center-item">
-                        <div className="center-left-item-header">헤더</div>
+                        <div className="center-left-item-header">
+                          오늘 하루 목표
+                        </div>
                         <div className="center-left-item-con">
-                          <Doughnut
+                          <Bar
                             data={doughnutData}
                             options={{
                               // reponsive: false,
@@ -109,7 +132,7 @@ const Charts = () => {
 
                               plugins: {
                                 legend: {
-                                  display: true,
+                                  display: false,
                                   position: "right",
                                 },
                               },
@@ -118,7 +141,7 @@ const Charts = () => {
                                 // onComplete: animationHandler,
                               },
                             }}
-                          ></Doughnut>
+                          ></Bar>
                         </div>
                       </div>
                       <div className="center-item center-right-item padd05 ">
