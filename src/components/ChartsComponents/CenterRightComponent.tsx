@@ -14,30 +14,15 @@ const CenterRightComponent = ({
 }: CenterRightComponentProps) => {
   const [time, setTime] = useState(0);
   const [fadein, setFadein] = useState(0);
-  console.log("dd", progress);
+
   setTimeout(() => {
     setFadein(1);
   }, order * 100);
   setTimeout(() => {
     setTime(1);
   }, order * 200);
-  useEffect(() => {
-    // if (allow === true) {
-    //   const progressBar = setInterval(() => {
-    //     // console.log(count);
-    //     if (count >= progress) {
-    //       clearInterval(progressBar);
-    //       setTime(1);
-    //       return;
-    //     }
-    //     setCount(count + 1);
-    //   }, 10);
-    //   return () => {
-    //     clearInterval(progressBar);
-    //     setAllow(false);
-    //   };
-    // }
-  }, []);
+
+  useEffect(() => {}, []);
   return (
     <CenterRightComponentWrap
       time={time}
@@ -73,6 +58,7 @@ const CenterRightComponentWrap = styled.div<{
   box-shadow: 0 0.15rem 1.75rem 0 rgb(34 39 46 / 15%);
   opacity: ${(props) => props.fadein};
   transition: opacity ${(props) => props.order / 2}s ease-in-out;
+  transition: width 5s ease-in-out;
 
   .count-per {
     text-align: end;
@@ -94,7 +80,7 @@ const CenterRightComponentWrap = styled.div<{
   }
   .progress-bar {
     position: absolute;
-    width: 0;
+    width: ${(props) => `${props.progress}%`};
     @keyframes prog {
       0% {
         width: 0%;
@@ -111,5 +97,4 @@ const CenterRightComponentWrap = styled.div<{
   }
 `;
 
-export default React.memo(CenterRightComponent);
-
+export default CenterRightComponent;

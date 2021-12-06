@@ -89,7 +89,7 @@ const HeaderWrap = styled.header`
   }
   .page-toggle {
     padding-bottom: 0.25rem;
-    border-bottom: 5px solid black;
+    border-bottom: 5px solid rgba(252, 114, 114, 1);
   }
 `;
 
