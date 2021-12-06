@@ -28,14 +28,12 @@ const Home = () => {
 
   if (selector.todosSliceReducer.todosSuccess) {
     console.log(
-      (dd = selector.todosSliceReducer.todos.filter((arr: any) => {
-        if (
-          arr.createdAt.getDate() === new Date().getDate() &&
-          arr.createdAt.getMonth() === new Date().getMonth()
-        ) {
-          return arr;
-        }
-      }))
+      (dd = selector.todosSliceReducer.todos.filter(
+        (arr: any) =>
+        arr.createdAt.getDate() === new Date().getDate() &&
+        arr.createdAt.getMonth() === new Date().getMonth() &&
+        arr.createdAt.getFullYear() === new Date().getFullYear()
+      ))
     );
     dd.forEach((arr) => {
       if (arr.success) {
@@ -53,7 +51,7 @@ const Home = () => {
   };
 
   useEffect(() => {
-    console.log("gds");
+    console.log("디스패치!");
 
     const token = userSliceReducer.user.accessToken;
     const userId = userSliceReducer.user.userId;

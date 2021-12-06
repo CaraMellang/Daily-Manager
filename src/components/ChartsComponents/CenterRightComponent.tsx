@@ -33,7 +33,10 @@ const CenterRightComponent = ({
         }
         setCount(count + 1);
       }, 10);
-      return () => clearInterval(progressBar);
+      return () => {
+        clearInterval(progressBar);
+        setAllow(false);
+      };
     }
   }, [count, allow]);
   return (

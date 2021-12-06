@@ -1,14 +1,20 @@
-import React from "react";
+import dayjs from "dayjs";
+import React, { useEffect } from "react";
 import { Doughnut, Line } from "react-chartjs-2";
-import { connect, useSelector } from "react-redux";
+import { connect, useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import CenterRightComponent from "../components/ChartsComponents/CenterRightComponent";
 import TopComponent from "../components/ChartsComponents/TopComponent";
 import { color } from "../lib/color";
+import { ChartLineData } from "../lib/DateArrays";
+import { TODOS_REQUEST } from "../modules/redux/Todos";
 
 const Charts = () => {
   const userSelector = useSelector((state: any) => state.userSliceReducer.user);
   const selector = useSelector((state: any) => state);
+  const { userSliceReducer } = selector;
+  const dispatch = useDispatch();
+  const { lineDatas } = ChartLineData(selector.todosSliceReducer.todos);
 
   const doughnutData = {
     labels: [`테스팅`, `gdgd`, `쿄쿄요쿄요`],
@@ -27,11 +33,27 @@ const Charts = () => {
     ],
   };
   const barData = {
-    labels: ["29일", "30일", "31일", "01일", "02일", "03일", "04일"],
+    labels: [
+      `${dayjs(new Date()).add(-6, "day").get("date")}일`,
+      `${dayjs(new Date()).add(-5, "day").get("date")}일`,
+      `${dayjs(new Date()).add(-4, "day").get("date")}일`,
+      `${dayjs(new Date()).add(-3, "day").get("date")}일`,
+      `${dayjs(new Date()).add(-2, "day").get("date")}일`,
+      `${dayjs(new Date()).add(-1, "day").get("date")}일`,
+      `${dayjs(new Date()).get("date")}일(오늘)`,
+    ],
     datasets: [
       {
         label: "완료수",
-        data: [65, 59, 80, 81, 56, 55, 40],
+        data: [
+          lineDatas[6].compleData.length,
+          lineDatas[5].compleData.length,
+          lineDatas[4].compleData.length,
+          lineDatas[3].compleData.length,
+          lineDatas[2].compleData.length,
+          lineDatas[1].compleData.length,
+          lineDatas[0].compleData.length,
+        ],
         fill: false,
         backgroundColor: "rgb(75, 192, 192)",
         borderColor: "rgb(75, 192, 192)",
@@ -40,7 +62,15 @@ const Charts = () => {
       },
       {
         label: "목표수",
-        data: [71, 68, 63, 78, 60, 46, 61],
+        data: [
+          lineDatas[6].planData.length,
+          lineDatas[5].planData.length,
+          lineDatas[4].planData.length,
+          lineDatas[3].planData.length,
+          lineDatas[2].planData.length,
+          lineDatas[1].planData.length,
+          lineDatas[0].planData.length,
+        ],
         fill: false,
         backgroundColor: "rgb(52, 152, 219)",
         borderColor: "rgb(52, 152, 219)",
@@ -48,6 +78,14 @@ const Charts = () => {
       },
     ],
   };
+
+  useEffect(() => {
+    console.log("디스패치!");
+
+    const token = userSliceReducer.user.accessToken;
+    const userId = userSliceReducer.user.userId;
+    dispatch(TODOS_REQUEST({ token, userId }));
+  }, []);
 
   return (
     <ChartsWrap>
@@ -60,14 +98,37 @@ const Charts = () => {
                   <div className="gap1 row">
                     <div className="top-item">
                       {/* 뭘봐{userSelector.username} 입니다~~ */}
-                      <TopComponent title={`총 완료 수`} data={11} />
+                      <TopComponent
+                        title={`전체 완료 수`}
+                        data={
+                          selector.todosSliceReducer.todos.filter(
+                            (arr: any) => arr.success === true
+                          ).length
+                        }
+                      />
                     </div>
                     <div className="top-item">
                       {/* 뭘봐{userSelector.createdAt} 입니다~~ */}
-                      <TopComponent title={`총 작성 수`} data={selector.todosSliceReducer.todos.length} />
+                      <TopComponent
+                        title={`전체 작성 수`}
+                        data={selector.todosSliceReducer.todos.length}
+                      />
                     </div>
                     <div className="top-item">
-                      <TopComponent title={`총 남은 수`} data={12} />
+                      <TopComponent
+                        title={`오늘 작성 수`}
+                        data={
+                          selector.todosSliceReducer.todos.filter(
+                            (arr: any) =>
+                              arr.createdAt.getDate() ===
+                                new Date().getDate() &&
+                              arr.createdAt.getMonth() ===
+                                new Date().getMonth() &&
+                              arr.createdAt.getFullYear() ===
+                                new Date().getFullYear()
+                          ).length
+                        }
+                      />
                     </div>
                   </div>
                 </div>
@@ -100,12 +161,12 @@ const Charts = () => {
                     <div className="center-item center-right-item padd05 ">
                       <div className=" col gap1">
                         <CenterRightComponent
-                          title="오늘 완료 수"
+                          title="오늘 달성률"
                           progress={5}
                           order={1}
                         />
                         <CenterRightComponent
-                          title="오늘 남은 수"
+                          title="전일대비 달성률"
                           progress={19}
                           order={2}
                         />
