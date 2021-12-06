@@ -15,16 +15,15 @@ const CenterRightComponent = ({
   const [time, setTime] = useState(0);
   const [allow, setAllow] = useState(false);
   const [fadein, setFadein] = useState(0);
-  console.log("", progressa);
   //   setTimeout(() => {
   //     setAllow(true);
   //   }, 500);
   setTimeout(() => {
     setFadein(1);
   }, order * 100);
-  //   setTimeout(() => {
-  //     setTime(1);
-  //   }, order * 200);
+  setTimeout(() => {
+    setTime(1);
+  }, order * 200);
   useEffect(() => {
     // if (allow === true) {
     //   const progressBar = setInterval(() => {
@@ -51,7 +50,7 @@ const CenterRightComponent = ({
     >
       <div>{title}</div>
       <div>
-        <div className="count-per">이런 시부랄{progressa}%</div>
+        <div className="count-per">{progressa}%</div>
         <div className="progress-back">
           <div className="progress-bar2" />
         </div>
@@ -83,7 +82,6 @@ const CenterRightComponentWrap = styled.div<{
     opacity: ${(props) => props.time};
     transition: opacity 1s ease-in-out;
   }
-
   .progress-back {
     position: relative;
     width: 100%;
@@ -99,7 +97,7 @@ const CenterRightComponentWrap = styled.div<{
   .progress-bar2 {
     position: absolute;
     width: 0;
-    @keyframes prog {
+    @keyframes prog2 {
       0% {
         width: 0%;
       }
@@ -107,7 +105,7 @@ const CenterRightComponentWrap = styled.div<{
         width: ${(props) => `${props.progress}%`};
       }
     }
-    animation: prog 1s;
+    animation: prog2 1s 0.5s;
     animation-fill-mode: forwards; //애니메이션 마지막상태유지
     height: 5px;
     background-color: #fc3857;

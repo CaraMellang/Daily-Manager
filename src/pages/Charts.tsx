@@ -7,6 +7,8 @@ import BottomComponent from "../components/ChartsComponents/BottomComponent";
 import CenterRightBottomComponent from "../components/ChartsComponents/CenterRightBottomComponent";
 import CenterRightComponent from "../components/ChartsComponents/CenterRightComponent";
 import TopComponent from "../components/ChartsComponents/TopComponent";
+import Loading from "../components/Loading";
+import { Progress } from "../lib/ChartRight";
 import { color } from "../lib/color";
 import { ChartLineData } from "../lib/DateArrays";
 import { TODOS_REQUEST } from "../modules/redux/Todos";
@@ -33,124 +35,118 @@ const Charts = () => {
     ],
   };
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    console.log("디스패치!");
 
-  return (
-    <ChartsWrap>
-      <div className="content">
-        <div className="charts-background">
-          <div className="charts-padd">
-            <div className="charts">
-              <div className="charts-form col gap1">
-                <div className="chart-top w-100">
-                  <div className="gap1 row">
-                    <div className="top-item">
-                      {/* 뭘봐{userSelector.username} 입니다~~ */}
-                      <TopComponent
-                        title={`전체 완료 수`}
-                        data={
-                          selector.todosSliceReducer.todos.filter(
-                            (arr: any) => arr.success === true
-                          ).length
-                        }
-                      />
-                    </div>
-                    <div className="top-item">
-                      {/* 뭘봐{userSelector.createdAt} 입니다~~ */}
-                      <TopComponent
-                        title={`전체 작성 수`}
-                        data={selector.todosSliceReducer.todos.length}
-                      />
-                    </div>
-                    <div className="top-item">
-                      <TopComponent
-                        title={`오늘 작성 수`}
-                        data={
-                          selector.todosSliceReducer.todos.filter(
-                            (arr: any) =>
-                              arr.createdAt.getDate() ===
-                                new Date().getDate() &&
-                              arr.createdAt.getMonth() ===
-                                new Date().getMonth() &&
-                              arr.createdAt.getFullYear() ===
-                                new Date().getFullYear()
-                          ).length
-                        }
-                      />
-                    </div>
-                  </div>
-                </div>
-                <div className="chart-center w-100">
-                  <div className="center row gap1">
-                    <div className="center-item">
-                      <div className="center-left-item-header">헤더</div>
-                      <div className="center-left-item-con">
-                        <Doughnut
-                          data={doughnutData}
-                          options={{
-                            // reponsive: false,
-                            // reponsive: true,
-                            maintainAspectRatio: false,
+    const token = userSliceReducer.user.accessToken;
+    const userId = userSliceReducer.user.userId;
+    dispatch(TODOS_REQUEST({ token, userId }));
+  }, []);
 
-                            plugins: {
-                              legend: {
-                                display: true,
-                                position: "right",
-                              },
-                            },
-                            animation: {
-                              // duration: aniToggle,
-                              // onComplete: animationHandler,
-                            },
-                          }}
-                        ></Doughnut>
+  if (selector.todosSliceReducer.todosSuccess) {
+    const { todayCompletePer, dayToDayCompletePer } = Progress(
+      selector.todosSliceReducer.todos
+    );
+    console.log(selector.todosSliceReducer.todos);
+    console.log("몇퍼?", dayToDayCompletePer);
+
+    return (
+      <ChartsWrap>
+        <div className="content">
+          <div className="charts-background">
+            <div className="charts-padd">
+              <div className="charts">
+                <div className="charts-form col gap1">
+                  <div className="chart-top w-100">
+                    <div className="gap1 row">
+                      <div className="top-item">
+                        {/* 뭘봐{userSelector.username} 입니다~~ */}
+                        <TopComponent
+                          title={`전체 완료 수`}
+                          data={
+                            selector.todosSliceReducer.todos.filter(
+                              (arr: any) => arr.success === true
+                            ).length
+                          }
+                        />
                       </div>
-                    </div>
-                    <div className="center-item center-right-item padd05 ">
-                      <div className=" col gap1">
-                        <CenterRightComponent
-                          title="오늘 달성률"
-                          progress={Math.round(
-                            (selector.todosSliceReducer.todos.filter(
+                      <div className="top-item">
+                        {/* 뭘봐{userSelector.createdAt} 입니다~~ */}
+                        <TopComponent
+                          title={`전체 작성 수`}
+                          data={selector.todosSliceReducer.todos.length}
+                        />
+                      </div>
+                      <div className="top-item">
+                        <TopComponent
+                          title={`오늘 작성 수`}
+                          data={
+                            selector.todosSliceReducer.todos.filter(
                               (arr: any) =>
                                 arr.createdAt.getDate() ===
                                   new Date().getDate() &&
                                 arr.createdAt.getMonth() ===
                                   new Date().getMonth() &&
                                 arr.createdAt.getFullYear() ===
-                                  new Date().getFullYear() &&
-                                arr.success === true
-                            ).length *
-                              100) /
-                              selector.todosSliceReducer.todos.filter(
-                                (arr: any) =>
-                                  arr.createdAt.getDate() ===
-                                    new Date().getDate() &&
-                                  arr.createdAt.getMonth() ===
-                                    new Date().getMonth() &&
-                                  arr.createdAt.getFullYear() ===
-                                    new Date().getFullYear()
-                              ).length
-                          )}
-                          order={1}
-                        />
-                        <CenterRightBottomComponent
-                          title="전일대비 달성률"
-                          progressa={19}
-                          order={2}
+                                  new Date().getFullYear()
+                            ).length
+                          }
                         />
                       </div>
                     </div>
                   </div>
+                  <div className="chart-center w-100">
+                    <div className="center row gap1">
+                      <div className="center-item">
+                        <div className="center-left-item-header">헤더</div>
+                        <div className="center-left-item-con">
+                          <Doughnut
+                            data={doughnutData}
+                            options={{
+                              // reponsive: false,
+                              // reponsive: true,
+                              maintainAspectRatio: false,
+
+                              plugins: {
+                                legend: {
+                                  display: true,
+                                  position: "right",
+                                },
+                              },
+                              animation: {
+                                // duration: aniToggle,
+                                // onComplete: animationHandler,
+                              },
+                            }}
+                          ></Doughnut>
+                        </div>
+                      </div>
+                      <div className="center-item center-right-item padd05 ">
+                        <div className=" col gap1">
+                          <CenterRightComponent
+                            title="오늘 달성률"
+                            progress={todayCompletePer}
+                            order={1}
+                          />
+                          <CenterRightBottomComponent
+                            title="전일대비 달성 증가률"
+                            progressa={dayToDayCompletePer}
+                            order={2}
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <BottomComponent />
                 </div>
-                <BottomComponent />
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </ChartsWrap>
-  );
+      </ChartsWrap>
+    );
+  }
+  return <Loading />;
 };
 const ChartsWrap = styled.div`
   text-align: center;

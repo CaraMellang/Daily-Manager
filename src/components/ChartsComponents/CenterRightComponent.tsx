@@ -112,3 +112,4 @@ const CenterRightComponentWrap = styled.div<{
 `;
 
 export default React.memo(CenterRightComponent);
+
