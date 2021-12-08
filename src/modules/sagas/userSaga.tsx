@@ -1,11 +1,11 @@
 import axios from "axios";
 import { call, put } from "redux-saga/effects";
+import { backPath } from "../../lib/HttpPath";
 import { SIGNIN_FAILED, SIGNIN_SUCCESS } from "../redux/User";
-
 
 async function postUserData(data: any) {
   console.log("아 gg", data);
-  return await axios.post("http://localhost:5000/auth/signin", data);
+  return await axios.post(`${backPath}/auth/signin`, data);
 }
 
 export function* postUser(action: any): Generator {

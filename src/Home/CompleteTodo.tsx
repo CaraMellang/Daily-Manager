@@ -6,6 +6,7 @@ import React from "react";
 import { check } from "react-interaction";
 import styled from "styled-components";
 import { Todo } from "../components/Calendar/CalendarBody";
+import { backPath } from "../lib/HttpPath";
 
 interface CompleteTodoProps {
   Todo: Todo;
@@ -25,7 +26,7 @@ function CompleteTodo({ Todo, token, completeHandle }: CompleteTodoProps) {
         todoId: Todo._id,
       };
       await axios
-        .delete(`http://localhost:5000/todo/delete`, { data })
+        .delete(`${backPath}/todo/delete`, { data })
         .then((rr) => {
           console.log("야호", rr);
           completeHandle(false);

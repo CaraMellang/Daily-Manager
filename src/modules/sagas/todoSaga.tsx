@@ -1,11 +1,12 @@
 import axios from "axios";
 import dayjs from "dayjs";
 import { call, put } from "redux-saga/effects";
+import { backPath } from "../../lib/HttpPath";
 import { TODOS_FAILED, TODOS_SUCCESS } from "../redux/Todos";
 
 async function postGetTodoData(data: any) {
   // console.log("아 gg", data);
-  return await axios.post("http://localhost:5000/todo/read", data);
+  return await axios.post(`${backPath}/todo/read`, data);
 }
 
 export function* postGetTodoSaga(action: any): Generator {

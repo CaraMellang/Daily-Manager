@@ -11,6 +11,7 @@ import Charts from "./Charts";
 import Home from "./Home";
 import SignForm from "./SignForm";
 import { SIGNIN_FAILED } from "../modules/redux/User";
+import { backPath } from "../lib/HttpPath";
 
 const Main = () => {
   const [isSign, setIsSign] = useState(true);
@@ -33,7 +34,7 @@ const Main = () => {
 
   const postSign = async () => {
     await axios
-      .post(`http://localhost:5000/auth/verify`, ".", {
+      .post(`${backPath}/auth/verify`, ".", {
         headers: { Authorization: `Bearer ${cookiesToken.rememberToken}` },
       })
       .then((d) => {

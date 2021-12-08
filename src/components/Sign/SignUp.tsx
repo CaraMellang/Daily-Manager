@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 import styled from "styled-components";
+import { backPath } from "../../lib/HttpPath";
 
 interface SignIUpProps {
   onSignInToggle(): void;
@@ -35,7 +36,7 @@ const SignUp = ({ onSignInToggle, onSignHandler }: SignIUpProps) => {
       password: inputPw,
     };
     await axios
-      .post("http://localhost:5000/auth/signup", data)
+      .post(`${backPath}/auth/signup`, data)
       .then((res) => {
         console.log(res);
         window.alert("회원가입이 완료되었습니다. 로그인을 해주시기 바랍니다.");

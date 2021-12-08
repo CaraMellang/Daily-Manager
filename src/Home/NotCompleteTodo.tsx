@@ -6,6 +6,7 @@ import { check } from "react-interaction";
 import { faTrash, faTools } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { backPath } from "../lib/HttpPath";
 
 interface NotCompleteTodoProps {
   Todo: Todo;
@@ -31,7 +32,7 @@ function NotCompleteTodo({
         todoId: Todo._id,
       };
       await axios
-        .delete(`http://localhost:5000/todo/delete`, { data })
+        .delete(`${backPath}/todo/delete`, { data })
         .then((rr) => {
           console.log("야호", rr);
           completeHandle(false);
