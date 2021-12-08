@@ -40,7 +40,6 @@ function DetailItem({
     setText(e.target.value);
   };
   const onCheckedChange = (e: any) => {
-    console.log(e.target.checked);
     setChecked(e.target.checked);
   };
   const onClickFix = async () => {

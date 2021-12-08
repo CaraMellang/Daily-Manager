@@ -5,7 +5,6 @@ import { backPath } from "../../lib/HttpPath";
 import { TODOS_FAILED, TODOS_SUCCESS } from "../redux/Todos";
 
 async function postGetTodoData(data: any) {
-  // console.log("아 gg", data);
   return await axios.post(`${backPath}/todo/read`, data);
 }
 
@@ -27,7 +26,6 @@ export function* postGetTodoSaga(action: any): Generator {
         updatedAt: new Date(updatedAt),
       };
     });
-    console.log("리절트임ㅎㅇ", result);
     yield put(TODOS_SUCCESS(result));
   } catch (e) {
     console.log("왜이래임마", e);

@@ -36,7 +36,6 @@ export function ChartLineData(todos: []) {
       }
     }
   });
-  console.log(lineDatas);
   return { lineDatas };
 }
 

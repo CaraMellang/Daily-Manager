@@ -43,7 +43,6 @@ const Home = () => {
         notCompleteArray.push(arr);
       }
     });
-    console.log("comp", completeArray, "notcomp", notCompleteArray);
   }
 
   const completeHandle = (bool: boolean) => {

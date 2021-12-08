@@ -52,14 +52,12 @@ const CalendarBody = ({
   );
 
   const dispatch = useDispatch();
-  // const [toggle, setToggle] = useState(false);
   const daysArray = ["일", "월", "화", "수", "목", "금", "토"];
 
   const paintCalendar = async (userSliceReducer: any) => {
     let dateArray: DateInfo[] = [];
 
     const todoDatas = await getCurMonthData(userSliceReducer);
-    // console.log("투두뗴이팄", todoDatas);
 
     dayjs(currentMonth).set("date", 0).get("date");
     const prevLastDay = dayjs(currentMonth).set("date", 0).get("day");
@@ -120,14 +118,8 @@ const CalendarBody = ({
       }
     }
 
-    // console.log(dateArray);
-    // console.log(dateArray);
     setDates(dateArray);
-    // dates = dateArray;
     completeHandle(true);
-    // setDates(dateArray);
-    // console.log("tlqkffusdk", complete);
-    // console.log(dateArray);
   };
 
   const toggleClick = () => {
@@ -155,9 +147,6 @@ const CalendarBody = ({
     const intVal = parseInt(e.currentTarget.dataset.value);
     setClickDate(intVal);
     setDateModalToggle(!dateModalToggle);
-    // console.log("너 실행하냐?");
-    // console.log(e.currentTarget.dataset.value);
-    // console.log("eee", e.currentTarget);
   };
 
   const getCurMonthData = async (userSliceReducer: any) => {
@@ -170,37 +159,26 @@ const CalendarBody = ({
       // date: dayjs(currentDate).toDate().getMonth() + 1,
       gd: "???",
     };
-    const todos = await axios.post(
-      `${backPath}/todo/findcurrmonth`,
-      data
-    );
-    // console.log("실패했나,,,",todos.data.data," 길이",todos.data.data.length);
+    const todos = await axios.post(`${backPath}/todo/findcurrmonth`, data);
     if (todos.data.data.length === 0) {
       // console.log("얘! 데이터가 비어있단다!");
       return;
     }
-
 
     return todos.data.data;
   };
 
   useEffect(() => {
     const { userSliceReducer, todosSliceReducer } = userSelector;
-    // console.log(userSliceReducer);
     if (complete === false) {
       paintCalendar(userSliceReducer);
-      console.log("컴플리트 실행");
 
       // const token = userSliceReducer.user.accessToken;
       // const userId = userSliceReducer.user.userId;
       // dispatch(TODOS_REQUEST({ token, userId }));
     }
 
-    // console.log("ddd", dates);
-    console.log("리렌더!");
-    return () => {
-      console.log("사라짐");
-    };
+    return () => {};
   }, [currentMonth, complete]);
 
   return (
