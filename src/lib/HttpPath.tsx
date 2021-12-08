@@ -1,4 +1,4 @@
-export const backPath = "https://projectdm.herokuapp.com/";
+export const backPath = "https://projectdm.herokuapp.com";
 
 // 1 is use Localhost , 0 is use BackPaths
 export const useLocalOn = 0;
