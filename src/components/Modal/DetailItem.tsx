@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 import { calendarDates } from "../../lib/DateArrays";
+import { backPath } from "../../lib/HttpPath";
 import CurrentDay from "../CurrentDay";
 
 interface DetailItemProps {
@@ -52,7 +53,7 @@ function DetailItem({
     };
     console.log(data);
     await axios
-      .patch(`http://localhost:5000/todo/updatetodo`, data)
+      .patch(`${backPath}/todo/updatetodo`, data)
       .then((res) => {
         console.log("완료", res);
       })

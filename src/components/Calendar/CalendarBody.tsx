@@ -6,6 +6,7 @@ import Modal from "../Modal/Modal";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { TODOS_REQUEST } from "../../modules/redux/Todos";
+import { backPath } from "../../lib/HttpPath";
 
 interface CalendarBodyProps {
   currentMonth: Dayjs;
@@ -170,7 +171,7 @@ const CalendarBody = ({
       gd: "???",
     };
     const todos = await axios.post(
-      "http://localhost:5000/todo/findcurrmonth",
+      `${backPath}/todo/findcurrmonth`,
       data
     );
     // console.log("실패했나,,,",todos.data.data," 길이",todos.data.data.length);
@@ -179,11 +180,6 @@ const CalendarBody = ({
       return;
     }
 
-    console.log(
-      `getCurMonthData 현재 날짜 월${
-        currentMonth.get(`month`) + 1
-      } 일: ${currentMonth.get(`date`)}`
-    );
 
     return todos.data.data;
   };

@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
+import { backPath } from "../../lib/HttpPath";
 
 interface CreateTodoProps {
   completeHandle(bool: boolean): void;
@@ -21,7 +22,7 @@ function CreateTodo({ completeHandle }: CreateTodoProps) {
     };
 
     await axios
-      .post(`http://localhost:5000/todo/create`, data)
+      .post(`${backPath}/todo/create`, data)
       .then((res) => {
         console.log(res);
         completeHandle(false);

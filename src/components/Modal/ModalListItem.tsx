@@ -11,6 +11,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { faCheckCircle as farCheckCircle } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { backPath } from "../../lib/HttpPath";
 
 interface ModalListItemProps {
   Todos: Todo;
@@ -37,7 +38,7 @@ function ModalListItem({
       todoId: Todos._id,
     };
     await axios
-      .delete(`http://localhost:5000/todo/delete`, { data })
+      .delete(`${backPath}/todo/delete`, { data })
       .then((rr) => {
         console.log("딜리트클릭 성공", rr);
       })
@@ -55,7 +56,7 @@ function ModalListItem({
       success: checkBox,
     };
     await axios
-      .patch(`http://localhost:5000/todo/updatesuc`, data)
+      .patch(`${backPath}/todo/updatesuc`, data)
       .then((res) => {
         console.log("상태패치완료", res);
         completeHandle(false);
