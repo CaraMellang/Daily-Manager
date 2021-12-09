@@ -6,16 +6,27 @@ import { TODOS_REQUEST } from "../modules/redux/Todos";
 import Loading from "../components/Loading";
 import dayjs from "dayjs";
 import Clock from "../components/Clock";
-import NotCompleteTodo from "../Home/NotCompleteTodo";
+import NotCompleteTodo from "../components/Home/NotCompleteTodo";
 import { Todo } from "../components/Calendar/CalendarBody";
-import CompleteTodo from "../Home/CompleteTodo";
+import CompleteTodo from "../components/Home/CompleteTodo";
 import CurrentDay from "../components/CurrentDay";
+import HomePortal from "../components/Home/HomePortal";
+import HomeModal from "../components/Home/HomeModal";
 
 const Home = () => {
   let dd: any[] = [];
   let completeArray: Todo[] = [];
   let notCompleteArray: Todo[] = [];
   const [complete, setComplete] = useState(false);
+  const [clickFix, setClickFix] = useState(false);
+  const [clickFixTodo, setClickFixTodo] = useState<Todo>({
+    _id: `string;`,
+    creatorId: `string;`,
+    todo: ` string;`,
+    success: false,
+    createdAt: `string;`,
+    updatedAt: `string;`,
+  });
   const dispatch = useDispatch();
   const selector: any = useSelector((state) => state);
   const { userSliceReducer } = selector;
@@ -30,9 +41,9 @@ const Home = () => {
     console.log(
       (dd = selector.todosSliceReducer.todos.filter(
         (arr: any) =>
-        arr.createdAt.getDate() === new Date().getDate() &&
-        arr.createdAt.getMonth() === new Date().getMonth() &&
-        arr.createdAt.getFullYear() === new Date().getFullYear()
+          arr.createdAt.getDate() === new Date().getDate() &&
+          arr.createdAt.getMonth() === new Date().getMonth() &&
+          arr.createdAt.getFullYear() === new Date().getFullYear()
       ))
     );
     dd.forEach((arr) => {
@@ -47,6 +58,12 @@ const Home = () => {
 
   const completeHandle = (bool: boolean) => {
     setComplete((prev) => !prev);
+  };
+  const clickFixHandle = (bool: boolean) => {
+    setClickFix(bool);
+  };
+  const clickFixTodoHandle = (todo: Todo) => {
+    setClickFixTodo(todo);
   };
 
   useEffect(() => {
@@ -102,13 +119,14 @@ const Home = () => {
               <div className="col back-blur radius12px">
                 {notCompleteArray.length !== 0 ? (
                   notCompleteArray.map((arr) => {
-                    console.log(arr);
                     return (
                       <NotCompleteTodo
                         key={arr._id}
                         Todo={arr}
                         token={userSliceReducer.user.accessToken}
                         completeHandle={completeHandle}
+                        clickFixHandle={clickFixHandle}
+                        clickFixTodoHandle={clickFixTodoHandle}
                       />
                     );
                   })
@@ -133,6 +151,8 @@ const Home = () => {
                         Todo={arr}
                         token={userSliceReducer.user.accessToken}
                         completeHandle={completeHandle}
+                        clickFixHandle={clickFixHandle}
+                        clickFixTodoHandle={clickFixTodoHandle}
                       />
                     );
                   })
@@ -147,6 +167,12 @@ const Home = () => {
             {/* <div>최근 업데이트</div> */}
           </div>
         </div>
+        {clickFix && (
+          <HomePortal>
+            <HomeModal clickFixHandle={clickFixHandle} Todo={clickFixTodo}
+                        completeHandle={completeHandle} />
+          </HomePortal>
+        )}
       </HomeWrap>
     );
   }

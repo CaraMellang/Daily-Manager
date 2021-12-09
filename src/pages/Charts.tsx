@@ -16,8 +16,6 @@ const Charts = () => {
   const { userSliceReducer } = selector;
   const dispatch = useDispatch();
 
-  
-
   useEffect(() => {
     console.log("디스패치!");
 
@@ -32,7 +30,7 @@ const Charts = () => {
     );
     console.log(selector.todosSliceReducer.todos);
     console.log("몇퍼?", dayToDayCompletePer);
-    
+
     const doughnutData = {
       labels: [`미완료`, `완료`, `목표`],
       datasets: [
@@ -148,12 +146,21 @@ const Charts = () => {
                         <div className=" col gap1">
                           <CenterRightComponent
                             title="오늘 달성률"
-                            progress={todayCompletePer}
+                            progress={
+                              isNaN(todayCompletePer) || todayCompletePer < 0
+                                ? 0
+                                : todayCompletePer
+                            }
                             order={1}
                           />
                           <CenterRightBottomComponent
                             title="전일대비 달성 증가률"
-                            progressa={dayToDayCompletePer}
+                            progressa={
+                              isNaN(dayToDayCompletePer) ||
+                              dayToDayCompletePer < 0
+                                ? 0
+                                : dayToDayCompletePer
+                            }
                             order={2}
                           />
                         </div>
@@ -234,12 +241,12 @@ const ChartsWrap = styled.div`
   .top-item-header {
     color: white;
     border-radius: 10px 10px 0 0;
-    background-color: green;
+    background-color: rgba(252, 114, 114, 1);
     padding-top: 0.25rem;
     padding-bottom: 0.25rem;
   }
   .top-item-con {
-    color: #2eb500;
+    color: rgba(252, 114, 114, 1);
     background-color: white;
     border-radius: 0 0 10px 10px;
     padding-top: 0.5rem;
@@ -253,12 +260,12 @@ const ChartsWrap = styled.div`
   .center-left-item-header {
     color: white;
     border-radius: 10px 10px 0 0;
-    background-color: green;
+    background-color: rgba(252, 114, 114, 1);
   }
   .center-left-item-con {
     padding-top: 1rem;
     padding-bottom: 1rem;
-    color: #2eb500;
+    color: rgba(252, 114, 114, 1);
     background-color: white;
     border-radius: 0 0 10px 10px;
   }
@@ -287,7 +294,7 @@ const ChartsWrap = styled.div`
   .bottom-item-header {
     color: white;
     border-radius: 10px 10px 0 0;
-    background-color: green;
+    background-color: rgba(252, 114, 114, 1);
   }
   .bottom-item-con {
     padding: 1rem;

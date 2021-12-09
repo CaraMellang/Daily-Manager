@@ -5,7 +5,7 @@ import ModalPortal from "../Modal/ModalPortal";
 import Modal from "../Modal/Modal";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
-import { TODOS_REQUEST } from "../../modules/redux/Todos";
+import todosSliceReducer, { TODOS_REQUEST } from "../../modules/redux/Todos";
 import { backPath } from "../../lib/HttpPath";
 
 interface CalendarBodyProps {
@@ -46,7 +46,7 @@ const CalendarBody = ({
   const [dateModalToggle, setDateModalToggle] = useState(false);
   const [clickDate, setClickDate] = useState(0);
   const userSelector: any = useSelector((state) => state);
-  const Selector: any = useSelector((state) => state);
+  const selector: any = useSelector((state) => state);
   const { todosSuccess }: any = useSelector(
     (state: any) => state.todosSliceReducer.todosSuccess
   );
@@ -56,6 +56,7 @@ const CalendarBody = ({
 
   const paintCalendar = async (userSliceReducer: any) => {
     let dateArray: DateInfo[] = [];
+    console.log(selector.todosSliceReducer.todos);
 
     const todoDatas = await getCurMonthData(userSliceReducer);
 
@@ -171,6 +172,7 @@ const CalendarBody = ({
   useEffect(() => {
     const { userSliceReducer, todosSliceReducer } = userSelector;
     if (complete === false) {
+      console.log("실행");
       paintCalendar(userSliceReducer);
 
       // const token = userSliceReducer.user.accessToken;
@@ -180,7 +182,6 @@ const CalendarBody = ({
 
     return () => {};
   }, [currentMonth, complete]);
-
   return (
     <CalendarBodyWrap>
       <CalendarDayarray>
@@ -326,9 +327,9 @@ const CalendarDates = styled.div`
     height: 100%;
   }
   .red {
-    background-color: red;
+    background-color: darkgrey;
   }
 `;
 
-export default CalendarBody;
-// export default React.memo(CalendarBody);
+// export default CalendarBody;
+export default React.memo(CalendarBody);

@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { Todo } from "../Calendar/CalendarBody";
 import { cloneDeep } from "lodash";
@@ -12,6 +12,7 @@ import {
 import { faCheckCircle as farCheckCircle } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { backPath } from "../../lib/HttpPath";
+import { TODOS_REQUEST } from "../../modules/redux/Todos";
 
 interface ModalListItemProps {
   Todos: Todo;
@@ -31,6 +32,8 @@ function ModalListItem({
   const [checkBox, setCheckBox] = useState(Todos.success);
   const userSelector: any = useSelector((state) => state);
   //   const clone = JSON.parse(JSON.stringify(DateInfo)); // deep copy 개느림.
+  const selector: any = useState((state: any) => state);
+  const dispatch = useDispatch();
 
   const deleteClick = async (e: any) => {
     const data = {
@@ -41,6 +44,9 @@ function ModalListItem({
       .delete(`${backPath}/todo/delete`, { data })
       .then((rr) => {
         console.log("딜리트클릭 성공", rr);
+        // const token = selector.userSliceReducer.user.accessToken;
+        // const userId = selector.userSliceReducer.user.userId;
+        // dispatch(TODOS_REQUEST({ token, userId }));
       })
       .catch((e) => {
         console.log("딜리트 왜안되는데", e);

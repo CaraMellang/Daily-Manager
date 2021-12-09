@@ -7,12 +7,12 @@ interface CurrentDayProps {
   fullDay: Date;
 }
 
-function CurrentDay({ fullDay }: CurrentDayProps) {
+function CurrentDay({ fullDay}: CurrentDayProps) {
   const [day, setDay] = useState(dayjs(new Date()));
 
   useEffect(() => {
     setDay(dayjs(fullDay));
-  }, []);
+  }, [fullDay]);
   return (
     <CurrentDayWrap>
       <div className="date">{day.format("DD")}</div>

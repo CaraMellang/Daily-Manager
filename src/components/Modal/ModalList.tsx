@@ -30,19 +30,25 @@ function ModalList({
           {calendarDates[new Date(DateInfo.fulldate).getDay()]}
         </div>
       </div>
-      {DateInfo.todos.length === 0 ? "아무것도,,,없군요,," : ""}
-      {DateInfo.todos.map((arr) => {
-        return (
-          <ModalListItem
-            key={arr._id}
-            Todos={arr}
-            fulldate={DateInfo.fulldate}
-            completeHandle={completeHandle}
-            clickListToggleHandle={clickListToggleHandle}
-            onClickListHandle={onClickListHandle}
-          />
-        );
-      })}
+      {DateInfo.todos.length === 0 ? (
+        <div className="not-thing">아무것도...없어요...</div>
+      ) : (
+        ""
+      )}
+      <div className="listitems">
+        {DateInfo.todos.map((arr) => {
+          return (
+            <ModalListItem
+              key={arr._id}
+              Todos={arr}
+              fulldate={DateInfo.fulldate}
+              completeHandle={completeHandle}
+              clickListToggleHandle={clickListToggleHandle}
+              onClickListHandle={onClickListHandle}
+            />
+          );
+        })}
+      </div>
     </ModalListWrap>
   );
 }
@@ -50,6 +56,10 @@ function ModalList({
 const ModalListWrap = styled.div`
   z-index: 1000;
   width: 30%;
+  background: white;
+  z-index: 100000;
+  border-radius: 12px;
+  padding-bottom: 0.5rem;
   .modal-title {
     font-weight: bold;
     justify-content: space-between;
@@ -78,11 +88,6 @@ const ModalListWrap = styled.div`
     justify-content: center;
   } */
 
-  background: white;
-  height: auto;
-  z-index: 100000;
-  border-radius: 12px;
-
   .modalbutton {
     display: block;
     font-size: 18px;
@@ -105,6 +110,29 @@ const ModalListWrap = styled.div`
     resize: none;
     transition: height 1s;
   } */
+  .not-thing {
+    color: gray;
+    text-align: center;
+    padding: 4rem;
+    font-weight: bold;
+  }
+  .listitems {
+    min-height: 300px;
+    max-height: 350px;
+    overflow-y: auto;
+  }
+  .listitems::-webkit-scrollbar {
+    width: 2px;
+    /* border-radius: 10px; */
+  }
+  .listitems::-webkit-scrollbar-thumb {
+    background-color: #2f3542;
+    /* border-radius: 10px; */
+  }
+  .listitems::-webkit-scrollbar-track {
+    background-color: grey;
+    /* border-radius: 10px; */
+  }
 `;
 
 export default ModalList;

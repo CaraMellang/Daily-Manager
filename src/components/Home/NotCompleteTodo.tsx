@@ -1,23 +1,33 @@
-import { faTools, faTrash } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import axios from "axios";
 import dayjs from "dayjs";
 import React from "react";
-import { check } from "react-interaction";
 import styled from "styled-components";
-import { Todo } from "../components/Calendar/CalendarBody";
-import { backPath } from "../lib/HttpPath";
+import { Todo } from "../Calendar/CalendarBody";
+import { check } from "react-interaction";
+import { faTrash, faTools } from "@fortawesome/free-solid-svg-icons";
+import axios from "axios";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { backPath } from "../../lib/HttpPath";
 
-interface CompleteTodoProps {
+interface NotCompleteTodoProps {
   Todo: Todo;
   token: string;
   completeHandle(bool: boolean): void;
+  clickFixTodoHandle(todo: Todo): void;
+  clickFixHandle(bool: boolean): void;
 }
-function CompleteTodo({ Todo, token, completeHandle }: CompleteTodoProps) {
+
+function NotCompleteTodo({
+  Todo,
+  token,
+  completeHandle,
+  clickFixHandle,
+  clickFixTodoHandle,
+}: NotCompleteTodoProps) {
+  console.log(token);
   const conDeleteClick = async () => {
     let yesClick;
 
-    await check("정말로 삭제할꺼얌?", {
+    await check("정말로 삭제하시겠습니까?", {
       dimmedClassName: "my-check-dimmed",
     }).then((r) => (yesClick = r));
     if (yesClick) {
@@ -36,13 +46,21 @@ function CompleteTodo({ Todo, token, completeHandle }: CompleteTodoProps) {
         });
     }
   };
+
   return (
-    <CompleteTodoWrap className="padd">
+    <NotCompleteTodoWrap className="padd">
       <div className="col item-block">
         <div className="row dd">
-          <div className="">{Todo.todo}</div>
-          <div className="">
-            <FontAwesomeIcon className="fix-but" icon={faTools} />
+          <div>{Todo.todo}</div>
+          <div>
+            <FontAwesomeIcon
+              className="fix-but"
+              icon={faTools}
+              onClick={() => {
+                clickFixHandle(true);
+                clickFixTodoHandle(Todo);
+              }}
+            />
             <FontAwesomeIcon
               className="del-but"
               icon={faTrash}
@@ -54,11 +72,11 @@ function CompleteTodo({ Todo, token, completeHandle }: CompleteTodoProps) {
           {dayjs(Todo.createdAt).format("HH:mm:ss")}
         </div>
       </div>
-    </CompleteTodoWrap>
+    </NotCompleteTodoWrap>
   );
 }
 
-const CompleteTodoWrap = styled.div`
+const NotCompleteTodoWrap = styled.div`
   width: 100%;
   .dd {
     justify-content: space-between;
@@ -108,4 +126,4 @@ const CompleteTodoWrap = styled.div`
   }
 `;
 
-export default CompleteTodo;
+export default NotCompleteTodo;

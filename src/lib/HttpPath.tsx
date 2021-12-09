@@ -1,6 +1,15 @@
-export const backPath = "https://projectdm.herokuapp.com";
+export const backPath = `http://localhost:5000`;
 
-// 1 is use Localhost , 0 is use BackPaths
-export const useLocalOn = 0;
+// {
+//   let path;
+//   // 1 is use Localhost , 0 is use BackPaths
+//   const useLocalOn = false;
 
-export const localPath = "http://localhost:5000";
+//   if (useLocalOn) {
+//     path = process.env.LOCALPATH;
+//   } else if (!useLocalOn) {
+//     path = process.env.BACKPATH;
+//   }
+
+//   return { backPath: path };
+// }

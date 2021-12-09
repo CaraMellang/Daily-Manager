@@ -5,6 +5,7 @@ import { backPath } from "../../lib/HttpPath";
 import { TODOS_FAILED, TODOS_SUCCESS } from "../redux/Todos";
 
 async function postGetTodoData(data: any) {
+  console.log("포스트 투두 사가실행확인");
   return await axios.post(`${backPath}/todo/read`, data);
 }
 

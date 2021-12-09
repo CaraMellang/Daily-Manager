@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import dayjs, { Dayjs } from "dayjs";
+import CurrentDay from "../CurrentDay";
+import { calendarMonths } from "../../lib/DateArrays";
 
 interface CalendarHeaderProps {
   currentMonth: Dayjs;
@@ -25,7 +27,7 @@ const CalendarHeader = ({
   };
   return (
     <CalendarHeaderWrap>
-      <button onClick={prevClick}>
+      <div className="swapmonth" onClick={prevClick}>
         {`<`}
         {/* <svg
           stroke="currentColor"
@@ -38,9 +40,17 @@ const CalendarHeader = ({
         >
           <path d="M368 64L144 256l224 192V64z"></path>
         </svg> */}
-      </button>
-      <div>{currentMonth.format("M월")}</div>
-      <button onClick={nextClick}>
+      </div>
+      <CalendarWrap>
+        <div className="year-month">
+          <div className="font-size-2rem">{currentMonth.format("YYYY")}</div>
+          <div className="font-size-2rem">
+            {calendarMonths[currentMonth.get("month")]}
+          </div>
+        </div>
+      </CalendarWrap>
+      {/* <div>{currentMonth.format("M월")}</div> */}
+      <div className="swapmonth" onClick={nextClick}>
         {" "}
         {`>`}
         {/* <svg
@@ -54,16 +64,39 @@ const CalendarHeader = ({
         >
           <path d="M144 448l224-192L144 64v384z"></path>
         </svg> */}
-      </button>
+      </div>
     </CalendarHeaderWrap>
   );
 };
 const CalendarHeaderWrap = styled.div`
   display: flex;
   justify-content: space-evenly;
+  align-items: center;
   /* path {
     display: block;
   } */
+  .swapmonth {
+    cursor: pointer;
+    font-size: 2rem;
+  }
 `;
 
+const CalendarWrap = styled.div`
+  display: flex;
+  font-weight: bold;
+  /* justify-content: center; */
+  .date {
+    font-size: 4rem;
+  }
+  .year-month {
+    display: flex;
+    flex-direction: column;
+    padding-left: 0.4rem;
+    text-align:center;
+  }
+  .font-size-2rem {
+    font-size: 2rem;
+  }
+  
+`;
 export default CalendarHeader;

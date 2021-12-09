@@ -1,8 +1,9 @@
 import axios from "axios";
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { backPath } from "../../lib/HttpPath";
+import { TODOS_REQUEST } from "../../modules/redux/Todos";
 
 interface CreateTodoProps {
   completeHandle(bool: boolean): void;
@@ -10,6 +11,8 @@ interface CreateTodoProps {
 
 function CreateTodo({ completeHandle }: CreateTodoProps) {
   const [text, setText] = useState("");
+
+  const dispatch = useDispatch();
   const selector: any = useSelector((state) => state);
   const onTextChange = (e: any) => {
     setText(e.target.value);
@@ -26,6 +29,9 @@ function CreateTodo({ completeHandle }: CreateTodoProps) {
       .then((res) => {
         console.log(res);
         completeHandle(false);
+        // const token = selector.userSliceReducer.user.accessToken;
+        // const userId = selector.userSliceReducer.user.userId;
+        // dispatch(TODOS_REQUEST({ token, userId }));
         setText("");
       })
       .catch((e) => {
@@ -35,18 +41,20 @@ function CreateTodo({ completeHandle }: CreateTodoProps) {
 
   return (
     <CreateTodoWrap>
-      <div>
-        {" "}
-        <input
-          type="text"
-          className="inputf"
-          value={text}
-          onChange={onTextChange}
-        />
-      </div>
-      <button className="modalbutton" onClick={onCreateClick}>
-        작성
-      </button>
+      <form>
+        <div>
+          {" "}
+          <input
+            type="text"
+            className="inputf"
+            value={text}
+            onChange={onTextChange}
+          />
+        </div>
+        <button className="modalbutton" onClick={onCreateClick}>
+          작성
+        </button>
+      </form>
     </CreateTodoWrap>
   );
 }
