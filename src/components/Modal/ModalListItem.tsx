@@ -94,6 +94,7 @@ function ModalListItem({
   return (
     <ModalListItemWrap>
       <div>
+        
         {checkBox ? (
           <FontAwesomeIcon
             icon={faCheckCircle}

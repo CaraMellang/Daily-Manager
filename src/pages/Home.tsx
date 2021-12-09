@@ -25,11 +25,12 @@ const Home = () => {
     todo: ` string;`,
     success: false,
     createdAt: `string;`,
-    updatedAt: `string;`,
+    updatedAt: 'null',
   });
   const dispatch = useDispatch();
   const selector: any = useSelector((state) => state);
   const { userSliceReducer } = selector;
+  console.log(selector.todosSliceReducer.todos);
 
   // if (!selector.todosSliceReducer.todosSuccess) {
   //   const token = userSliceReducer.user.accessToken;
@@ -169,8 +170,11 @@ const Home = () => {
         </div>
         {clickFix && (
           <HomePortal>
-            <HomeModal clickFixHandle={clickFixHandle} Todo={clickFixTodo}
-                        completeHandle={completeHandle} />
+            <HomeModal
+              clickFixHandle={clickFixHandle}
+              Todo={clickFixTodo}
+              completeHandle={completeHandle}
+            />
           </HomePortal>
         )}
       </HomeWrap>

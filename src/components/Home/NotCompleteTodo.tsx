@@ -23,9 +23,9 @@ function NotCompleteTodo({
   clickFixHandle,
   clickFixTodoHandle,
 }: NotCompleteTodoProps) {
-  console.log(token);
   const conDeleteClick = async () => {
     let yesClick;
+    console.log(Todo.updatedAt);
 
     await check("정말로 삭제하시겠습니까?", {
       dimmedClassName: "my-check-dimmed",
