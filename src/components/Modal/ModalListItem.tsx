@@ -94,8 +94,8 @@ function ModalListItem({
   return (
     <ModalListItemWrap>
       <div>
-        
-        {checkBox ? (
+        {/* {checkBox ? ( 왜 얘는 안됨? */}
+        {Todos.success ? (
           <FontAwesomeIcon
             icon={faCheckCircle}
             className="items-icon green icon-cursor"

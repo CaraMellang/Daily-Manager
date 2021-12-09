@@ -30,24 +30,23 @@ function ModalList({
           {calendarDates[new Date(DateInfo.fulldate).getDay()]}
         </div>
       </div>
-      {DateInfo.todos.length === 0 ? (
-        <div className="not-thing">아무것도...없어요...</div>
-      ) : (
-        ""
-      )}
       <div className="listitems">
-        {DateInfo.todos.map((arr) => {
-          return (
-            <ModalListItem
-              key={arr._id}
-              Todos={arr}
-              fulldate={DateInfo.fulldate}
-              completeHandle={completeHandle}
-              clickListToggleHandle={clickListToggleHandle}
-              onClickListHandle={onClickListHandle}
-            />
-          );
-        })}
+        {DateInfo.todos.length === 0 ? (
+          <div className="not-thing">아무것도...없어요...</div>
+        ) : (
+          DateInfo.todos.map((arr) => {
+            return (
+              <ModalListItem
+                key={arr._id}
+                Todos={arr}
+                fulldate={DateInfo.fulldate}
+                completeHandle={completeHandle}
+                clickListToggleHandle={clickListToggleHandle}
+                onClickListHandle={onClickListHandle}
+              />
+            );
+          })
+        )}
       </div>
     </ModalListWrap>
   );
@@ -113,7 +112,9 @@ const ModalListWrap = styled.div`
   .not-thing {
     color: gray;
     text-align: center;
-    padding: 4rem;
+    height: 300px;
+    box-sizing: border-box;
+    padding-top: 8rem;
     font-weight: bold;
   }
   .listitems {
