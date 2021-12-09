@@ -18,7 +18,8 @@ function CreateTodo({ completeHandle }: CreateTodoProps) {
     setText(e.target.value);
   };
 
-  const onCreateClick = async () => {
+  const onCreateSubmit = async (e: any) => {
+    e.preventDefault();
     const data = {
       token: selector.userSliceReducer.user.accessToken,
       todo: text,
@@ -41,7 +42,7 @@ function CreateTodo({ completeHandle }: CreateTodoProps) {
 
   return (
     <CreateTodoWrap>
-      <form>
+      <form onSubmit={onCreateSubmit}>
         <div>
           {" "}
           <input
@@ -51,7 +52,7 @@ function CreateTodo({ completeHandle }: CreateTodoProps) {
             onChange={onTextChange}
           />
         </div>
-        <button className="modalbutton" onClick={onCreateClick}>
+        <button type="submit" className="modalbutton">
           작성
         </button>
       </form>
