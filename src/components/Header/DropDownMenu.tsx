@@ -119,7 +119,7 @@ const DropDownMenuWrap = styled.div`
   }
   .menu-trigger {
     background: #ffffff;
-    border-radius: 90px;
+    border-radius: 15px;
     cursor: pointer;
     display: flex;
     justify-content: space-between;

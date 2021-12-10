@@ -7,6 +7,8 @@ import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import todosSliceReducer, { TODOS_REQUEST } from "../../modules/redux/Todos";
 import { backPath } from "../../lib/HttpPath";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faStar } from "@fortawesome/free-solid-svg-icons";
 
 interface CalendarBodyProps {
   currentMonth: Dayjs;
@@ -225,7 +227,9 @@ const CalendarBody = ({
                           />
                         </ModalPortal>
                       ) : (
-                        ""
+                        <div style={{ color: "yellow", textAlign: "center" }}>
+                          <FontAwesomeIcon icon={faStar} className="scale1-4" />
+                        </div>
                       )}
                     </div>
                   </div>
@@ -327,7 +331,10 @@ const CalendarDates = styled.div`
     height: 100%;
   }
   .red {
-    background-color: darkgrey;
+    background-color: #202020;
+  }
+  .scale1-4 {
+    transform: scale(1.4);
   }
 `;
 

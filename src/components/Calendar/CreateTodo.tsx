@@ -44,7 +44,6 @@ function CreateTodo({ completeHandle }: CreateTodoProps) {
     <CreateTodoWrap>
       <form onSubmit={onCreateSubmit}>
         <div>
-          {" "}
           <input
             type="text"
             className="inputf"
@@ -73,6 +72,9 @@ const CreateTodoWrap = styled.div`
   .modalbutton {
     border: 0;
     border-radius: 2px;
+  }
+  form {
+    display: flex;
   }
 `;
 

@@ -1,9 +1,9 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
-import {  useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
-import { SIGNIN_REQUEST} from "../../modules/redux/User";
+import { SIGNIN_REQUEST } from "../../modules/redux/User";
 
 interface SignInProps {
   onSignInToggle(): void;
@@ -98,6 +98,7 @@ const SignIn = ({
     <SignInBox>
       <div className="login-box">
         <div className="form">
+          <div className="signin-title">DM</div>
           <form
             className="flex-row flex-col form-login"
             onSubmit={handleFormSubmit}
@@ -133,11 +134,17 @@ const SignIn = ({
 };
 
 const SignInBox = styled.div`
+  .signin-title {
+    color: rgba(252, 114, 114, 1);
+    font-weight: bold;
+    font-size: 2rem;
+    padding-bottom: 1rem;
+  }
   .login-box {
     position: relative;
     background-color: white;
     border-radius: 10px;
-    box-shadow: 0 0 20px 0 rgb(0 0 0 / 20%), 0 10px 10px 0 rgb(0 0 0 / 12%);
+    /* box-shadow: 0 0 20px 0 rgb(0 0 0 / 20%), 0 10px 10px 0 rgb(0 0 0 / 12%); */
   }
   .form {
     padding: 55px;
@@ -161,7 +168,7 @@ const SignInBox = styled.div`
   .submit {
     cursor: pointer;
     border: none;
-    background-color: #4caf50;
+    background-color: rgba(252, 114, 114, 1);
     height: 50px;
     color: white;
   }
@@ -172,7 +179,7 @@ const SignInBox = styled.div`
   }
   .create-account {
     cursor: pointer;
-    color: #4caf50;
+    color: rgba(252, 114, 114, 1);
   }
 `;
 export default React.memo(SignIn);

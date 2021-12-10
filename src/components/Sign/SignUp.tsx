@@ -50,6 +50,7 @@ const SignUp = ({ onSignInToggle, onSignHandler }: SignIUpProps) => {
     <SignUpBox>
       <div className="login-box">
         <div className="form">
+          <div className="signup-title">DM</div>
           <form
             className="flex-row flex-col form-login"
             onSubmit={handleFormSubmit}
@@ -93,11 +94,17 @@ const SignUp = ({ onSignInToggle, onSignHandler }: SignIUpProps) => {
 };
 
 const SignUpBox = styled.div`
+  .signup-title {
+    color: rgba(252, 114, 114, 1);
+    font-weight: bold;
+    font-size: 2rem;
+    padding-bottom: 1rem;
+  }
   .login-box {
     position: relative;
     background-color: white;
     border-radius: 10px;
-    box-shadow: 0 0 20px 0 rgb(0 0 0 / 20%), 0 10px 10px 0 rgb(0 0 0 / 12%);
+    /* box-shadow: 0 0 20px 0 rgb(0 0 0 / 20%), 0 10px 10px 0 rgb(0 0 0 / 12%); */
   }
   .form {
     padding: 55px;
@@ -121,7 +128,7 @@ const SignUpBox = styled.div`
   .submit {
     cursor: pointer;
     border: none;
-    background-color: #4caf50;
+    background-color: rgba(252, 114, 114, 1);
     height: 50px;
     color: white;
   }
@@ -132,7 +139,8 @@ const SignUpBox = styled.div`
   }
   .sign-in {
     cursor: pointer;
-    color: #4caf50;
+    /* color: #4caf50; */
+    color: rgba(252, 114, 114, 1);
   }
 `;
 
