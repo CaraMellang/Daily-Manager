@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { Link, NavLink } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import DropDownMenu from "./DropDownMenu";
+import { ReactComponent as DMlogo } from "../../svgs/dm.svg";
 
 interface HeaderProps {
   setIsSign: React.Dispatch<React.SetStateAction<boolean>>;
@@ -17,7 +18,11 @@ const Header = ({ setIsSign }: HeaderProps) => {
     <HeaderWrap>
       <div className="padd">
         <div className="header">
-          <div className="logo">Logo</div>
+          <div className="logo">
+            <NavLink to={`/`}>
+              <DMlogo />
+            </NavLink>
+          </div>
           <div className="menu">
             <NavLink
               to={`/`}

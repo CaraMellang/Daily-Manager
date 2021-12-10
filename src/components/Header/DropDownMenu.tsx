@@ -40,19 +40,19 @@ const DropDownMenu = ({ setIsSign }: DropDownMenuProps) => {
       <div className="menu-container">
         <button onClick={onClick} className="menu-trigger">
           <span>{userSelector.username}</span>
-          <img
+          {/* <img
             src="https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/df/df7789f313571604c0e4fb82154f7ee93d9989c6.jpg"
             alt="User avatar"
-          />
+          /> */}
         </button>
         <nav
           ref={dropdownRef}
           className={`menu ${isActive ? "active" : "inactive"}`}
         >
           <ul>
-            <li>
+            {/* <li>
               <div>option</div>
-            </li>
+            </li> */}
             <li>
               <div
                 onClick={() => {
@@ -74,6 +74,9 @@ const DropDownMenu = ({ setIsSign }: DropDownMenuProps) => {
 };
 
 const DropDownMenuWrap = styled.div`
+  span {
+    padding: 0.5rem;
+  }
   .menu-container {
     position: relative;
   }
@@ -88,7 +91,7 @@ const DropDownMenuWrap = styled.div`
     opacity: 0;
     visibility: hidden;
     transform: translateY(-20px);
-    transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s;
+    transition: opacity 0.1s ease, transform 0.1s ease, visibility 0.4s;
   }
 
   .menu.active {
