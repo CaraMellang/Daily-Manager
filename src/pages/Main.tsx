@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
 import { useDispatch } from "react-redux";
 import { Route, useHistory } from "react-router-dom";
-import Header from "../components/Header/Header";
+import DesktopHeader from "../components/Header/DesktopHeader";
 import Loading from "../components/Loading";
 import Calender from "./Calender";
 import Charts from "./Charts";
@@ -12,6 +12,7 @@ import Home from "./Home";
 import SignForm from "./SignForm";
 import { SIGNIN_FAILED } from "../modules/redux/User";
 import { backPath } from "../lib/HttpPath";
+import HeaderBlock from "../components/Header/HeaderBlcok";
 
 const Main = () => {
   const [isSign, setIsSign] = useState(true);
@@ -86,7 +87,8 @@ const Main = () => {
         />
       ) : (
         <>
-          <Header setIsSign={setIsSign} />
+          {/* <DesktopHeader setIsSign={setIsSign} /> */}
+          <HeaderBlock setIsSign={setIsSign} />
           <Route path={`/`} component={Home} exact />
           <Route path={`/calender`} component={Calender} />
           <Route path={`/charts`} component={Charts} />

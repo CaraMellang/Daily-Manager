@@ -5,17 +5,17 @@ import { useCookies } from "react-cookie";
 import DropDownMenu from "./DropDownMenu";
 import { ReactComponent as DMlogo } from "../../svgs/dm.svg";
 
-interface HeaderProps {
+interface DesktopHeaderProps {
   setIsSign: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const Header = ({ setIsSign }: HeaderProps) => {
+const DesktopHeader = ({ setIsSign }: DesktopHeaderProps) => {
   const [cookiesToken, setCookieToken, removeCookieToken] = useCookies([
     "rememberToken",
   ]);
 
   return (
-    <HeaderWrap>
+    <DesktopHeaderWrap>
       <div className="padd">
         <div className="header">
           <div className="logo">
@@ -62,11 +62,11 @@ const Header = ({ setIsSign }: HeaderProps) => {
           <DropDownMenu setIsSign={setIsSign} />
         </div>
       </div>
-    </HeaderWrap>
+    </DesktopHeaderWrap>
   );
 };
 
-const HeaderWrap = styled.header`
+const DesktopHeaderWrap = styled.header`
   color: black;
   background-color: white;
   height: 70px;
@@ -98,4 +98,4 @@ const HeaderWrap = styled.header`
   }
 `;
 
-export default Header;
+export default DesktopHeader;
