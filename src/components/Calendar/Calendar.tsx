@@ -65,7 +65,6 @@ const Calendar = () => {
 };
 
 const CalendarWrap = styled.div`
-  width: 768px;
 `;
 
 export default React.memo(Calendar);

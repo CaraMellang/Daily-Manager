@@ -30,7 +30,7 @@ const DesktopHeader = ({ setIsSign }: DesktopHeaderProps) => {
               className="menu-item"
               exact
             >
-              Home
+              Home 
             </NavLink>
             <NavLink
               to={`/calender`}

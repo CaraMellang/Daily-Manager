@@ -13,6 +13,8 @@ import SignForm from "./SignForm";
 import { SIGNIN_FAILED } from "../modules/redux/User";
 import { backPath } from "../lib/HttpPath";
 import HeaderBlock from "../components/Header/HeaderBlcok";
+import styled from "styled-components";
+import media from "../lib/media";
 
 const Main = () => {
   const [isSign, setIsSign] = useState(true);
@@ -72,7 +74,7 @@ const Main = () => {
   }
 
   return (
-    <div>
+    <MainWrap>
       {isSign ? (
         <Route
           path={`/`}
@@ -94,8 +96,21 @@ const Main = () => {
           <Route path={`/charts`} component={Charts} />
         </>
       )}
-    </div>
+    </MainWrap>
   );
 };
+
+const MainWrap = styled.div`
+  .content {
+    width: 768px;
+    /* height: 2000px; */
+    margin: auto;
+  }
+  ${media.medium} {
+    .content {
+      width: 100%;
+    }
+  }
+`;
 
 export default Main;

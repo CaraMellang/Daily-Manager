@@ -24,7 +24,7 @@ function HeaderBlock({ setIsSign }: HeaderBlockProps) {
   };
 
   useEffect(() => {
-    window.addEventListener("load", loadHandle);
+    loadHandle();
     window.addEventListener("resize", resizeHandle);
     return () => {
       window.removeEventListener("resize", () => {

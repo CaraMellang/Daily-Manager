@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useHistory } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import DropDownMenu from "./DropDownMenu";
 import { ReactComponent as DMlogo } from "../../svgs/dm.svg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { SIGNOUT } from "../../modules/redux/User";
 
 interface MobileHeaderProps {
   setIsSign: React.Dispatch<React.SetStateAction<boolean>>;
@@ -19,6 +20,16 @@ const MobileHeader = ({ setIsSign }: MobileHeaderProps) => {
     "rememberToken",
   ]);
   const user = useSelector((state: any) => state.userSliceReducer.user);
+  const dispatch = useDispatch();
+  const history = useHistory();
+
+  const signOutHandle = () => {
+    window.alert("로그아웃완료");
+    dispatch(SIGNOUT());
+    removeCookieToken("rememberToken");
+    setIsSign(true);
+    history.push("/");
+  };
 
   const menuOffHandle = () => {
     setSlide(false);
@@ -53,12 +64,20 @@ const MobileHeader = ({ setIsSign }: MobileHeaderProps) => {
       {menuOn && (
         <div className="mobile">
           <div className={`mobile-menu ${slide ? `show` : "hide"}`}>
-            <div className="user-block">{user.username}</div>
+            <div className="mobile-title">Daily Manager</div>
+            <div className="user-block">
+              <div className="username-area">{user.username}</div>
+              <div className="email-area">{user.email}</div>
+              <div className="signout" onClick={signOutHandle}>
+                SignOut
+              </div>
+            </div>
             <div className="menus">
               <NavLink
                 to={`/`}
                 activeClassName="page-toggle"
                 className="menu-item"
+                onClick={menuOffHandle}
                 exact
               >
                 Home
@@ -67,6 +86,7 @@ const MobileHeader = ({ setIsSign }: MobileHeaderProps) => {
                 to={`/calender`}
                 activeClassName="page-toggle"
                 className="menu-item"
+                onClick={menuOffHandle}
                 exact
               >
                 Calender
@@ -75,6 +95,7 @@ const MobileHeader = ({ setIsSign }: MobileHeaderProps) => {
                 to={`/charts`}
                 activeClassName="page-toggle"
                 className="menu-item"
+                onClick={menuOffHandle}
               >
                 Charts
               </NavLink>
@@ -99,11 +120,10 @@ const MobileHeaderWrap = styled.header<{ menuOn: boolean }>`
     padding: 10px;
   }
   .header {
-    width: 768px;
     height: 100%;
     display: flex;
     justify-content: space-between;
-    gap: 12rem;
+    /* gap: 12rem; */
     margin: 0 auto;
     align-items: center;
   }
@@ -162,9 +182,16 @@ const MobileHeaderWrap = styled.header<{ menuOn: boolean }>`
     background: rgba(0, 0, 0, 0.5);
   }
   .user-block {
-    margin: 1rem auto;
+    padding: 1rem;
     font-weight: bold;
+    color: white;
+    background-color: #28647f;
+  }
+  .username-area {
     font-size: 1.5rem;
+  }
+  .email-area {
+    color: #cacaca;
   }
   .menus {
     display: flex;
@@ -172,6 +199,14 @@ const MobileHeaderWrap = styled.header<{ menuOn: boolean }>`
   }
   .menu-item {
     background-color: white;
+    padding-top: 1rem;
+    padding-left: 1rem;
+    padding-bottom: 1rem;
+    transition: background-color 0.2s, color 0.2s;
+  }
+  .menu-item:hover {
+    background-color: rgba(252, 114, 114, 1);
+    color: white;
   }
   .page-toggle {
     /* padding-bottom: 0.25rem;
@@ -181,8 +216,31 @@ const MobileHeaderWrap = styled.header<{ menuOn: boolean }>`
   }
   .burgericon {
     cursor: pointer;
-    transform: scale(1.5);
+    transform: scale(1.75);
     color: rgba(252, 114, 114, 1);
+    padding-right: 1rem;
+  }
+  .mobile-title {
+    background-color: rgba(252, 114, 114, 1);
+    color: white;
+    text-align: center;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+  .signout {
+    width: 70px;
+    text-align: center;
+    margin-top: 0.5rem;
+    padding: 0.5rem;
+    background-color: white;
+    color: black;
+    box-sizing: content-box;
+    border-radius: 12px;
+    transition: background-color 0.2s, color 0.2s;
+  }
+  .signout:hover {
+    background-color: rgba(252, 114, 114, 1);
+    color: white;
   }
 `;
 
