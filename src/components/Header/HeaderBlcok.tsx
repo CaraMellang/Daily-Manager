@@ -8,6 +8,8 @@ interface HeaderBlockProps {
 function HeaderBlock({ setIsSign }: HeaderBlockProps) {
   const [activeMobile, setActiveMobile] = useState(false);
   const loadHandle = () => {
+    let vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty("--vh", `${vh}px`); //vh100퍼 해결용
     if (window.innerWidth > 1024) {
       setActiveMobile(false);
       console.log("폴스");
