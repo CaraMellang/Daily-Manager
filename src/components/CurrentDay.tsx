@@ -2,12 +2,13 @@ import dayjs from "dayjs";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { calendarMonths } from "../lib/DateArrays";
+import media from "../lib/media";
 
 interface CurrentDayProps {
   fullDay: Date;
 }
 
-function CurrentDay({ fullDay}: CurrentDayProps) {
+function CurrentDay({ fullDay }: CurrentDayProps) {
   const [day, setDay] = useState(dayjs(new Date()));
 
   useEffect(() => {
@@ -38,6 +39,14 @@ const CurrentDayWrap = styled.div`
   }
   .font-size-2rem {
     font-size: 2rem;
+  }
+  ${media.xsmall} {
+    .date {
+      font-size: 2.5rem;
+    }
+    .font-size-2rem {
+      font-size: 1.5rem;
+    }
   }
 `;
 

@@ -1,6 +1,7 @@
 import dayjs from "dayjs";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import media from "../lib/media";
 
 function Clock() {
   const [timeHorizon, setTimeHorizon] = useState("AM");
@@ -45,6 +46,12 @@ const ClockWrap = styled.div`
   .time {
     display: flex;
     align-items: flex-end;
+  }
+  ${media.xsmall} {
+    font-size: 2rem;
+    .time-horizon {
+      font-size: 1rem;
+    }
   }
 `;
 

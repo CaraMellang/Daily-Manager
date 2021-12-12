@@ -30,7 +30,7 @@ html , body , #root{
   /* #121212 */
   color:white;
   width:100%;
-  height:100%;
+  /* height:100%; */
   font-family: 'Spoqa Han Sans Neo', 'sans-serif'; 
 }
 a, a:link, a:visited , a:hover , a:focus{

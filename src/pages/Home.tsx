@@ -12,6 +12,7 @@ import CompleteTodo from "../components/Home/CompleteTodo";
 import CurrentDay from "../components/CurrentDay";
 import HomePortal from "../components/Home/HomePortal";
 import HomeModal from "../components/Home/HomeModal";
+import media from "../lib/media";
 
 const Home = () => {
   let dd: any[] = [];
@@ -25,7 +26,7 @@ const Home = () => {
     todo: ` string;`,
     success: false,
     createdAt: `string;`,
-    updatedAt: 'null',
+    updatedAt: "null",
   });
   const dispatch = useDispatch();
   const selector: any = useSelector((state) => state);
@@ -112,7 +113,7 @@ const Home = () => {
             </div>
           </div>
           <p>Good Day, {userSliceReducer.user.username}</p>
-          <div className="row">
+          <div className="row col-mo">
             <div className="w50per padd ">
               <div className="todo-title">
                 <span className="title1">오늘의 할일들</span>
@@ -252,6 +253,15 @@ const HomeWrap = styled.div`
       top: -20px;
       animation: fade 0.4s 0.1s;
       animation-fill-mode: forwards;
+    }
+  }
+  ${media.xsmall} {
+    .col-mo {
+      display: flex;
+      flex-direction: column;
+    }
+    .w50per {
+      width: 100%;
     }
   }
 `;
