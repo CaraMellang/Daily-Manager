@@ -42,18 +42,28 @@ function CreateTodo({ completeHandle }: CreateTodoProps) {
 
   return (
     <CreateTodoWrap>
+      <div
+        style={{
+          marginBottom: "1rem",
+          backgroundColor: "rgb(25, 70, 89,0.5)",
+          textAlign: "center",
+          fontWeight: "bold",
+        }}
+      >
+        투두 입력!
+      </div>
       <form onSubmit={onCreateSubmit}>
-        <div>
+        <div className="wrap">
           <input
             type="text"
             className="inputf"
             value={text}
             onChange={onTextChange}
-          />
+          ></input>
+          <button type="submit" className="submitbutton">
+            +
+          </button>
         </div>
-        <button type="submit" className="modalbutton">
-          작성
-        </button>
       </form>
     </CreateTodoWrap>
   );
@@ -61,20 +71,45 @@ function CreateTodo({ completeHandle }: CreateTodoProps) {
 
 const CreateTodoWrap = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  /* height: 2rem; */
   .inputf {
     width: 100%;
-    box-sizing: "border-box";
-    border: 0;
+    box-sizing: border-box;
+    border: none;
+    //border-width: 0;
     height: 100%;
+    font-size: 20px;
     padding: 0;
+    font-weight: bold;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    border-bottom: 2px solid white;
+    transition: border 0.2s;
   }
-  .modalbutton {
+  .inputf:focus {
+    border-bottom: 2px solid rgb(241, 147, 147);
+  }
+  .submitbutton {
+    cursor: pointer;
+    position: absolute;
+    color: white;
+    top: -5px;
+    right: -30px;
+    background: rgb(241, 147, 147);
     border: 0;
-    border-radius: 2px;
+    width: 35px;
+    height: 35px;
+    font-size: 2rem;
+    border-radius: 75px;
   }
   form {
     display: flex;
+    justify-content: center;
+  }
+  .wrap {
+    position: relative;
   }
 `;
 
