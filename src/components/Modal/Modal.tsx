@@ -47,6 +47,7 @@ const Modal = ({
             clickListToggleHandle={clickListToggleHandle}
             clickList={clickList}
             completeHandle={completeHandle}
+            toggleClick={toggleClick}
           />
         ) : (
           <ModalList
@@ -54,6 +55,7 @@ const Modal = ({
             completeHandle={completeHandle}
             clickListToggleHandle={clickListToggleHandle}
             onClickListHandle={onClickListHandle}
+            toggleClick={toggleClick}
           />
         )}
         <div className="modalback" onClick={toggleClick}></div>
@@ -92,7 +94,7 @@ const MyModalWrap = styled.div<stProps>`
     left: 0;
     top: 0;
     height: 100%;
-    
+
     width: 100%;
     display: flex;
     align-items: center;

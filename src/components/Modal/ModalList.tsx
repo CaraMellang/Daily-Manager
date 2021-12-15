@@ -1,9 +1,12 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import React from "react";
 import styled from "styled-components";
 import { calendarDates } from "../../lib/DateArrays";
 import { DateInfo } from "../Calendar/CalendarBody";
 import CurrentDay from "../CurrentDay";
 import ModalListItem from "./ModalListItem";
+import media from "../../lib/media";
 
 interface modalListProps {
   //   toggleClick(): void;
@@ -12,6 +15,7 @@ interface modalListProps {
   DateInfo: DateInfo;
   clickListToggleHandle(bool: boolean): void;
   onClickListHandle(data: any): void;
+  toggleClick(): void;
 }
 
 function ModalList({
@@ -19,9 +23,13 @@ function ModalList({
   completeHandle,
   clickListToggleHandle,
   onClickListHandle,
+  toggleClick,
 }: modalListProps) {
   return (
     <ModalListWrap>
+      <div className="cancel-button">
+        <FontAwesomeIcon icon={faTimes} onClick={toggleClick} />
+      </div>
       <div className="row modal-title">
         <div className="fulldate">
           <CurrentDay fullDay={new Date(DateInfo.fulldate)} />
@@ -53,12 +61,16 @@ function ModalList({
 }
 
 const ModalListWrap = styled.div`
+  position: relative;
   z-index: 1000;
-  width: 30%;
+  width: 600px;
   background: white;
   z-index: 100000;
   border-radius: 12px;
   padding-bottom: 0.5rem;
+  ${media.medium} {
+    width: 100%;
+  }
   .modal-title {
     font-weight: bold;
     justify-content: space-between;
@@ -133,6 +145,13 @@ const ModalListWrap = styled.div`
   .listitems::-webkit-scrollbar-track {
     background-color: grey;
     /* border-radius: 10px; */
+  }
+  .cancel-button {
+    cursor: pointer;
+    position: absolute;
+    top: 1rem;
+    right: 1.5rem;
+    transform: scale(1.5);
   }
 `;
 

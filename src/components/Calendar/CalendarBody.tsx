@@ -9,6 +9,7 @@ import todosSliceReducer, { TODOS_REQUEST } from "../../modules/redux/Todos";
 import { backPath } from "../../lib/HttpPath";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
+import media from "../../lib/media";
 
 interface CalendarBodyProps {
   currentMonth: Dayjs;
@@ -335,6 +336,14 @@ const CalendarDates = styled.div`
   }
   .scale1-4 {
     transform: scale(1.4);
+  }
+  ${media.medium} {
+    .date-box {
+      height: 4rem;
+    }
+    .date {
+      padding: 0.03rem;
+    }
   }
 `;
 

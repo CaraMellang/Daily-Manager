@@ -1,4 +1,4 @@
-import { faCheckCircle } from "@fortawesome/free-solid-svg-icons";
+import { faCheckCircle, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { faCheckCircle as farCheckCircle } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
@@ -9,12 +9,14 @@ import styled from "styled-components";
 import { calendarDates } from "../../lib/DateArrays";
 import { backPath } from "../../lib/HttpPath";
 import CurrentDay from "../CurrentDay";
+import media from "../../lib/media";
 
 interface DetailItemProps {
   clickListToggleHandle(bool: boolean): void;
   clickListToggle: boolean;
   clickList: any;
   completeHandle(bool: boolean): void;
+  toggleClick(): void;
 }
 
 function DetailItem({
@@ -22,6 +24,7 @@ function DetailItem({
   clickList,
   clickListToggle,
   completeHandle,
+  toggleClick,
 }: DetailItemProps) {
   const [text, setText] = useState(clickList.todo);
   let todoId = clickList.todoId;
@@ -74,6 +77,9 @@ function DetailItem({
   });
   return (
     <DetailItemWrap clickListToggle={clickListToggle}>
+      <div className="cancel-button">
+        <FontAwesomeIcon icon={faTimes} onClick={toggleClick} />
+      </div>
       <div className={`modalbox `}>
         <div className="content">
           <div className="row modal-title">
@@ -143,8 +149,12 @@ function DetailItem({
 }
 
 const DetailItemWrap = styled.div<{ clickListToggle: boolean }>`
+  position: relative;
   z-index: 1000;
-  width: 30%;
+  width: 600px;
+  ${media.medium} {
+    width: 100%;
+  }
   .input {
     position: relative;
     width: 90%;
@@ -254,6 +264,13 @@ const DetailItemWrap = styled.div<{ clickListToggle: boolean }>`
   }
   .row {
     font-weight: bold;
+  }
+  .cancel-button {
+    cursor: pointer;
+    position: absolute;
+    top: 1rem;
+    right: 1.5rem;
+    transform: scale(1.5);
   }
 `;
 

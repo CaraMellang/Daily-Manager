@@ -10,6 +10,7 @@ import CurrentDay from "../CurrentDay";
 import { faCheckCircle } from "@fortawesome/free-regular-svg-icons";
 import { faCheckCircle as farCheckCircle } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import media from "../../lib/media";
 
 interface HomeDetailItemProps {
   Todo: Todo;
@@ -127,7 +128,10 @@ function HomeDetailItem({
 
 const DetailItemWrap = styled.div`
   z-index: 1000;
-  width: 30%;
+  width: 600px;
+  ${media.medium} {
+    width: 100%;
+  }
   .input {
     position: relative;
     width: 90%;
