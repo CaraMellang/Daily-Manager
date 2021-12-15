@@ -78,6 +78,7 @@ const CreateTodoWrap = styled.div`
     width: 100%;
     box-sizing: border-box;
     border: none;
+    border-radius: 12px 0 0 12px;
     //border-width: 0;
     height: 100%;
     font-size: 20px;

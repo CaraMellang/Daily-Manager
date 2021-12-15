@@ -43,6 +43,7 @@ const CenterRightComponent = ({
     </CenterRightComponentWrap>
   );
 };
+
 const CenterRightComponentWrap = styled.div<{
   time: number;
   fadein: number;
@@ -118,4 +119,5 @@ const CenterRightComponentWrap = styled.div<{
     border-radius: 10px;
   }
 `;
+
 export default React.memo(CenterRightComponent);

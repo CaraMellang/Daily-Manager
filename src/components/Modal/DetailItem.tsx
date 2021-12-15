@@ -90,16 +90,13 @@ function DetailItem({
               {calendarDates[new Date(clickList.fulldate).getDay()]}
             </div>
           </div>
-          <div className="outline">
-            <span className="outlinechild"></span>
-            <span className="outlinechild"></span>
-            <span className="outlinechild"></span>
-            <span className="outlinechild"></span>
+          <div className="input-box">
             <input
               className="input"
               type="text"
               value={text}
               onChange={onTextChange}
+              spellCheck={false} // 맞춤법 검사 끄기
             />
           </div>
           <div className="row space-evenly">
@@ -155,17 +152,24 @@ const DetailItemWrap = styled.div<{ clickListToggle: boolean }>`
   ${media.medium} {
     width: 100%;
   }
+  .input-box {
+    margin: 4rem 0 4rem 0;
+    text-align: center;
+  }
   .input {
-    position: relative;
-    width: 90%;
+    width: 80%;
     height: 1.5rem;
     border: 0;
     box-sizing: border-box;
     font-weight: bold;
     font-size: 1rem;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    padding-bottom: 0.5rem;
+
+    border-bottom: 2px solid rgba(19, 68, 88, 1);
+    transition: border 0.4s;
+  }
+  .input:focus {
+    border-bottom: 2px solid rgb(241, 147, 147);
   }
   .clickbox {
     display: flex;
@@ -208,57 +212,7 @@ const DetailItemWrap = styled.div<{ clickListToggle: boolean }>`
   .icon-cursor {
     cursor: pointer;
   }
-  .outline {
-    position: relative;
-    width: 70%;
-    height: 2rem;
-    box-sizing: border-box;
-    margin: 50px auto;
-  }
-  .outline span {
-    position: absolute;
-    background: rgba(182, 114, 114, 1);
-  }
-  .outline span:nth-child(1) {
-    left: 0;
-    top: 0;
-    width: 0;
-    height: 2px;
-    transition: width 0.4s;
-  }
-  .outline span:nth-child(2) {
-    left: 0;
-    top: 0;
-    width: 2px;
-    height: 0;
-    transition: height 0.4s;
-  }
-  .outline span:nth-child(3) {
-    right: 0;
-    bottom: 0;
-    width: 0;
-    height: 2px;
-    transition: width 0.4s;
-  }
-  .outline span:nth-child(4) {
-    right: 0;
-    bottom: 0;
-    width: 2px;
-    height: 0;
-    transition: height 0.4s;
-  }
-  .outline:hover span:nth-child(1) {
-    width: 100%;
-  }
-  .outline:hover span:nth-child(2) {
-    height: 100%;
-  }
-  .outline:hover span:nth-child(3) {
-    width: 100%;
-  }
-  .outline:hover span:nth-child(4) {
-    height: 100%;
-  }
+
   .space-evenly {
     justify-content: space-evenly;
   }

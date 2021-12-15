@@ -9,6 +9,7 @@ import CenterRightComponent from "../components/ChartsComponents/CenterRightComp
 import TopComponent from "../components/ChartsComponents/TopComponent";
 import Loading from "../components/Loading";
 import { Progress } from "../lib/ChartRight";
+import media from "../lib/media";
 import { TODOS_REQUEST } from "../modules/redux/Todos";
 
 const Charts = () => {
@@ -197,6 +198,11 @@ const ChartsWrap = styled.div`
   .charts-padd {
     padding: 2rem;
     opacity: 1;
+  }
+  ${media.medium} {
+    .charts-padd {
+      padding: 0.5rem;
+    }
   }
   /* 134458 */
   .charts {

@@ -40,6 +40,7 @@ const CenterRightComponent = ({
     //     setAllow(false);
     //   };
     // }
+    return () => {};
   }, []);
   return (
     <CenterRightComponentWrap
