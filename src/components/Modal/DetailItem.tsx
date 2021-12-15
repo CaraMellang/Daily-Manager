@@ -60,10 +60,10 @@ function DetailItem({
     await axios
       .patch(`${backPath}/todo/updatetodo`, data)
       .then((res) => {
-        console.log("완료", res);
+        // console.log("완료", res);
       })
       .catch((e) => {
-        console.log("이게  왜,,오류?", e);
+        console.log(e);
       });
     completeHandle(false);
     clickListToggleHandle(false);

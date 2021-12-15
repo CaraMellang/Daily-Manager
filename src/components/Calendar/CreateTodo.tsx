@@ -28,7 +28,6 @@ function CreateTodo({ completeHandle }: CreateTodoProps) {
     await axios
       .post(`${backPath}/todo/create`, data)
       .then((res) => {
-        console.log(res);
         completeHandle(false);
         // const token = selector.userSliceReducer.user.accessToken;
         // const userId = selector.userSliceReducer.user.userId;

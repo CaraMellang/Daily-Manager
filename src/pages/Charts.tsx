@@ -18,7 +18,6 @@ const Charts = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log("디스패치!");
 
     const token = userSliceReducer.user.accessToken;
     const userId = userSliceReducer.user.userId;
@@ -29,8 +28,6 @@ const Charts = () => {
     const { todayCompletePer, dayToDayCompletePer } = Progress(
       selector.todosSliceReducer.todos
     );
-    console.log(selector.todosSliceReducer.todos);
-    console.log("몇퍼?", dayToDayCompletePer);
 
     const barData = {
       labels: [`미완료`, `완료`, `목표`],

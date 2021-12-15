@@ -13,6 +13,7 @@ import { faCheckCircle as farCheckCircle } from "@fortawesome/free-regular-svg-i
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { backPath } from "../../lib/HttpPath";
 import { TODOS_REQUEST } from "../../modules/redux/Todos";
+import ResponseStatusCode from "../../lib/ResponseStatusCode";
 
 interface ModalListItemProps {
   Todos: Todo;
@@ -69,7 +70,7 @@ function ModalListItem({
       })
       .catch((e) => {
         console.log(e);
-        window.alert("얘! 상태오류란다!(상태패치)");
+        window.alert(ResponseStatusCode(e.response.data.status));
       });
   };
 
@@ -82,7 +83,7 @@ function ModalListItem({
       updatedAt: Todos.updatedAt,
       fulldate,
     };
-    console.log(data);
+    // console.log(data);
     onClickListHandle(data);
     clickListToggleHandle(true);
   };

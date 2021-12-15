@@ -15,6 +15,7 @@ import { backPath } from "../lib/HttpPath";
 import HeaderBlock from "../components/Header/HeaderBlcok";
 import styled from "styled-components";
 import media from "../lib/media";
+import ResponseStatusCode from "../lib/ResponseStatusCode";
 
 const Main = () => {
   const [isSign, setIsSign] = useState(true);
@@ -41,19 +42,19 @@ const Main = () => {
         headers: { Authorization: `Bearer ${cookiesToken.rememberToken}` },
       })
       .then((d) => {
-        console.log("성공?", d);
+        // console.log("성공?", d);
         // setProfile({ username: d.data.username, createdAt: d.data.createdAt });
         setIsSign(false);
         setLoadingSpin(false);
       })
       .catch((e) => {
-        console.log("실패", e);
+        console.log(e);
+        console.dir(e.response.data.status);
         setLoadingSpin(false);
-        window.alert("자동로그인 실패입니다.");
+        window.alert(ResponseStatusCode(e.response.data.status).msg);
         dispatch(SIGNIN_FAILED(e));
         removeCookieToken(`rememberToken`);
         setIsSign(true);
-        console.log(history);
         history.push("/");
       });
   };
@@ -61,10 +62,10 @@ const Main = () => {
   useEffect(() => {
     if (cookiesToken.rememberToken !== undefined) {
       postSign();
-      console.log("있어", cookiesToken.rememberToken);
+      // console.log("있어", cookiesToken.rememberToken);
     } else {
       setLoadingSpin(false);
-      console.log("없어", cookiesToken.rememberToken);
+      // console.log("없어", cookiesToken.rememberToken);
     }
     return () => {};
   }, []);
