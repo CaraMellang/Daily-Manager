@@ -30,7 +30,7 @@ const DesktopHeader = ({ setIsSign }: DesktopHeaderProps) => {
               className="menu-item"
               exact
             >
-              Home 
+              Home
             </NavLink>
             <NavLink
               to={`/calender`}
@@ -59,7 +59,9 @@ const DesktopHeader = ({ setIsSign }: DesktopHeaderProps) => {
             {profile.username}
             Sign out
           </button> */}
-          <DropDownMenu setIsSign={setIsSign} />
+          <div>
+            <DropDownMenu setIsSign={setIsSign} />
+          </div>
         </div>
       </div>
     </DesktopHeaderWrap>

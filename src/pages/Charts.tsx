@@ -32,7 +32,7 @@ const Charts = () => {
     console.log(selector.todosSliceReducer.todos);
     console.log("몇퍼?", dayToDayCompletePer);
 
-    const doughnutData = {
+    const barData = {
       labels: [`미완료`, `완료`, `목표`],
       datasets: [
         {
@@ -123,7 +123,7 @@ const Charts = () => {
                         </div>
                         <div className="center-left-item-con">
                           <Bar
-                            data={doughnutData}
+                            data={barData}
                             options={{
                               // reponsive: false,
                               // reponsive: true,
