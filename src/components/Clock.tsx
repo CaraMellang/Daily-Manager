@@ -47,6 +47,12 @@ const ClockWrap = styled.div`
     display: flex;
     align-items: flex-end;
   }
+  ${media.medium} {
+    font-size: 2rem;
+    .time-horizon {
+      font-size: 1rem;
+    }
+  }
   ${media.xsmall} {
     font-size: 2rem;
     .time-horizon {

@@ -35,7 +35,7 @@ function HeaderBlock({ setIsSign }: HeaderBlockProps) {
     //   });
     //   window.removeEventListener("load", loadHandle);
     // };
-  });
+  },[]);
   return (
     <div>
       {activeMobile ? (

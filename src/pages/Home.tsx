@@ -108,7 +108,7 @@ const Home = () => {
             }}
           >
             <CurrentDay fullDay={new Date()} />
-            <div style={{ marginTop: "3rem" }}>
+            <div className="clock-block">
               <Clock />
             </div>
           </div>
@@ -255,7 +255,18 @@ const HomeWrap = styled.div`
       animation-fill-mode: forwards;
     }
   }
+  .clock-block {
+    margin-top: 3rem;
+  }
+  ${media.medium} {
+    .clock-block {
+      margin-top: 5rem;
+    }
+  }
   ${media.xsmall} {
+    .clock-block {
+      margin-top: 3rem;
+    }
     .col-mo {
       display: flex;
       flex-direction: column;

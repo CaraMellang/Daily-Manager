@@ -1,5 +1,5 @@
 import dayjs from "dayjs";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Bar, Doughnut, Line } from "react-chartjs-2";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
@@ -7,6 +7,7 @@ import BottomComponent from "../components/ChartsComponents/BottomComponent";
 import CenterRightBottomComponent from "../components/ChartsComponents/CenterRightBottomComponent";
 import CenterRightComponent from "../components/ChartsComponents/CenterRightComponent";
 import TopComponent from "../components/ChartsComponents/TopComponent";
+import useMobile from "../components/hooks/useMobile";
 import Loading from "../components/Loading";
 import { Progress } from "../lib/ChartRight";
 import media from "../lib/media";
@@ -16,9 +17,13 @@ const Charts = () => {
   const selector = useSelector((state: any) => state);
   const { userSliceReducer } = selector;
   const dispatch = useDispatch();
+  const { activeMobile, innerWidth } = useMobile(false);
+
+  const columnToggleHandle = (): string => {
+    return innerWidth < 425 ? `col` : `row`;
+  };
 
   useEffect(() => {
-
     const token = userSliceReducer.user.accessToken;
     const userId = userSliceReducer.user.userId;
     dispatch(TODOS_REQUEST({ token, userId }));
@@ -73,9 +78,9 @@ const Charts = () => {
           <div className="charts-background">
             <div className="charts-padd">
               <div className="charts">
-                <div className="charts-form col gap1">
+                <div className="charts-form col gap">
                   <div className="chart-top w-100">
-                    <div className="gap1 row">
+                    <div className={`gap ${columnToggleHandle()}`}>
                       <div className="top-item">
                         {/* 뭘봐{userSelector.username} 입니다~~ */}
                         <TopComponent
@@ -113,13 +118,14 @@ const Charts = () => {
                     </div>
                   </div>
                   <div className="chart-center w-100">
-                    <div className="center row gap1">
+                    <div className={`center ${columnToggleHandle()} gap`}>
                       <div className="center-item">
                         <div className="center-left-item-header">
                           오늘 하루 목표
                         </div>
                         <div className="center-left-item-con">
                           <Bar
+                            className="charts-padd"
                             data={barData}
                             options={{
                               // reponsive: false,
@@ -141,7 +147,7 @@ const Charts = () => {
                         </div>
                       </div>
                       <div className="center-item center-right-item padd05 ">
-                        <div className=" col gap1">
+                        <div className=" col gap">
                           <CenterRightComponent
                             title="오늘 달성률"
                             progress={
@@ -229,7 +235,7 @@ const ChartsWrap = styled.div`
   .w-100 {
     width: 100%;
   }
-  .gap1 {
+  .gap {
     gap: 1rem;
   }
   .padd05 {
@@ -239,6 +245,14 @@ const ChartsWrap = styled.div`
     width: 33.3%;
     border-radius: 10px;
     box-shadow: 0 0.15rem 1.75rem 0 rgb(34 39 46 / 15%);
+  }
+  ${media.small} {
+    .top-item {
+      width: 100%;
+    }
+    .gap {
+      gap: 0.35rem;
+    }
   }
 
   .top-item-header {
@@ -259,6 +273,11 @@ const ChartsWrap = styled.div`
     width: 50%;
     border-radius: 10px;
     box-shadow: 0 0.15rem 1.75rem 0 rgb(34 39 46 / 15%);
+  }
+  ${media.small} {
+    .center-item {
+      width: 100%;
+    }
   }
   .center-left-item-header {
     color: white;
