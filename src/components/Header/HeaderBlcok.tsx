@@ -26,7 +26,7 @@ function HeaderBlock({ setIsSign }: HeaderBlockProps) {
   //   loadHandle();
   // };
   useEffect(() => {
-    console.log("useMobile 리렌더?", activeMobile);
+    // console.log("useMobile 리렌더?", activeMobile);
     // loadHandle();
     // window.addEventListener("resize", resizeHandle);
     // return () => {
@@ -35,7 +35,7 @@ function HeaderBlock({ setIsSign }: HeaderBlockProps) {
     //   });
     //   window.removeEventListener("load", loadHandle);
     // };
-  },[]);
+  }, []);
   return (
     <div>
       {activeMobile ? (

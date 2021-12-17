@@ -49,14 +49,14 @@ function DetailItem({
     setCheckBox((prev: any) => !prev);
   };
   const onClickFix = async () => {
-    console.log(todoId);
+    // console.log(todoId);
     const data = {
       token: userSelector.userSliceReducer.user.accessToken,
       todoId: todoId,
       todo: text,
       success: checkBox,
     };
-    console.log(data);
+    // console.log(data);
     await axios
       .patch(`${backPath}/todo/updatetodo`, data)
       .then((res) => {

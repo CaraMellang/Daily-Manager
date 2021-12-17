@@ -44,19 +44,19 @@ function ModalListItem({
     await axios
       .delete(`${backPath}/todo/delete`, { data })
       .then((rr) => {
-        console.log("딜리트클릭 성공", rr);
+        // console.log("딜리트클릭 성공", rr);
         // const token = selector.userSliceReducer.user.accessToken;
         // const userId = selector.userSliceReducer.user.userId;
         // dispatch(TODOS_REQUEST({ token, userId }));
       })
       .catch((e) => {
-        console.log("딜리트 왜안되는데", e);
+        // console.log("딜리트 왜안되는데", e);
       });
     completeHandle(false);
   };
   const checkedHandle = async (e: any) => {
     setCheckBox((prev) => !prev);
-    console.log("gggddd", checkBox); // 비동기라서 변하기 전값이 찍히는데 결과는 잘나옴;
+    // console.log("gggddd", checkBox); // 비동기라서 변하기 전값이 찍히는데 결과는 잘나옴;
     const data = {
       token: userSelector.userSliceReducer.user.accessToken,
       todoId: Todos._id,
@@ -65,7 +65,7 @@ function ModalListItem({
     await axios
       .patch(`${backPath}/todo/updatesuc`, data)
       .then((res) => {
-        console.log("상태패치완료", res);
+        // console.log("상태패치완료", res);
         completeHandle(false);
       })
       .catch((e) => {

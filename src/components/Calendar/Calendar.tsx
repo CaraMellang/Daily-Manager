@@ -27,7 +27,7 @@ const Calendar = () => {
   const selector: any = useSelector((state) => state);
   const dispatch = useDispatch();
   dayjs.extend(utc);
-  console.log("리렌더?");
+  // console.log("리렌더?");
 
   const completeHandle = (bool: boolean) => {
     setComplete(bool);

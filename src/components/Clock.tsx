@@ -18,7 +18,7 @@ function Clock() {
       setTime(dayjs(new Date()));
     }, 1000);
     return () => {
-      console.log("시계죽음 ㅋㅋ");
+      // console.log("시계죽음 ㅋㅋ");
       clearInterval(inter);
     };
   }, []);

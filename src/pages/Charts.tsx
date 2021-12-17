@@ -123,9 +123,8 @@ const Charts = () => {
                         <div className="center-left-item-header">
                           오늘 하루 목표
                         </div>
-                        <div className="center-left-item-con">
+                        <div className="center-left-item-con charts-padd">
                           <Bar
-                            className="charts-padd"
                             data={barData}
                             options={{
                               // reponsive: false,
@@ -319,7 +318,6 @@ const ChartsWrap = styled.div`
     background-color: rgba(252, 114, 114, 1);
   }
   .bottom-item-con {
-    padding: 1rem;
     color: #2eb500;
     background-color: white;
     border-radius: 0 0 10px 10px;

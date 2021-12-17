@@ -79,7 +79,7 @@ const SignIn = ({
 
   useEffect(() => {
     const { userSliceReducer }: any = userSelector;
-    console.log(userSliceReducer);
+    // console.log(userSliceReducer);
 
     // if (cookiesToken.rememberToken !== undefined) {
     //   postSign();

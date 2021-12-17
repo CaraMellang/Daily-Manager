@@ -31,7 +31,7 @@ const Home = () => {
   const dispatch = useDispatch();
   const selector: any = useSelector((state) => state);
   const { userSliceReducer } = selector;
-  console.log(selector.todosSliceReducer.todos);
+  // console.log(selector.todosSliceReducer.todos);
 
   // if (!selector.todosSliceReducer.todosSuccess) {
   //   const token = userSliceReducer.user.accessToken;
@@ -40,14 +40,14 @@ const Home = () => {
   // }
 
   if (selector.todosSliceReducer.todosSuccess) {
-    console.log(
-      (dd = selector.todosSliceReducer.todos.filter(
-        (arr: any) =>
-          arr.createdAt.getDate() === new Date().getDate() &&
-          arr.createdAt.getMonth() === new Date().getMonth() &&
-          arr.createdAt.getFullYear() === new Date().getFullYear()
-      ))
+    // console.log(
+    dd = selector.todosSliceReducer.todos.filter(
+      (arr: any) =>
+        arr.createdAt.getDate() === new Date().getDate() &&
+        arr.createdAt.getMonth() === new Date().getMonth() &&
+        arr.createdAt.getFullYear() === new Date().getFullYear()
     );
+    // );
     dd.forEach((arr) => {
       if (arr.success) {
         completeArray.push(arr);
@@ -69,7 +69,7 @@ const Home = () => {
   };
 
   useEffect(() => {
-    console.log("디스패치!");
+    // console.log("디스패치!");
 
     const token = userSliceReducer.user.accessToken;
     const userId = userSliceReducer.user.userId;

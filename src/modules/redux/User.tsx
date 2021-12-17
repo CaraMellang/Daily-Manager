@@ -19,13 +19,13 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     SIGNIN_REQUEST: (state, action) => {
-      console.log("SIGNIN_REQUEST Reducer");
+      // console.log("SIGNIN_REQUEST Reducer");
       state.signinLoading = true;
       state.signinLoading = false;
       state.signinError = null;
     },
     SIGNIN_SUCCESS: (state: any, action: any) => {
-      console.log("SIGNIN_SUCCESS Reducer");
+      // console.log("SIGNIN_SUCCESS Reducer");
       // console.log(action.payload.data);
       state.signinLoading = false;
       state.signinSucceed = true;
@@ -47,22 +47,22 @@ const userSlice = createSlice({
       // state.user = action.payload;
       //방법 3
       //그냥 user객체 빼버리고 외부로 풀어버리기
-      console.log(action.payload.data.email);
-      console.log(state.user.userId);
-      console.log(state.user.accessToken);
-      console.log(state.user.email);
-      console.log(state.user.username);
-      console.log(state.user.createdAt);
+      // console.log(action.payload.data.email);
+      // console.log(state.user.userId);
+      // console.log(state.user.accessToken);
+      // console.log(state.user.email);
+      // console.log(state.user.username);
+      // console.log(state.user.createdAt);
     },
     SIGNIN_FAILED: (state, action) => {
-      console.log("SIGNIN_FAILED Reducer");
+      // console.log("SIGNIN_FAILED Reducer");
       console.log(action);
       state.signinSucceed = false;
       state.signinLoading = false;
       state.signinError = action.payload.error;
     },
     SIGNOUT: (state: any) => {
-      console.log("SIGNOUT Reducer");
+      // console.log("SIGNOUT Reducer");
       // state.signinLoading = false;
       state.signinSucceed = false;
       // state.username = action.payload.username;

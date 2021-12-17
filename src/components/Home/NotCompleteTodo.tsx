@@ -25,7 +25,7 @@ function NotCompleteTodo({
 }: NotCompleteTodoProps) {
   const conDeleteClick = async () => {
     let yesClick;
-    console.log(Todo.updatedAt);
+    // console.log(Todo.updatedAt);
 
     await check("정말로 삭제하시겠습니까?", {
       dimmedClassName: "my-check-dimmed",
@@ -38,11 +38,11 @@ function NotCompleteTodo({
       await axios
         .delete(`${backPath}/todo/delete`, { data })
         .then((rr) => {
-          console.log("야호", rr);
+          // console.log("야호", rr);
           completeHandle(false);
         })
         .catch((e) => {
-          console.log("왜안되는데", e);
+          // console.log("왜안되는데", e);
         });
     }
   };

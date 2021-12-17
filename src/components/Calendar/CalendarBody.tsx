@@ -59,7 +59,7 @@ const CalendarBody = ({
 
   const paintCalendar = async (userSliceReducer: any) => {
     let dateArray: DateInfo[] = [];
-    console.log(selector.todosSliceReducer.todos);
+    // console.log(selector.todosSliceReducer.todos);
 
     const todoDatas = await getCurMonthData(userSliceReducer);
 
@@ -79,7 +79,7 @@ const CalendarBody = ({
         dateArray = [];
       }
       if (i === prevLastDay) {
-        console.log(prevLastDay);
+        // console.log(prevLastDay);
         break;
       }
     }
@@ -175,7 +175,7 @@ const CalendarBody = ({
   useEffect(() => {
     const { userSliceReducer, todosSliceReducer } = userSelector;
     if (complete === false) {
-      console.log("실행");
+      // console.log("실행");
       paintCalendar(userSliceReducer);
 
       // const token = userSliceReducer.user.accessToken;
