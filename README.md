@@ -6,7 +6,7 @@
 
 https://project-dm.netlify.app/
 
-## 사용스택
+## 사용기술
 
 ### FrontEnd
 
