@@ -26,5 +26,11 @@ React, styled-components, react-chartjs-2, typescript, redux, react-redux, redux
 
 Express, mongoose, jsonwebtoken, bcrypt, cors, mongoose, axios
 
+## 배포
+### Front
+=> Netlify
+### Back
+=> Heroku
+
 ## 사이트 화면
 
