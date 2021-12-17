@@ -31,23 +31,14 @@ const Home = () => {
   const dispatch = useDispatch();
   const selector: any = useSelector((state) => state);
   const { userSliceReducer } = selector;
-  // console.log(selector.todosSliceReducer.todos);
-
-  // if (!selector.todosSliceReducer.todosSuccess) {
-  //   const token = userSliceReducer.user.accessToken;
-  //   const userId = userSliceReducer.user.userId;
-  //   dispatch(TODOS_REQUEST({ token, userId }));
-  // }
 
   if (selector.todosSliceReducer.todosSuccess) {
-    // console.log(
     dd = selector.todosSliceReducer.todos.filter(
       (arr: any) =>
         arr.createdAt.getDate() === new Date().getDate() &&
         arr.createdAt.getMonth() === new Date().getMonth() &&
         arr.createdAt.getFullYear() === new Date().getFullYear()
     );
-    // );
     dd.forEach((arr) => {
       if (arr.success) {
         completeArray.push(arr);
@@ -69,36 +60,17 @@ const Home = () => {
   };
 
   useEffect(() => {
-    // console.log("디스패치!");
 
     const token = userSliceReducer.user.accessToken;
     const userId = userSliceReducer.user.userId;
     dispatch(TODOS_REQUEST({ token, userId }));
 
-    // if (selector.todosSliceReducer.todosSuccess) {
-    //   console.log(selector.todosSliceReducer.todosLoading);
-    //   console.log(
-    //     "ㄹ릴낟달;ㅇ?ddddddddddddd",
-    //     selector.todosSliceReducer.todos[0].createdAt.getDate(),
-    //     selector.todosSliceReducer.todos[0].todo
-    //     // typeof todosSliceReducer.todos[0].createdAt,
-    //   );
-    //   todosArray = [];
-    //   todosArray.push(selector.todosSliceReducer.todos);
-    // }
   }, [complete]);
 
   if (selector.todosSliceReducer.todosSuccess) {
     return (
       <HomeWrap>
         <div className="content">
-          {/* <button
-            type="button"
-            className="example-button"
-            onClick={() => notice("나가")}
-          >
-            <div>notice</div>
-          </button> */}
 
           <div
             style={{
@@ -166,7 +138,6 @@ const Home = () => {
                 )}
               </div>
             </div>
-            {/* <div>최근 업데이트</div> */}
           </div>
         </div>
         {clickFix && (

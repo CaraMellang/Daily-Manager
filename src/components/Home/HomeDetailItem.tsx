@@ -28,8 +28,6 @@ function HomeDetailItem({
   const userSelector: any = useSelector((state) => state);
 
   let createdAt = dayjs(new Date(Todo.createdAt)).format(`YYYY-MM-DD HH:mm:ss`);
-  // console.log(clickList.updateAt)
-  // console.log("투두업데이트", Todo.updatedAt);
   let updatedAt =
     Todo.updatedAt !== "null"
       ? dayjs(new Date(Todo.updatedAt)).format(`YYYY-MM-DD HH:mm:ss`)
@@ -42,31 +40,24 @@ function HomeDetailItem({
     setCheckBox((prev) => !prev);
   };
   const onClickFix = async () => {
-    // console.log(Todo._id);
     const data = {
       token: userSelector.userSliceReducer.user.accessToken,
       todoId: Todo._id,
       todo: text,
       success: checkBox,
     };
-    // console.log(data);
     await axios
       .patch(`${backPath}/todo/updatetodo`, data)
       .then((res) => {
-        // console.log("완료", res);
         completeHandle(false);
         clickFixHandle(false);
       })
       .catch((e) => {
-        // console.log("이게  왜,,오류?", e);
+        console.log( e);
       });
   };
 
   useEffect(() => {
-    // return () => {
-    //   console.log("실행?");
-    //   clickListToggleHandle(false);
-    // };
     return () => {};
   });
   return (

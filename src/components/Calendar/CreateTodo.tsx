@@ -29,9 +29,6 @@ function CreateTodo({ completeHandle }: CreateTodoProps) {
       .post(`${backPath}/todo/create`, data)
       .then((res) => {
         completeHandle(false);
-        // const token = selector.userSliceReducer.user.accessToken;
-        // const userId = selector.userSliceReducer.user.userId;
-        // dispatch(TODOS_REQUEST({ token, userId }));
         setText("");
       })
       .catch((e) => {

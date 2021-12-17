@@ -4,32 +4,7 @@ const initialState = {
   todosLoading: true,
   todosSuccess: false,
   todosError: "",
-  todos: [
-    {},
-    // {
-    //   createdAt: new Date(),
-    //   creatorId: {
-    //     _id: "string",
-    //     name: "string",
-    //     email: "string",
-    //     password: "string",
-    //     createdAt: new Date(),
-    //   },
-    //   success: false,
-    //   todo: "string",
-    //   updatedAt: new Date(),
-    //   _id: "string",
-    // },
-    // {
-    // userId: "기본,,?",
-    // email: "",
-    // username: "",
-    // createdAt: "",
-    // accessToken: "",
-    // },
-  ],
-  // username: "",
-  // createdAt: "",
+  todos: [{}],
 };
 
 const todosSlice = createSlice({

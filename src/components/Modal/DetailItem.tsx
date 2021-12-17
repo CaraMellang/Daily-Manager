@@ -49,18 +49,15 @@ function DetailItem({
     setCheckBox((prev: any) => !prev);
   };
   const onClickFix = async () => {
-    // console.log(todoId);
     const data = {
       token: userSelector.userSliceReducer.user.accessToken,
       todoId: todoId,
       todo: text,
       success: checkBox,
     };
-    // console.log(data);
     await axios
       .patch(`${backPath}/todo/updatetodo`, data)
       .then((res) => {
-        // console.log("완료", res);
       })
       .catch((e) => {
         console.log(e);
@@ -70,10 +67,6 @@ function DetailItem({
   };
 
   useEffect(() => {
-    // return () => {
-    //   console.log("실행?");
-    //   clickListToggleHandle(false);
-    // };
   });
   return (
     <DetailItemWrap clickListToggle={clickListToggle}>
@@ -119,15 +112,6 @@ function DetailItem({
             </div>
           </div>
 
-          {/* <div>생성시간: {createdAt}</div>
-          <div>업뎃시간: {updatedAt}</div>
-          <input
-            className="input"
-            type="text"
-            value={text}
-            onChange={onTextChange}
-          />
-          <input type="checkbox" checked={checked} onChange={onCheckHandle} /> */}
         </div>
         <div className="clickbox">
           <button

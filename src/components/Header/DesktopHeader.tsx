@@ -48,17 +48,7 @@ const DesktopHeader = ({ setIsSign }: DesktopHeaderProps) => {
               Charts
             </NavLink>
           </div>
-          {/* <button
-            className="signout"
-            onClick={() => {
-              window.alert("로그아웃완료");
-              removeCookieToken("rememberToken");
-              setIsSign(true);
-            }}
-          >
-            {profile.username}
-            Sign out
-          </button> */}
+          
           <div>
             <DropDownMenu setIsSign={setIsSign} />
           </div>

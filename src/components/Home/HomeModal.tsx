@@ -13,41 +13,41 @@ interface stProps {
   dateModalToggle: boolean;
 }
 
-const HomeModal = ({ clickFixHandle, Todo,completeHandle }: HomeModalProps) =>
-  // toggleClick,
-  // dateModalToggle,
-  // Todo,
-  // completeHandle,
-  {
-    const [clickListToggle, setClickListToggle] = useState(false);
-    const [clickList, setClickList] = useState<{
-      todoId: string;
-      todo: string;
-      createdAt: string;
-      success: string;
-    }>();
-    const stopBubbling = (e: any) => {
-      e.stopPropagation();
-    };
-    const clickListToggleHandle = (bool: boolean) => {
-      setClickListToggle(bool);
-    };
-    const onClickListHandle = (data: any) => {
-      setClickList(data);
-    };
-
-    return (
-      <MyModalWrap>
-        <div className="MyModal" onClick={stopBubbling}>
-          <HomeDetailItem Todo={Todo} completeHandle={completeHandle} clickFixHandle={clickFixHandle} />
-          <div
-            className="modalback"
-            onClick={() => clickFixHandle(false)}
-          ></div>
-        </div>
-      </MyModalWrap>
-    );
+const HomeModal = ({
+  clickFixHandle,
+  Todo,
+  completeHandle,
+}: HomeModalProps) => {
+  const [clickListToggle, setClickListToggle] = useState(false);
+  const [clickList, setClickList] = useState<{
+    todoId: string;
+    todo: string;
+    createdAt: string;
+    success: string;
+  }>();
+  const stopBubbling = (e: any) => {
+    e.stopPropagation();
   };
+  const clickListToggleHandle = (bool: boolean) => {
+    setClickListToggle(bool);
+  };
+  const onClickListHandle = (data: any) => {
+    setClickList(data);
+  };
+
+  return (
+    <MyModalWrap>
+      <div className="MyModal" onClick={stopBubbling}>
+        <HomeDetailItem
+          Todo={Todo}
+          completeHandle={completeHandle}
+          clickFixHandle={clickFixHandle}
+        />
+        <div className="modalback" onClick={() => clickFixHandle(false)}></div>
+      </div>
+    </MyModalWrap>
+  );
+};
 
 const MyModalWrap = styled.div`
   color: black;

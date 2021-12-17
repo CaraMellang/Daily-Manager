@@ -16,7 +16,6 @@ interface CalendarBodyProps {
   setCurrentMonth: React.Dispatch<React.SetStateAction<dayjs.Dayjs>>;
   completeHandle(bool: boolean): void;
   complete: boolean;
-  // getCurrentDates:
 }
 
 export interface DateInfo {
@@ -44,7 +43,6 @@ const CalendarBody = ({
   const [dates, setDates] = useState<DateInfo[]>([
     { date: 1, month: 2, fulldate: "지s", descrition: "string", todos: [] },
   ]);
-  // let dates: Array<DateInfo> = [];
 
   const [dateModalToggle, setDateModalToggle] = useState(false);
   const [clickDate, setClickDate] = useState(0);
@@ -59,7 +57,6 @@ const CalendarBody = ({
 
   const paintCalendar = async (userSliceReducer: any) => {
     let dateArray: DateInfo[] = [];
-    // console.log(selector.todosSliceReducer.todos);
 
     const todoDatas = await getCurMonthData(userSliceReducer);
 
@@ -79,7 +76,6 @@ const CalendarBody = ({
         dateArray = [];
       }
       if (i === prevLastDay) {
-        // console.log(prevLastDay);
         break;
       }
     }
@@ -89,8 +85,6 @@ const CalendarBody = ({
       i <= dayjs(currentMonth).add(1, "month").set("date", 0).get("date");
       i++
     ) {
-      // setDates((prevState) => [...prevState, i]);
-
       let data: DateInfo = {
         date: i,
         month: currentMonth.get("month"),
@@ -131,23 +125,6 @@ const CalendarBody = ({
   };
 
   const dateClick = (e: any) => {
-    // // console.log(e.target);
-    // // console.log(e.currentTarget);
-    // // if (e.target !== e.currentTarget) {
-    // //   return;
-    // // }
-    // console.log(e);
-    // const yValue = window.scrollY;
-    // // document.body.style.cssText = `position: fixed; top: -${yValue}px`;
-    // const text =
-    //   dummy.fulldate === e.currentTarget.title ? dummy.descrition : "";
-    // document.body.style.overflow = "hidden";
-    // notice(
-    //   `클릭하신 날짜는 ${e.currentTarget.title} 입니다. ${`\n` + text}`
-    // ).then(() => {
-    //   // document.body.style.cssText = `position: unset ; top: -${yValue}px`; //모바일도 대응 근데 좀 손봐야함
-    //   document.body.style.overflow = "unset";
-    // });
     const intVal = parseInt(e.currentTarget.dataset.value);
     setClickDate(intVal);
     setDateModalToggle(!dateModalToggle);
@@ -160,12 +137,10 @@ const CalendarBody = ({
       year: currentMonth.toDate().getFullYear(),
       month: currentMonth.toDate().getMonth() + 1,
       date: currentMonth.toDate().getDate(),
-      // date: dayjs(currentDate).toDate().getMonth() + 1,
       gd: "???",
     };
     const todos = await axios.post(`${backPath}/todo/findcurrmonth`, data);
     if (todos.data.data.length === 0) {
-      // console.log("얘! 데이터가 비어있단다!");
       return;
     }
 
@@ -175,12 +150,7 @@ const CalendarBody = ({
   useEffect(() => {
     const { userSliceReducer, todosSliceReducer } = userSelector;
     if (complete === false) {
-      // console.log("실행");
       paintCalendar(userSliceReducer);
-
-      // const token = userSliceReducer.user.accessToken;
-      // const userId = userSliceReducer.user.userId;
-      // dispatch(TODOS_REQUEST({ token, userId }));
     }
 
     return () => {};
@@ -196,7 +166,6 @@ const CalendarBody = ({
       </CalendarDayarray>
       <CalendarDates>
         {dates.map((i, index) => {
-          // console.log(i.todos[0].creatorId);
           if (i.date === 404) {
             return (
               <div className="date-box " key={index}>

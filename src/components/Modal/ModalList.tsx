@@ -9,8 +9,6 @@ import ModalListItem from "./ModalListItem";
 import media from "../../lib/media";
 
 interface modalListProps {
-  //   toggleClick(): void;
-  //   dateModalToggle: boolean;
   completeHandle(bool: boolean): void;
   DateInfo: DateInfo;
   clickListToggleHandle(bool: boolean): void;

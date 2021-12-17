@@ -21,38 +21,19 @@ const DropDownMenu = ({ setIsSign }: DropDownMenuProps) => {
   const dispatch = useDispatch();
   const userSelector = useSelector((state: any) => state.userSliceReducer.user);
 
-  // useEffect(() => {
-  //   const pageClickEvent = (e) => {
-  //     // If the active element exists and is clicked outside of
-  //     if (dropdownRef.current !== null && !dropdownRef.current.contains(e.target)) {
-  //       setIsActive(!isActive);
-  //     }
-  //   };
-  //   if (isActive) {
-  //     window.addEventListener("click", pageClickEvent);
-  //   }
-  //   return () => {
-  //     window.removeEventListener("click", pageClickEvent);
-  //   };
-  // }, [isActive]);
   return (
     <DropDownMenuWrap>
       <div className="menu-container">
         <button onClick={onClick} className="menu-trigger">
           <span>{userSelector.username}</span>
-          {/* <img
-            src="https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/df/df7789f313571604c0e4fb82154f7ee93d9989c6.jpg"
-            alt="User avatar"
-          /> */}
+          
         </button>
         <nav
           ref={dropdownRef}
           className={`menu ${isActive ? "active" : "inactive"}`}
         >
           <ul>
-            {/* <li>
-              <div>option</div>
-            </li> */}
+            
             <li>
               <div
                 onClick={() => {

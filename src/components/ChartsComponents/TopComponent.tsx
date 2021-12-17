@@ -11,7 +11,6 @@ const TopComponent = ({ title, data }: TopComponentProps) => {
   const [intCounter, setIntCounter] = useState(0);
   useEffect(() => {
     const progressCount = setInterval(() => {
-      //   console.log(intCounter);
       if (intCounter >= data) {
         setIntCounter(data);
         clearInterval(progressCount);

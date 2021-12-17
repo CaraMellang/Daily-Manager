@@ -10,24 +10,6 @@ function BottomComponent() {
   const selector = useSelector((state: any) => state);
   const { userSliceReducer } = selector;
   const { lineDatas } = ChartLineData(selector.todosSliceReducer.todos);
-  // console.log(
-  //   Math.round(
-  //     (selector.todosSliceReducer.todos.filter(
-  //       (arr: any) =>
-  //         arr.createdAt.getDate() === new Date().getDate() &&
-  //         arr.createdAt.getMonth() === new Date().getMonth() &&
-  //         arr.createdAt.getFullYear() === new Date().getFullYear() &&
-  //         arr.success === true
-  //     ).length *
-  //       100) /
-  //       selector.todosSliceReducer.todos.filter(
-  //         (arr: any) =>
-  //           arr.createdAt.getDate() === new Date().getDate() &&
-  //           arr.createdAt.getMonth() === new Date().getMonth() &&
-  //           arr.createdAt.getFullYear() === new Date().getFullYear()
-  //       ).length
-  //   )
-  // );
   const barData = {
     labels: [
       `${dayjs(new Date()).add(-6, "day").get("date")}일`,

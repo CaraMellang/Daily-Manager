@@ -1,10 +1,8 @@
 import axios from "axios";
-import dayjs from "dayjs";
 import React, { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
 import { useDispatch } from "react-redux";
 import { Route, useHistory } from "react-router-dom";
-import DesktopHeader from "../components/Header/DesktopHeader";
 import Loading from "../components/Loading";
 import Calender from "./Calender";
 import Charts from "./Charts";
@@ -26,7 +24,7 @@ const Main = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const onSignHandler = () => {
-    setIsSign(false); //얘때문에 토큰있으면 그냥 프리패스당함.
+    setIsSign(false); 
   };
 
   const isSignHandle = (bool: boolean) => {
@@ -42,8 +40,6 @@ const Main = () => {
         headers: { Authorization: `Bearer ${cookiesToken.rememberToken}` },
       })
       .then((d) => {
-        // console.log("성공?", d);
-        // setProfile({ username: d.data.username, createdAt: d.data.createdAt });
         setIsSign(false);
         setLoadingSpin(false);
       })
@@ -62,10 +58,8 @@ const Main = () => {
   useEffect(() => {
     if (cookiesToken.rememberToken !== undefined) {
       postSign();
-      // console.log("있어", cookiesToken.rememberToken);
     } else {
       setLoadingSpin(false);
-      // console.log("없어", cookiesToken.rememberToken);
     }
     return () => {};
   }, []);
@@ -90,7 +84,6 @@ const Main = () => {
         />
       ) : (
         <>
-          {/* <DesktopHeader setIsSign={setIsSign} /> */}
           <HeaderBlock setIsSign={setIsSign} />
           <Route path={`/`} component={Home} exact />
           <Route path={`/calender`} component={Calender} />

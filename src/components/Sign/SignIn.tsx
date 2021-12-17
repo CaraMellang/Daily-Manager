@@ -25,11 +25,8 @@ const SignIn = ({
   ]);
   const dispatch = useDispatch();
   const userSelector: any = useSelector((state) => state);
-  // console.log(sucessSelector);
-  // console.log(sucessSelector.userSliceReducer.signinSucceed);
 
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    // console.log(e.target);
     const {
       target: { value, name },
     } = e;
@@ -56,38 +53,11 @@ const SignIn = ({
 
     dispatch(SIGNIN_REQUEST(data));
 
-    // await axios
-    //   .post("http://localhost:5000/auth/signin", data)
-    //   .then((res) => {
-    //     const resDate = {
-    //       username: res.data.username,
-    //       createdAt: res.data.createdAt + "니세모노 ",
-    //     };
-    //     console.log("ㅎㅇ", res);
-    //     setCookieToken(`rememberToken`, res.data.accessToken);
-    //     userProfile(res.data.username, res.data.createdAt);
-    //     addSignIn(data);
-    //     console.log(signInData);
-
-    //     onSignHandler();
-    //   })
-    //   .catch((e) => {
-    //     console.log(e);
-    //     window.alert("오류!!");
-    //   });
   };
 
   useEffect(() => {
     const { userSliceReducer }: any = userSelector;
-    // console.log(userSliceReducer);
-
-    // if (cookiesToken.rememberToken !== undefined) {
-    //   postSign();
-    //   console.log("있어", cookiesToken.rememberToken);
-    // } else {
-    //   loadingSpinHandle(false);
-    //   console.log("없어", cookiesToken.rememberToken);
-    // }
+    
     if (userSliceReducer.signinSucceed) {
       setCookieToken(`rememberToken`, userSliceReducer.user.accessToken);
       onSignHandler();

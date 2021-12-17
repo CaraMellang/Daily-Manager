@@ -58,7 +58,6 @@ const MobileHeader = ({ setIsSign }: MobileHeaderProps) => {
               }}
             />
           </div>
-          {/* <DropDownMenu setIsSign={setIsSign} /> */}
         </div>
       </div>
       {menuOn && (
