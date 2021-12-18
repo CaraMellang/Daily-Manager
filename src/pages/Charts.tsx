@@ -158,7 +158,7 @@ const Charts = () => {
                           />
                           <CenterRightBottomComponent
                             title="전일대비 달성 증가률"
-                            progressa={
+                            progress={
                               isNaN(dayToDayCompletePer) ||
                               dayToDayCompletePer < 0
                                 ? 0

@@ -3,13 +3,13 @@ import styled from "styled-components";
 
 interface CenterRightComponentProps {
   title: string;
-  progressa: number;
+  progress: number;
   order: number;
 }
 
 const CenterRightComponent = ({
   title,
-  progressa,
+  progress,
   order,
 }: CenterRightComponentProps) => {
   const [time, setTime] = useState(0);
@@ -47,11 +47,11 @@ const CenterRightComponent = ({
       time={time}
       fadein={fadein}
       order={order}
-      progress={progressa}
+      progress={progress}
     >
       <div>{title}</div>
       <div>
-        <div className="count-per">{progressa}%</div>
+        <div className="count-per">{progress}%</div>
         <div className="progress-back">
           <div className="progress-bar2" />
         </div>
