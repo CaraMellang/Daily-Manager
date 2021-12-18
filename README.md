@@ -23,7 +23,9 @@ https://project-dm.netlify.app/
 <!-- React, styled-components, react-chartjs-2, typescript, redux, react-redux, redux toolkit, redux-persist, redux-saga -->
 
 ### BackEnd
-
+<p align='center'>
+    <img src="https://img.shields.io/badge/express-v4.17.1-gray?logo=express">
+</p>
 Express, mongoose, jsonwebtoken, bcrypt, cors, mongoose
 
 ## 배포
