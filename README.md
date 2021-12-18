@@ -24,10 +24,10 @@ https://project-dm.netlify.app/
 
 ### BackEnd
 <p align='center'>
-    <img src="https://img.shields.io/badge/express-v4.17.1-aaa?logo=express">
-    <img src="https://img.shields.io/badge/mongodb-v5.0.3-critical?logo=mongodb">
+    <img src="https://img.shields.io/badge/Express-v4.17.1-aaa?logo=express">
+    <img src="https://img.shields.io/badge/Mongodb-v5.0.3-critical?logo=mongodb">
     <img src="https://img.shields.io/badge/mongoose-v6.0.13-critical?logo=mongodb">
-    <img src="https://img.shields.io/badge/jsonwebtoken-v8.5.1-critical?logo=jsonwebtoken">
+    <img src="https://img.shields.io/badge/JWT-v8.5.1-critical?logo=jsonwebtoken">
     <img src="https://img.shields.io/badge/bcrypt-v5.0.1-critical?logo=bcrypt">
 </p>
 Express, mongoose, jsonwebtoken, bcrypt, mongoose
