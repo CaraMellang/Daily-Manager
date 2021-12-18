@@ -30,7 +30,7 @@ https://project-dm.netlify.app/
     <img src="https://img.shields.io/badge/JWT-v8.5.1-critical?logo=jsonwebtoken">
     <img src="https://img.shields.io/badge/bcrypt-v5.0.1-critical?logo=bcrypt">
 </p>
-Express, mongoose, jsonwebtoken, bcrypt, mongoose
+<!-- Express, mongoose, jsonwebtoken, bcrypt, mongoose -->
 
 ## 배포
 ### Front
