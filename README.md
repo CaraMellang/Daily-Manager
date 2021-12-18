@@ -24,7 +24,7 @@ https://project-dm.netlify.app/
 
 ### BackEnd
 
-Express, mongoose, jsonwebtoken, bcrypt, cors, mongoose, axios
+Express, mongoose, jsonwebtoken, bcrypt, cors, mongoose
 
 ## 배포
 ### Front
