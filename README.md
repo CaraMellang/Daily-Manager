@@ -39,7 +39,7 @@ https://project-dm.netlify.app/
 => Heroku
 
 ## 사이트 화면
-<p align='center'>
+<div align='center'>
     <img src="https://user-images.githubusercontent.com/51808985/146792714-af7c4cf1-b6a6-4957-8ac9-000328979614.png"/>
     <img src="https://user-images.githubusercontent.com/51808985/146793041-60a0c201-c800-4449-a0d6-7ae6639a8de0.png"/>
     <p>[로그인 && 회원가입]</p>
@@ -55,7 +55,4 @@ https://project-dm.netlify.app/
     <img src="https://user-images.githubusercontent.com/51808985/146793955-2b8c582a-536d-40e7-8552-aa42944810a1.png"/>
 [모달 수정]
 
-
-
-    
-</p>
+</div>
