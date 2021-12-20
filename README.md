@@ -42,7 +42,8 @@ https://project-dm.netlify.app/
 <p align='center'>
     <img src="https://user-images.githubusercontent.com/51808985/146792714-af7c4cf1-b6a6-4957-8ac9-000328979614.png"/>
     <img src="https://user-images.githubusercontent.com/51808985/146793041-60a0c201-c800-4449-a0d6-7ae6639a8de0.png"/>
-[로그인 && 회원가입]
+    <p>[로그인 && 회원가입]</p>
+
     <img src="https://user-images.githubusercontent.com/51808985/146794067-4e69fb0b-7f95-49cb-8e5a-779238dd8f88.png"/>
 [홈 화면]
     <img src="https://user-images.githubusercontent.com/51808985/146793427-f94347b1-3e9c-4b63-8d98-e4ec1e533906.png"/>
