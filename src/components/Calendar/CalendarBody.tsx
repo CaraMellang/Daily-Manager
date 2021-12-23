@@ -237,6 +237,19 @@ const CalendarBody = ({
             </div>
           );
         })}
+        {/* {dateModalToggle && (
+                        <div style={{ color: "yellow", textAlign: "center" }}>
+                          <FontAwesomeIcon icon={faStar} className="scale1-4" />
+                        <ModalPortal>
+                          <Modal
+                            toggleClick={toggleClick}
+                            dateModalToggle={dateModalToggle}
+                            DateInfo={i}
+                            completeHandle={completeHandle}
+                          />
+                        </ModalPortal>
+                        </div>
+                      )} */}
       </CalendarDates>
     </CalendarBodyWrap>
   );

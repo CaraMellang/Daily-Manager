@@ -4,8 +4,8 @@ import { Bar, Doughnut, Line } from "react-chartjs-2";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import BottomComponent from "../components/ChartsComponents/BottomComponent";
-import CenterRightBottomComponent from "../components/ChartsComponents/CenterRightBottomComponent";
-import CenterRightComponent from "../components/ChartsComponents/CenterRightComponent";
+import CenterRightBottomComponent from "../components/ChartsComponents/CenterRightBotComponent";
+import CenterRightTopComponent from "../components/ChartsComponents/CenterRightTopComponent";
 import TopComponent from "../components/ChartsComponents/TopComponent";
 import useMobile from "../components/hooks/useMobile";
 import Loading from "../components/Loading";
@@ -147,7 +147,7 @@ const Charts = () => {
                       </div>
                       <div className="center-item center-right-item padd05 ">
                         <div className=" col gap">
-                          <CenterRightComponent
+                          <CenterRightTopComponent
                             title="오늘 달성률"
                             progress={
                               isNaN(todayCompletePer) || todayCompletePer < 0

@@ -7,27 +7,43 @@ interface CenterRightComponentProps {
   order: number;
 }
 
-const CenterRightComponent = ({
+const CenterRightBotComponent = ({
   title,
   progress,
   order,
 }: CenterRightComponentProps) => {
   const [time, setTime] = useState(0);
+  const [allow, setAllow] = useState(false);
   const [fadein, setFadein] = useState(0);
-
+  //   setTimeout(() => {
+  //     setAllow(true);
+  //   }, 500);
   setTimeout(() => {
     setFadein(1);
   }, order * 100);
   setTimeout(() => {
     setTime(1);
   }, order * 200);
-
   useEffect(() => {
+    // if (allow === true) {
+    //   const progressBar = setInterval(() => {
+    //     // console.log(count);
+    //     if (count >= progress) {
+    //       clearInterval(progressBar);
+    //       setTime(1);
+    //       return;
+    //     }
+    //     setCount(count + 1);
+    //   }, 10);
+    //   return () => {
+    //     clearInterval(progressBar);
+    //     setAllow(false);
+    //   };
+    // }
     return () => {};
   }, []);
-
   return (
-    <CenterRightComponentWrap
+    <CenterRightBotComponentWrap
       time={time}
       fadein={fadein}
       order={order}
@@ -37,14 +53,14 @@ const CenterRightComponent = ({
       <div>
         <div className="count-per">{progress}%</div>
         <div className="progress-back">
-          <div className="progress-bar" />
+          <div className="progress-bar2" />
         </div>
       </div>
-    </CenterRightComponentWrap>
+    </CenterRightBotComponentWrap>
   );
 };
 
-const CenterRightComponentWrap = styled.div<{
+const CenterRightBotComponentWrap = styled.div<{
   time: number;
   fadein: number;
   order: number;
@@ -59,8 +75,8 @@ const CenterRightComponentWrap = styled.div<{
   padding: 1rem;
   border-radius: 10px;
   box-shadow: 0 0.15rem 1.75rem 0 rgb(34 39 46 / 15%);
-  /* opacity: ${(props) => props.fadein}; */
-  /* transition: opacity ${(props) => props.order / 2}s ease-in-out; */
+  /* opacity: ${(props) => props.fadein};
+  transition: opacity ${(props) => props.order / 2}s ease-in-out; */
   opacity: 0;
   @keyframes opa {
     from {
@@ -70,13 +86,14 @@ const CenterRightComponentWrap = styled.div<{
       opacity: 1;
     }
   }
-  animation: opa 0.2s;
+  animation: opa 0.8s;
   animation-fill-mode: forwards; //애니메이션 마지막상태유지
 
   .count-per {
     text-align: end;
-    /* opacity: ${(props) => props.time};
-    transition: opacity 1s ease-in-out; */
+    /* opacity: ${(props) => props.time}; */
+    /* transition: opacity 1s ease-in-out; */
+
     opacity: 0;
     @keyframes opa {
       from {
@@ -86,10 +103,9 @@ const CenterRightComponentWrap = styled.div<{
         opacity: 1;
       }
     }
-    animation: opa 0.5s 1.5s;
+    animation: opa 0.5s 2.5s;
     animation-fill-mode: forwards; //애니메이션 마지막상태유지
   }
-
   .progress-back {
     position: relative;
     width: 100%;
@@ -102,17 +118,18 @@ const CenterRightComponentWrap = styled.div<{
       rgba(255, 255, 255, 1) 100%
     );
   }
-  .progress-bar {
+  .progress-bar2 {
     position: absolute;
-    @keyframes prog {
-      from {
+    width: 0;
+    @keyframes prog2 {
+      0% {
         width: 0%;
       }
-      to {
+      100% {
         width: ${(props) => `${props.progress}%`};
       }
     }
-    animation: prog 1s 0.5s;
+    animation: prog2 1s 1.5s;
     animation-fill-mode: forwards; //애니메이션 마지막상태유지
     height: 5px;
     background-color: #fc3857;
@@ -120,4 +137,4 @@ const CenterRightComponentWrap = styled.div<{
   }
 `;
 
-export default React.memo(CenterRightComponent);
+export default React.memo(CenterRightBotComponent);
