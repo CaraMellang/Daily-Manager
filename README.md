@@ -1,32 +1,22 @@
 ## 프로젝트 소개
 
----
-
 📅하루의 일을 기록하고 보여주는 투두 웹 사이트
 
 ## 🌐프로젝트 링크
-
----
 
 [https://project-dm.netlify.app/](https://project-dm.netlify.app/)
 
 ## ⚙️개발 언어
 
----
-
 Javascript, typescript, nodejs
 
 ## ****💻****개발 스택
-
----
 
 프론트 – React, Redux toolkit, Redux-saga, styled components, chartjs, dayjs
 
 백앤드 – Express, Mongodb, Mongoose, bcrypt, jwt
 
 ## 배포
-
----
 
 Front
 
@@ -38,13 +28,9 @@ Back
 
 ## ****⏱****개발기간
 
----
-
 2021.10.01 ~ 2021.12.17 (약 2개월)
 
 ## 프로젝트 기능
-
----
 
 - 로그인, 회원가입, 로그아웃 구현
 - Jwt를 통해 로그인 유지
@@ -54,8 +40,6 @@ Back
 - 반응형으로 설계하여 모바일 가능.
 
 ## 문제와 해결
-
----
 
 1. DB 선택
 
@@ -79,8 +63,6 @@ Back
 
 ## 추후 보완사항
 
----
-
 - Oauth 2.0을 사용하여 구글, 카카오 소셜 로그인 기능 추가
 - aws를 사용해 배포
 - 배포사이트에서 Todo 생성 , 수정할때 날짜가 수시간 전으로 DB에 저장되는 사항수정.
@@ -88,13 +70,9 @@ Back
 
 ## 프로젝트 아키텍쳐
 
----
-
 ![image](https://user-images.githubusercontent.com/51808985/159106580-58764cba-eb5a-48ea-85aa-0abc87ec8a24.png)
 
 ## 사이트 화면
-
----
 
 ### **[로그인 && 회원가입]**
 
