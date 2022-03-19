@@ -12,9 +12,29 @@ Javascript, typescript, nodejs
 
 ## ****💻****개발 스택
 
-프론트 – React, Redux toolkit, Redux-saga, styled components, chartjs, dayjs
+### Front
+<p align='center'>
+    <img src="https://img.shields.io/badge/Typescript-v4.4.3-blue?logo=typescript"/>
+    <img src="https://img.shields.io/badge/React-v17.0.2-blue?logo=React"/>
+    <img src="https://img.shields.io/badge/styled components-v5.3.1-pink?logo=react">
+<!--     <img src="https://img.shields.io/badge/redux-v4.1.1-blue?logo=react"> -->
+<!--     <img src="https://img.shields.io/badge/react redux-v7.2.5-blue?logo=react"> -->
+    <img src="https://img.shields.io/badge/redux toolkit-v1.6.2-blue?logo=react">
+<!--     <img src="https://img.shields.io/badge/redux persist-v6.0.0-blue?logo=react"> -->
+    <img src="https://img.shields.io/badge/redux saga-v1.1.3-blue?logo=react">
+    <img src="https://img.shields.io/badge/dayjs-v1.10.7-blue?logo=dayjs">
+    <img src="https://img.shields.io/badge/chartjs-v3.5.1-blue?logo=chartjs">
+</p>
+<!-- React, styled-components, react-chartjs-2, typescript, redux, react-redux, redux toolkit, redux-persist, redux-saga -->
 
-백앤드 – Express, Mongodb, Mongoose, bcrypt, jwt
+### Back
+<p align='center'>
+    <img src="https://img.shields.io/badge/Express-v4.17.1-aaa?logo=express">
+    <img src="https://img.shields.io/badge/Mongodb-v5.0.3-critical?logo=mongodb">
+    <img src="https://img.shields.io/badge/mongoose-v6.0.13-critical?logo=mongodb">
+    <img src="https://img.shields.io/badge/JWT-v8.5.1-critical?logo=jsonwebtoken">
+    <img src="https://img.shields.io/badge/bcrypt-v5.0.1-critical?logo=bcrypt">
+</p>
 
 ## 배포
 
