@@ -7,14 +7,16 @@
 [https://project-dm.netlify.app/](https://project-dm.netlify.app/)
 
 ## ⚙️개발 언어
-
-Javascript, typescript, nodejs
+<div align='center'>
+    <img src="https://img.shields.io/badge/Javascript-gray?logo=javascript"/>
+    <img src="https://img.shields.io/badge/Typescript-gray?logo=typescript"/>
+</div>
 
 ## ****💻****개발 스택
 
 ### Front
 <p align='center'>
-    <img src="https://img.shields.io/badge/Typescript-v4.4.3-blue?logo=typescript"/>
+<!--     <img src="https://img.shields.io/badge/Typescript-v4.4.3-blue?logo=typescript"/> -->
     <img src="https://img.shields.io/badge/React-v17.0.2-blue?logo=React"/>
     <img src="https://img.shields.io/badge/styled components-v5.3.1-pink?logo=react">
 <!--     <img src="https://img.shields.io/badge/redux-v4.1.1-blue?logo=react"> -->
