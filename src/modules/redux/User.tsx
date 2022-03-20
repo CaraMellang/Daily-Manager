@@ -43,12 +43,40 @@ const userSlice = createSlice({
       state.user.username = "";
       state.user.createdAt = "";
     },
+    VERIFY_REQUEST: (state: any, action: any) => {
+      state.signinLoading = true;
+      state.signinLoading = false;
+      state.signinError = null;
+    },
+
+    VERIFY_SUCCESS: (state: any, action: any) => {
+      console.log("zzzzzzz", action);
+      state.signinLoading = false;
+      state.signinSucceed = true;
+      state.user.userId = action.payload.userId;
+      state.user.email = action.payload.email;
+      state.user.username = action.payload.username;
+      state.user.createdAt = action.payload.createdAt;
+    },
+    VERIFY_FAILED: (state: any, action: any) => {
+      console.log(action);
+      state.signinSucceed = false;
+      state.signinLoading = false;
+      state.signinError = action.payload.response.data;
+    },
   },
 });
 
 const userSliceReducer = userSlice.reducer;
 
-export const { SIGNIN_REQUEST, SIGNIN_SUCCESS, SIGNIN_FAILED, SIGNOUT } =
-  userSlice.actions;
+export const {
+  SIGNIN_REQUEST,
+  SIGNIN_SUCCESS,
+  SIGNIN_FAILED,
+  SIGNOUT,
+  VERIFY_REQUEST,
+  VERIFY_SUCCESS,
+  VERIFY_FAILED,
+} = userSlice.actions;
 
 export default userSliceReducer;

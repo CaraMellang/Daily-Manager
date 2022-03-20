@@ -13,6 +13,7 @@ import CurrentDay from "../components/CurrentDay";
 import HomePortal from "../components/Home/HomePortal";
 import HomeModal from "../components/Home/HomeModal";
 import media from "../lib/media";
+import { useCookies } from "react-cookie";
 
 const Home = () => {
   let dd: any[] = [];
@@ -31,6 +32,10 @@ const Home = () => {
   const dispatch = useDispatch();
   const selector: any = useSelector((state) => state);
   const { userSliceReducer } = selector;
+
+  const [cookiesToken, setCookieToken, removeCookieToken] = useCookies([
+    "rememberToken",
+  ]);
 
   if (selector.todosSliceReducer.todosSuccess) {
     dd = selector.todosSliceReducer.todos.filter(
@@ -60,18 +65,22 @@ const Home = () => {
   };
 
   useEffect(() => {
-
-    const token = userSliceReducer.user.accessToken;
+    const accessToken = cookiesToken.rememberToken;
     const userId = userSliceReducer.user.userId;
-    dispatch(TODOS_REQUEST({ token, userId }));
-
+    dispatch(TODOS_REQUEST({ accessToken, userId }));
   }, [complete]);
+
+  useEffect(() => {
+    // const accessToken = cookiesToken.rememberToken;
+    // const userId = userSliceReducer.user.userId;
+    // console.log("왜지랄이야", accessToken, userId);
+    // dispatch(TODOS_REQUEST({ accessToken, userId }));
+  }, []);
 
   if (selector.todosSliceReducer.todosSuccess) {
     return (
       <HomeWrap>
         <div className="content">
-
           <div
             style={{
               display: "flex",

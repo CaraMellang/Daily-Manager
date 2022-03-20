@@ -6,7 +6,7 @@ import { TODOS_FAILED, TODOS_SUCCESS } from "../redux/Todos";
 
 async function postGetTodoData(data: any) {
   // console.log("포스트 투두 사가실행확인");
-  return await axios.post(`${backPath}/todo/read`, data);
+  return await axios.post(`${backPath}/todo/read`, {userId:data.userId},{headers:{authorization:`bearer ${data.accessToken}`}});
 }
 
 export function* postGetTodoSaga(action: any): Generator {

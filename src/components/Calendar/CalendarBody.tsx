@@ -48,7 +48,7 @@ const CalendarBody = ({
   const [clickDate, setClickDate] = useState(0);
   const userSelector: any = useSelector((state) => state);
   const selector: any = useSelector((state) => state);
-  const { todosSuccess }: any = useSelector(
+  const { todosSuccess } = useSelector(
     (state: any) => state.todosSliceReducer.todosSuccess
   );
 

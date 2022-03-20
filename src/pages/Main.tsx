@@ -1,14 +1,18 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Route, useHistory } from "react-router-dom";
 import Loading from "../components/Loading";
 import Calender from "./Calender";
 import Charts from "./Charts";
 import Home from "./Home";
 import SignForm from "./SignForm";
-import { SIGNIN_FAILED } from "../modules/redux/User";
+import {
+  SIGNIN_FAILED,
+  VERIFY_REQUEST,
+  VERIFY_SUCCESS,
+} from "../modules/redux/User";
 import { backPath } from "../lib/HttpPath";
 import HeaderBlock from "../components/Header/HeaderBlcok";
 import styled from "styled-components";
@@ -24,7 +28,7 @@ const Main = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const onSignHandler = () => {
-    setIsSign(false); 
+    setIsSign(false);
   };
 
   const isSignHandle = (bool: boolean) => {
@@ -35,11 +39,14 @@ const Main = () => {
   };
 
   const postSign = async () => {
+    console.log(cookiesToken.rememberToken);
     await axios
       .post(`${backPath}/auth/verify`, ".", {
-        headers: { Authorization: `Bearer ${cookiesToken.rememberToken}` },
+        headers: { authorization: `Bearer ${cookiesToken.rememberToken}` },
       })
       .then((d) => {
+        console.log("테스트", d.data.data);
+        dispatch(VERIFY_SUCCESS(d.data.data));
         setIsSign(false);
         setLoadingSpin(false);
       })
@@ -48,7 +55,7 @@ const Main = () => {
         console.dir(e.response.data.status);
         setLoadingSpin(false);
         window.alert(ResponseStatusCode(e.response.data.status).msg);
-        dispatch(SIGNIN_FAILED(e));
+        // dispatch(SIGNIN_FAILED(e));
         removeCookieToken(`rememberToken`);
         setIsSign(true);
         history.push("/");

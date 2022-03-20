@@ -24,7 +24,7 @@ const store = configureStore({
   reducer: rootReducer,
   middleware: [sagaMiddleware],
 });
-const persistor = persistStore(store);
+// const persistor = persistStore(store);
 
 sagaMiddleware.run(mySaga);
 
@@ -32,9 +32,11 @@ ReactDOM.render(
   // <React.StrictMode>
   <Provider store={store}>
     <CookiesProvider>
-      <PersistGate loading={null} persistor={persistor}>
+      {/* <PersistGate loading={null} 
+      persistor={persistor}
+      > */}
         <App />
-      </PersistGate>
+      {/* </PersistGate> */}
     </CookiesProvider>
   </Provider>,
   document.getElementById("root")
