@@ -14,6 +14,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { backPath } from "../../lib/HttpPath";
 import { TODOS_REQUEST } from "../../modules/redux/Todos";
 import ResponseStatusCode from "../../lib/ResponseStatusCode";
+import { useCookies } from "react-cookie";
 
 interface ModalListItemProps {
   Todos: Todo;
@@ -35,6 +36,9 @@ function ModalListItem({
   //   const clone = JSON.parse(JSON.stringify(DateInfo)); // deep copy 개느림.
   const selector: any = useState((state: any) => state);
   const dispatch = useDispatch();
+  const [cookiesToken, setCookieToken, removeCookieToken] = useCookies([
+    "rememberToken",
+  ]);
 
   const deleteClick = async (e: any) => {
     const data = {
@@ -42,7 +46,7 @@ function ModalListItem({
       todoId: Todos._id,
     };
     await axios
-      .delete(`${backPath}/todo/delete`, { data })
+      .delete(`${backPath}/todo/delete`, { data , headers:{authorization:`bearer ${cookiesToken.rememberToken}`} } )
       .then((rr) => {})
       .catch((e) => {
         console.log(e);
@@ -52,12 +56,11 @@ function ModalListItem({
   const checkedHandle = async (e: any) => {
     setCheckBox((prev) => !prev);
     const data = {
-      token: userSelector.userSliceReducer.user.accessToken,
       todoId: Todos._id,
       success: checkBox,
     };
     await axios
-      .patch(`${backPath}/todo/updatesuc`, data)
+      .patch(`${backPath}/todo/updatesuc`, data,{headers:{authorization:`bearer ${cookiesToken.rememberToken}`}})
       .then((res) => {
         completeHandle(false);
       })

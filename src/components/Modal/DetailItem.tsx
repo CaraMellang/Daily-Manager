@@ -10,6 +10,7 @@ import { calendarDates } from "../../lib/DateArrays";
 import { backPath } from "../../lib/HttpPath";
 import CurrentDay from "../CurrentDay";
 import media from "../../lib/media";
+import { useCookies } from "react-cookie";
 
 interface DetailItemProps {
   clickListToggleHandle(bool: boolean): void;
@@ -30,6 +31,9 @@ function DetailItem({
   let todoId = clickList.todoId;
   const [checkBox, setCheckBox] = useState(clickList.success);
   const userSelector: any = useSelector((state) => state);
+  const [cookiesToken, setCookieToken, removeCookieToken] = useCookies([
+    "rememberToken",
+  ]);
 
   let createdAt = dayjs(new Date(clickList.createdAt.slice(0, 19))).format(
     `YYYY-MM-DD HH:mm:ss`
@@ -50,13 +54,12 @@ function DetailItem({
   };
   const onClickFix = async () => {
     const data = {
-      token: userSelector.userSliceReducer.user.accessToken,
       todoId: todoId,
       todo: text,
       success: checkBox,
     };
     await axios
-      .patch(`${backPath}/todo/updatetodo`, data)
+      .patch(`${backPath}/todo/updatetodo`, data,{headers:{authorization:`bearer ${cookiesToken.rememberToken}`}})
       .then((res) => {
       })
       .catch((e) => {

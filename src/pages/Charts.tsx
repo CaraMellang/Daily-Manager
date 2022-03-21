@@ -1,6 +1,7 @@
 import dayjs from "dayjs";
 import React, { useEffect, useState } from "react";
 import { Bar, Doughnut, Line } from "react-chartjs-2";
+import { useCookies } from "react-cookie";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import BottomComponent from "../components/ChartsComponents/BottomComponent";
@@ -18,15 +19,18 @@ const Charts = () => {
   const { userSliceReducer } = selector;
   const dispatch = useDispatch();
   const { activeMobile, innerWidth } = useMobile(false);
+  const [cookiesToken, setCookieToken, removeCookieToken] = useCookies([
+    "rememberToken",
+  ]);
 
   const columnToggleHandle = (): string => {
     return innerWidth < 425 ? `col` : `row`;
   };
 
   useEffect(() => {
-    const token = userSliceReducer.user.accessToken;
+    const accessToken = cookiesToken.rememberToken;
     const userId = userSliceReducer.user.userId;
-    dispatch(TODOS_REQUEST({ token, userId }));
+    dispatch(TODOS_REQUEST({ accessToken, userId }));
   }, []);
 
   if (selector.todosSliceReducer.todosSuccess) {

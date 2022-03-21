@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useState } from "react";
+import { useCookies } from "react-cookie";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { backPath } from "../../lib/HttpPath";
@@ -11,6 +12,9 @@ interface CreateTodoProps {
 
 function CreateTodo({ completeHandle }: CreateTodoProps) {
   const [text, setText] = useState("");
+  const [cookiesToken, setCookieToken, removeCookieToken] = useCookies([
+    "rememberToken",
+  ]);
 
   const dispatch = useDispatch();
   const selector: any = useSelector((state) => state);
@@ -21,12 +25,11 @@ function CreateTodo({ completeHandle }: CreateTodoProps) {
   const onCreateSubmit = async (e: any) => {
     e.preventDefault();
     const data = {
-      token: selector.userSliceReducer.user.accessToken,
       todo: text,
     };
 
     await axios
-      .post(`${backPath}/todo/create`, data)
+      .post(`${backPath}/todo/create`, data,{headers:{authorization:`bearer ${cookiesToken.rememberToken}`}})
       .then((res) => {
         completeHandle(false);
         setText("");
