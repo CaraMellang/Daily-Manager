@@ -114,7 +114,6 @@ const SignInBox = styled.div`
     position: relative;
     background-color: white;
     border-radius: 10px;
-    /* box-shadow: 0 0 20px 0 rgb(0 0 0 / 20%), 0 10px 10px 0 rgb(0 0 0 / 12%); */
   }
   .form {
     padding: 55px;

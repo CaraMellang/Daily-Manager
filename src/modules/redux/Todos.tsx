@@ -31,7 +31,7 @@ const todosSlice = createSlice({
     TODOS_FAILED: (state, action) => {
       state.todosLoading = false;
       state.todosSuccess = false;
-      state.todosError = ""; //몰?루
+      state.todosError = ""; 
     },
   },
 });

@@ -62,7 +62,6 @@ const DesktopHeaderWrap = styled.header`
   color: black;
   background-color: white;
   height: 70px;
-  /* height: 7.5vh; */
   font-weight: bold;
   .padd {
     box-sizing: border-box;

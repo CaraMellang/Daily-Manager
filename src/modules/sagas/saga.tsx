@@ -1,11 +1,9 @@
-import axios from "axios";
-import { call, put, takeLatest } from "redux-saga/effects";
-import { SIGNIN_FAILED, SIGNIN_SUCCESS } from "../redux/User";
+import { takeLatest } from "redux-saga/effects";
 import { postGetTodoSaga } from "./todoSaga";
 import { postUser, verifyUser } from "./userSaga";
 
 const userSignInRequestType = "userReducer/SIGNIN_REQUEST";
-const todoPostReadRequestType = "todosReducer/TODOS_REQUEST"; //read
+const todoPostReadRequestType = "todosReducer/TODOS_REQUEST";
 const userVerifySigninRequestType = "userReducer/VERIFY_REQUEST"
 
 function* mySaga() {

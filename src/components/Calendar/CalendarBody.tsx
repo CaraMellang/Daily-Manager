@@ -52,7 +52,6 @@ const CalendarBody = ({
     (state: any) => state.todosSliceReducer.todosSuccess
   );
 
-  const dispatch = useDispatch();
   const daysArray = ["일", "월", "화", "수", "목", "금", "토"];
 
   const paintCalendar = async (userSliceReducer: any) => {
@@ -109,7 +108,7 @@ const CalendarBody = ({
           date: 404,
           month: currentMonth.get("month"),
           fulldate: currentMonth.format("YYYY-MM-DD"),
-          descrition: "공란날짜임",
+          descrition: "공란날짜",
           todos: [],
         };
         dateArray.push(data);
@@ -137,7 +136,6 @@ const CalendarBody = ({
       year: currentMonth.toDate().getFullYear(),
       month: currentMonth.toDate().getMonth() + 1,
       date: currentMonth.toDate().getDate(),
-      gd: "???",
     };
     const todos = await axios.post(`${backPath}/todo/findcurrmonth`, data);
     if (todos.data.data.length === 0) {
@@ -237,19 +235,6 @@ const CalendarBody = ({
             </div>
           );
         })}
-        {/* {dateModalToggle && (
-                        <div style={{ color: "yellow", textAlign: "center" }}>
-                          <FontAwesomeIcon icon={faStar} className="scale1-4" />
-                        <ModalPortal>
-                          <Modal
-                            toggleClick={toggleClick}
-                            dateModalToggle={dateModalToggle}
-                            DateInfo={i}
-                            completeHandle={completeHandle}
-                          />
-                        </ModalPortal>
-                        </div>
-                      )} */}
       </CalendarDates>
     </CalendarBodyWrap>
   );

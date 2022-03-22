@@ -36,11 +36,10 @@ function CompleteTodo({
       await axios
         .delete(`${backPath}/todo/delete`, { data })
         .then((rr) => {
-          console.log("야호", rr);
           completeHandle(false);
         })
         .catch((e) => {
-          console.log("왜안되는데", e);
+          console.log(e);
         });
     }
   };
@@ -114,7 +113,7 @@ const CompleteTodoWrap = styled.div`
     }
     .fix-but {
       animation: fade 0.2s;
-      animation-fill-mode: forwards; //애니메이션 마지막상태유지
+      animation-fill-mode: forwards; 
     }
     .del-but {
       animation: fade 0.2s 0.1s;

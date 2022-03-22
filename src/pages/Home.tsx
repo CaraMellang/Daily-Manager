@@ -16,7 +16,7 @@ import media from "../lib/media";
 import { useCookies } from "react-cookie";
 
 const Home = () => {
-  let dd: any[] = [];
+  let todosArray: any[] = [];
   let completeArray: Todo[] = [];
   let notCompleteArray: Todo[] = [];
   const [complete, setComplete] = useState(false);
@@ -38,13 +38,13 @@ const Home = () => {
   ]);
 
   if (selector.todosSliceReducer.todosSuccess) {
-    dd = selector.todosSliceReducer.todos.filter(
+    todosArray = selector.todosSliceReducer.todos.filter(
       (arr: any) =>
         arr.createdAt.getDate() === new Date().getDate() &&
         arr.createdAt.getMonth() === new Date().getMonth() &&
         arr.createdAt.getFullYear() === new Date().getFullYear()
     );
-    dd.forEach((arr) => {
+    todosArray.forEach((arr) => {
       if (arr.success) {
         completeArray.push(arr);
       }
@@ -69,13 +69,6 @@ const Home = () => {
     const userId = userSliceReducer.user.userId;
     dispatch(TODOS_REQUEST({ accessToken, userId }));
   }, [complete]);
-
-  useEffect(() => {
-    // const accessToken = cookiesToken.rememberToken;
-    // const userId = userSliceReducer.user.userId;
-    // console.log("왜지랄이야", accessToken, userId);
-    // dispatch(TODOS_REQUEST({ accessToken, userId }));
-  }, []);
 
   if (selector.todosSliceReducer.todosSuccess) {
     return (

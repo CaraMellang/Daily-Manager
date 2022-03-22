@@ -10,7 +10,6 @@ interface SignIUpProps {
 
 const SignUp = ({ onSignInToggle, onSignHandler }: SignIUpProps) => {
   const [inputEmail, setInputEmail] = useState("");
-  // const [inputId, setInputId] = useState("");
   const [inputUsername, setInputUsername] = useState("");
   const [inputPw, setInputPw] = useState("");
 
@@ -104,7 +103,6 @@ const SignUpBox = styled.div`
     position: relative;
     background-color: white;
     border-radius: 10px;
-    /* box-shadow: 0 0 20px 0 rgb(0 0 0 / 20%), 0 10px 10px 0 rgb(0 0 0 / 12%); */
   }
   .form {
     padding: 55px;
@@ -139,7 +137,6 @@ const SignUpBox = styled.div`
   }
   .sign-in {
     cursor: pointer;
-    /* color: #4caf50; */
     color: rgba(252, 114, 114, 1);
   }
 `;

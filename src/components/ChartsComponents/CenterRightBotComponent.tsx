@@ -15,33 +15,14 @@ const CenterRightBotComponent = ({
   const [time, setTime] = useState(0);
   const [allow, setAllow] = useState(false);
   const [fadein, setFadein] = useState(0);
-  //   setTimeout(() => {
-  //     setAllow(true);
-  //   }, 500);
+  
   setTimeout(() => {
     setFadein(1);
   }, order * 100);
   setTimeout(() => {
     setTime(1);
   }, order * 200);
-  useEffect(() => {
-    // if (allow === true) {
-    //   const progressBar = setInterval(() => {
-    //     // console.log(count);
-    //     if (count >= progress) {
-    //       clearInterval(progressBar);
-    //       setTime(1);
-    //       return;
-    //     }
-    //     setCount(count + 1);
-    //   }, 10);
-    //   return () => {
-    //     clearInterval(progressBar);
-    //     setAllow(false);
-    //   };
-    // }
-    return () => {};
-  }, []);
+  
   return (
     <CenterRightBotComponentWrap
       time={time}
@@ -75,8 +56,6 @@ const CenterRightBotComponentWrap = styled.div<{
   padding: 1rem;
   border-radius: 10px;
   box-shadow: 0 0.15rem 1.75rem 0 rgb(34 39 46 / 15%);
-  /* opacity: ${(props) => props.fadein};
-  transition: opacity ${(props) => props.order / 2}s ease-in-out; */
   opacity: 0;
   @keyframes opa {
     from {
@@ -87,12 +66,10 @@ const CenterRightBotComponentWrap = styled.div<{
     }
   }
   animation: opa 0.8s;
-  animation-fill-mode: forwards; //애니메이션 마지막상태유지
+  animation-fill-mode: forwards; 
 
   .count-per {
     text-align: end;
-    /* opacity: ${(props) => props.time}; */
-    /* transition: opacity 1s ease-in-out; */
 
     opacity: 0;
     @keyframes opa {
@@ -104,7 +81,7 @@ const CenterRightBotComponentWrap = styled.div<{
       }
     }
     animation: opa 0.5s 2.5s;
-    animation-fill-mode: forwards; //애니메이션 마지막상태유지
+    animation-fill-mode: forwards; 
   }
   .progress-back {
     position: relative;
@@ -130,7 +107,7 @@ const CenterRightBotComponentWrap = styled.div<{
       }
     }
     animation: prog2 1s 1.5s;
-    animation-fill-mode: forwards; //애니메이션 마지막상태유지
+    animation-fill-mode: forwards; 
     height: 5px;
     background-color: #fc3857;
     border-radius: 10px;

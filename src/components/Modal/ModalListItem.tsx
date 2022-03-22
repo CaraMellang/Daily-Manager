@@ -33,9 +33,6 @@ function ModalListItem({
 }: ModalListItemProps) {
   const [checkBox, setCheckBox] = useState(Todos.success);
   const userSelector: any = useSelector((state) => state);
-  //   const clone = JSON.parse(JSON.stringify(DateInfo)); // deep copy 개느림.
-  const selector: any = useState((state: any) => state);
-  const dispatch = useDispatch();
   const [cookiesToken, setCookieToken, removeCookieToken] = useCookies([
     "rememberToken",
   ]);
@@ -46,7 +43,10 @@ function ModalListItem({
       todoId: Todos._id,
     };
     await axios
-      .delete(`${backPath}/todo/delete`, { data , headers:{authorization:`bearer ${cookiesToken.rememberToken}`} } )
+      .delete(`${backPath}/todo/delete`, {
+        data,
+        headers: { authorization: `bearer ${cookiesToken.rememberToken}` },
+      })
       .then((rr) => {})
       .catch((e) => {
         console.log(e);
@@ -60,7 +60,9 @@ function ModalListItem({
       success: checkBox,
     };
     await axios
-      .patch(`${backPath}/todo/updatesuc`, data,{headers:{authorization:`bearer ${cookiesToken.rememberToken}`}})
+      .patch(`${backPath}/todo/updatesuc`, data, {
+        headers: { authorization: `bearer ${cookiesToken.rememberToken}` },
+      })
       .then((res) => {
         completeHandle(false);
       })
@@ -79,19 +81,13 @@ function ModalListItem({
       updatedAt: Todos.updatedAt,
       fulldate,
     };
-    // console.log(data);
     onClickListHandle(data);
     clickListToggleHandle(true);
-  };
-
-  const stopBubbling = (e: any) => {
-    e.stopPropagation();
   };
 
   return (
     <ModalListItemWrap>
       <div>
-        {/* {checkBox ? ( 왜 얘는 안됨? */}
         {Todos.success ? (
           <FontAwesomeIcon
             icon={faCheckCircle}
@@ -134,23 +130,18 @@ const ModalListItemWrap = styled.div`
   div {
     font-weight: bold;
     :nth-child(1) {
-      //사용법 : 부모태그 기준으로 div라는 태그들중 1번째 div에 적용
-      /* width: 5%; */
       flex: 0.5 10;
     }
     :nth-child(2) {
-      /* width: 85%; */
       flex: 8 10;
     }
     :nth-child(3) {
-      /* width: 10%; */
       display: flex;
       flex: 1.5 10;
       justify-content: space-evenly;
     }
   }
   .complete-todo-checking {
-    /* text-decoration: line-through; */
     color: gray;
   }
   .items-icon {

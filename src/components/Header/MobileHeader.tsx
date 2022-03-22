@@ -111,7 +111,6 @@ const MobileHeaderWrap = styled.header<{ menuOn: boolean }>`
   color: black;
   background-color: white;
   height: 70px;
-  /* height: 7.5vh; */
   font-weight: bold;
   .padd {
     box-sizing: border-box;
@@ -122,7 +121,6 @@ const MobileHeaderWrap = styled.header<{ menuOn: boolean }>`
     height: 100%;
     display: flex;
     justify-content: space-between;
-    /* gap: 12rem; */
     margin: 0 auto;
     align-items: center;
   }
@@ -208,8 +206,6 @@ const MobileHeaderWrap = styled.header<{ menuOn: boolean }>`
     color: white;
   }
   .page-toggle {
-    /* padding-bottom: 0.25rem;
-    border-bottom: 5px solid rgba(252, 114, 114, 1); */
     color: white;
     background-color: rgba(252, 114, 114, 1);
   }

@@ -22,10 +22,6 @@ const CenterRightTopComponent = ({
     setTime(1);
   }, order * 200);
 
-  useEffect(() => {
-    return () => {};
-  }, []);
-
   return (
     <CenterRightTopComponentWrap
       time={time}
@@ -59,8 +55,6 @@ const CenterRightTopComponentWrap = styled.div<{
   padding: 1rem;
   border-radius: 10px;
   box-shadow: 0 0.15rem 1.75rem 0 rgb(34 39 46 / 15%);
-  /* opacity: ${(props) => props.fadein}; */
-  /* transition: opacity ${(props) => props.order / 2}s ease-in-out; */
   opacity: 0;
   @keyframes opa {
     from {
@@ -71,12 +65,10 @@ const CenterRightTopComponentWrap = styled.div<{
     }
   }
   animation: opa 0.2s;
-  animation-fill-mode: forwards; //애니메이션 마지막상태유지
+  animation-fill-mode: forwards; 
 
   .count-per {
     text-align: end;
-    /* opacity: ${(props) => props.time};
-    transition: opacity 1s ease-in-out; */
     opacity: 0;
     @keyframes opa {
       from {
@@ -87,7 +79,7 @@ const CenterRightTopComponentWrap = styled.div<{
       }
     }
     animation: opa 0.5s 1.5s;
-    animation-fill-mode: forwards; //애니메이션 마지막상태유지
+    animation-fill-mode: forwards; 
   }
 
   .progress-back {
@@ -113,7 +105,7 @@ const CenterRightTopComponentWrap = styled.div<{
       }
     }
     animation: prog 1s 0.5s;
-    animation-fill-mode: forwards; //애니메이션 마지막상태유지
+    animation-fill-mode: forwards; 
     height: 5px;
     background-color: #fc3857;
     border-radius: 10px;

@@ -15,16 +15,10 @@ import { all, call } from "@redux-saga/core/effects";
 
 const sagaMiddleware = createSagaMiddleware();
 
-// function* rootSaga() {
-//   yield all([call(mySaga())]);
-// }
-
-// const store = createStore(rootReducer);
 const store = configureStore({
   reducer: rootReducer,
   middleware: [sagaMiddleware],
 });
-// const persistor = persistStore(store);
 
 sagaMiddleware.run(mySaga);
 
@@ -32,11 +26,7 @@ ReactDOM.render(
   // <React.StrictMode>
   <Provider store={store}>
     <CookiesProvider>
-      {/* <PersistGate loading={null} 
-      persistor={persistor}
-      > */}
         <App />
-      {/* </PersistGate> */}
     </CookiesProvider>
   </Provider>,
   document.getElementById("root")

@@ -38,7 +38,6 @@ function DetailItem({
   let createdAt = dayjs(new Date(clickList.createdAt.slice(0, 19))).format(
     `YYYY-MM-DD HH:mm:ss`
   );
-  // console.log(clickList.updateAt)
   let updatedAt =
     clickList.updatedAt !== null
       ? dayjs(new Date(clickList.updatedAt.slice(0, 19))).format(
@@ -92,7 +91,7 @@ function DetailItem({
               type="text"
               value={text}
               onChange={onTextChange}
-              spellCheck={false} // 맞춤법 검사 끄기
+              spellCheck={false}
             />
           </div>
           <div className="row space-evenly">

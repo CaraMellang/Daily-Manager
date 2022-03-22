@@ -83,20 +83,6 @@ const ModalListWrap = styled.div`
       font-size: 1.5rem;
     }
   }
-
-  /* .MyModal {
-    z-index: 1000;
-    //background: rgba(0, 0, 0, 0.25);
-    position: fixed;
-    left: 0;
-    top: 0;
-    height: 100%;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  } */
-
   .modalbutton {
     display: block;
     font-size: 18px;
@@ -109,16 +95,7 @@ const ModalListWrap = styled.div`
     cursor: pointer;
     width: 100%;
     border-radius: 0 0 12px 12px;
-  } /* 
-  .modaltextarea {
-    font-weight: bold;
-    font-size: 24px;
-    box-sizing: border-box;
-    width: 100%;
-    height: 200px;
-    resize: none;
-    transition: height 1s;
-  } */
+  } 
   .not-thing {
     color: gray;
     text-align: center;

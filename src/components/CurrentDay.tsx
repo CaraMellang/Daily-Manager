@@ -28,7 +28,6 @@ function CurrentDay({ fullDay }: CurrentDayProps) {
 const CurrentDayWrap = styled.div`
   display: flex;
   font-weight: bold;
-  /* justify-content: center; */
   .date {
     font-size: 4rem;
   }

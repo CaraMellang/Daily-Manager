@@ -8,8 +8,7 @@ interface HeaderBlockProps {
 }
 function HeaderBlock({ setIsSign }: HeaderBlockProps) {
   const { activeMobile } = useMobile(false);
-  useEffect(() => {
-  }, []);
+  
   return (
     <div>
       {activeMobile ? (

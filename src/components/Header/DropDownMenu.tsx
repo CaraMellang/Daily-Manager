@@ -87,9 +87,6 @@ const DropDownMenuWrap = styled.div`
     margin: 0;
   }
 
-  .menu li {
-    /* border-bottom: 1px solid #dddddd; */
-  }
 
   .menu li div {
     text-decoration: none;

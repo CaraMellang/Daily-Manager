@@ -1,12 +1,7 @@
 import dayjs from "dayjs";
-import { useSelector } from "react-redux";
 const currDate = dayjs(new Date());
 
 export function ChartLineData(todos: []) {
-  // const selector: any = useSelector((state) => state);
-  // const {
-  //   todosSliceReducer: { todos },
-  // } = selector;
   let lineDatas: any = [
     { compleData: [], planData: [] },
     { compleData: [], planData: [] },

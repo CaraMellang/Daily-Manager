@@ -18,7 +18,6 @@ function Clock() {
       setTime(dayjs(new Date()));
     }, 1000);
     return () => {
-      // console.log("시계죽음 ㅋㅋ");
       clearInterval(inter);
     };
   }, []);
@@ -41,7 +40,6 @@ const ClockWrap = styled.div`
     align-items: flex-end;
     font-size: 2rem;
     margin-bottom: 11px;
-    /* padding-bottom: 0.5rem; */
   }
   .time {
     display: flex;

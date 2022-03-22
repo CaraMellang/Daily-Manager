@@ -74,7 +74,6 @@ const MyModalWrap = styled.div`
   }
   .MyModal {
     z-index: 1000;
-    /* background: rgba(0, 0, 0, 0.25); */
     position: fixed;
     left: 0;
     top: 0;

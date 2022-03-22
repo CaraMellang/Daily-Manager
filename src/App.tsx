@@ -17,8 +17,6 @@ const App = () => {
 
 const GlobalStyled = createGlobalStyle`
 html , body , #root{
-  /* height:100%; */
-  /* background: #181818; */
   background: rgb(241, 147, 147);
   background: linear-gradient(
     180deg,
@@ -26,11 +24,8 @@ html , body , #root{
     rgba(182, 114, 114, 1) 100%
   );
   background-repeat:no-repeat;
-  /* background: #181818; */
-  /* #121212 */
   color:white;
   width:100%;
-  /* height:100%; */
   height:100vh;
   font-family: 'Spoqa Han Sans Neo', 'sans-serif'; 
 }
@@ -43,15 +38,12 @@ input:focus{
 }
   body::-webkit-scrollbar {
     width: 6px;
-    /* border-radius: 10px; */
   }
   body::-webkit-scrollbar-thumb {
     background-color: #2f3542;
-    /* border-radius: 10px; */
   }
   body::-webkit-scrollbar-track {
     background-color: grey;
-    /* border-radius: 10px; */
   }
 `;
 

@@ -86,7 +86,6 @@ const Charts = () => {
                   <div className="chart-top w-100">
                     <div className={`gap ${columnToggleHandle()}`}>
                       <div className="top-item">
-                        {/* 뭘봐{userSelector.username} 입니다~~ */}
                         <TopComponent
                           title={`전체 완료 수`}
                           data={
@@ -97,7 +96,6 @@ const Charts = () => {
                         />
                       </div>
                       <div className="top-item">
-                        {/* 뭘봐{userSelector.createdAt} 입니다~~ */}
                         <TopComponent
                           title={`전체 작성 수`}
                           data={selector.todosSliceReducer.todos.length}
@@ -188,12 +186,6 @@ const Charts = () => {
 const ChartsWrap = styled.div`
   text-align: center;
   font-weight: bold;
-  /* background: rgb(241, 147, 147);
-  background: linear-gradient(
-    180deg,
-    rgba(19, 68, 88, 1) 10%,
-    rgba(182, 114, 114, 1) 100%
-  ); */
   .content {
     width: 768px;
     margin: auto;
@@ -210,17 +202,10 @@ const ChartsWrap = styled.div`
       padding: 0.5rem;
     }
   }
-  /* 134458 */
   .charts {
     color: black;
     padding: 1rem;
     background-color: rgba(255, 255, 255, 0.2);
-    /* background: rgb(168, 237, 234);
-    background: linear-gradient(
-      0deg,
-      rgba(168, 237, 234, 1) 0%,
-      rgba(254, 214, 227, 1) 100%
-    ); */
     border-radius: 12px;
   }
   .col {
@@ -294,16 +279,6 @@ const ChartsWrap = styled.div`
     background-color: white;
     border-radius: 0 0 10px 10px;
   }
-  /* .center-right-item-header {
-    color: white;
-    border-radius: 10px 10px 0 0;
-    background-color: green;
-  }
-  .center-right-item-con {
-    padding-top: 1rem;
-    padding-bottom: 1rem;
-    color: #2eb500;
-  } */
   .center-right-item {
     background: rgb(252, 55, 86);
     background: linear-gradient(

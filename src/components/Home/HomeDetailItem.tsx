@@ -79,7 +79,7 @@ function HomeDetailItem({
               type="text"
               value={text}
               onChange={onTextChange}
-              spellCheck={false} // 맞춤법 검사 끄기
+              spellCheck={false} 
             />
           </div>
           <div className="row space-evenly">

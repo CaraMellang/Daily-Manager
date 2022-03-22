@@ -5,7 +5,6 @@ import { backPath } from "../../lib/HttpPath";
 import { TODOS_FAILED, TODOS_SUCCESS } from "../redux/Todos";
 
 async function postGetTodoData(data: any) {
-  // console.log("포스트 투두 사가실행확인");
   return await axios.post(`${backPath}/todo/read`, {userId:data.userId},{headers:{authorization:`bearer ${data.accessToken}`}});
 }
 
@@ -29,22 +28,6 @@ export function* postGetTodoSaga(action: any): Generator {
     });
     yield put(TODOS_SUCCESS(result));
   } catch (e) {
-    // console.log("왜이래임마", e);
     yield put(TODOS_FAILED(e));
   }
 }
-
-// async function postCreateTodoData(data:any) {
-//   console.log("이잉 gg",data)
-// }
-
-// function* postCreateTodoSaga(action:any):Generator{
-//   try{
-//     const {data:{data}}:any = yield call(postCreateTodoData,action.payload)
-
-//     console.log("createTOdo",data)
-//     yield put
-//   }catch(e){
-//     console.log(e)
-//   }
-// }
