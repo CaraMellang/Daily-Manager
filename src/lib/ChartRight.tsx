@@ -35,7 +35,6 @@ export function Progress(todos: []) {
     ).length;
 
   //전일대비 계산
-  console.log(prevCompletePer, todayCompletePer);
   let dayToDayCompletePer =
     (todayCompletePer / (prevCompletePer === 0 ? 1 : prevCompletePer)) * 100 -
     100; 

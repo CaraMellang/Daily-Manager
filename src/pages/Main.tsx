@@ -39,13 +39,11 @@ const Main = () => {
   };
 
   const postSign = async () => {
-    console.log(cookiesToken.rememberToken);
     await axios
       .post(`${backPath}/auth/verify`, ".", {
         headers: { authorization: `Bearer ${cookiesToken.rememberToken}` },
       })
       .then((d) => {
-        console.log("테스트", d.data.data);
         dispatch(VERIFY_SUCCESS(d.data.data));
         setIsSign(false);
         setLoadingSpin(false);

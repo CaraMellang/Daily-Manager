@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import styled from "styled-components";
 import { backPath } from "../../lib/HttpPath";
+import ResponseStatusCode from "../../lib/ResponseStatusCode";
 
 interface SignIUpProps {
   onSignInToggle(): void;
@@ -37,12 +38,11 @@ const SignUp = ({ onSignInToggle, onSignHandler }: SignIUpProps) => {
     await axios
       .post(`${backPath}/auth/signup`, data)
       .then((res) => {
-        console.log(res);
         window.alert("회원가입이 완료되었습니다. 로그인을 해주시기 바랍니다.");
         onSignInToggle();
       })
       .catch((e) => {
-        console.log(e);
+        window.alert(ResponseStatusCode(e.response.status).msg);
       });
   };
   return (

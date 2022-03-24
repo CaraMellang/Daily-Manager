@@ -31,7 +31,6 @@ const userSlice = createSlice({
       state.user.createdAt = action.payload.data.createdAt;
     },
     SIGNIN_FAILED: (state, action) => {
-      console.log(action);
       state.signinSucceed = false;
       state.signinLoading = false;
       state.signinError = action.payload.error;
@@ -50,7 +49,6 @@ const userSlice = createSlice({
     },
 
     VERIFY_SUCCESS: (state: any, action: any) => {
-      console.log("zzzzzzz", action);
       state.signinLoading = false;
       state.signinSucceed = true;
       state.user.userId = action.payload.userId;
