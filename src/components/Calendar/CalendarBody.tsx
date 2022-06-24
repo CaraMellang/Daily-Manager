@@ -10,6 +10,7 @@ import { backPath } from "../../lib/HttpPath";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import media from "../../lib/media";
+import Loading from "../Loading";
 
 interface CalendarBodyProps {
   currentMonth: Dayjs;
@@ -43,6 +44,7 @@ const CalendarBody = ({
   const [dates, setDates] = useState<DateInfo[]>([
     { date: 1, month: 2, fulldate: "지s", descrition: "string", todos: [] },
   ]);
+  const [loading, setLoading] = useState(false);
 
   const [dateModalToggle, setDateModalToggle] = useState(false);
   const [clickDate, setClickDate] = useState(0);
@@ -57,6 +59,7 @@ const CalendarBody = ({
   const paintCalendar = async (userSliceReducer: any) => {
     let dateArray: DateInfo[] = [];
 
+    setLoading(true);
     const todoDatas = await getCurMonthData(userSliceReducer);
 
     dayjs(currentMonth).set("date", 0).get("date");
@@ -117,6 +120,7 @@ const CalendarBody = ({
 
     setDates(dateArray);
     completeHandle(true);
+    setLoading(false);
   };
 
   const toggleClick = () => {
@@ -147,12 +151,12 @@ const CalendarBody = ({
 
   useEffect(() => {
     const { userSliceReducer, todosSliceReducer } = userSelector;
-    if (complete === false) {
+    if (complete === false && loading === false) {
       paintCalendar(userSliceReducer);
     }
 
     return () => {};
-  }, [currentMonth, complete]);
+  }, [currentMonth, complete, loading]);
   return (
     <CalendarBodyWrap>
       <CalendarDayarray>
@@ -163,17 +167,55 @@ const CalendarBody = ({
         ))}
       </CalendarDayarray>
       <CalendarDates>
-        {dates.map((i, index) => {
-          if (i.date === 404) {
-            return (
-              <div className="date-box " key={index}>
-                <div className="date ">
-                  <div className="date-box-non">{""}</div>
+        {loading ? (
+          <Loading />
+        ) : (
+          dates.map((i, index) => {
+            if (i.date === 404) {
+              return (
+                <div className="date-box " key={index}>
+                  <div className="date ">
+                    <div className="date-box-non">{""}</div>
+                  </div>
                 </div>
-              </div>
-            );
-          }
-          if (i.todos.length !== 0) {
+              );
+            }
+            if (i.todos.length !== 0) {
+              return (
+                <div className="date-box" key={index}>
+                  <div
+                    className="date"
+                    onClick={dateClick}
+                    title={i.fulldate}
+                    data-value={i.date}
+                  >
+                    <div className={`ddate red`}>
+                      <div>{i.date}</div>
+                      <div>
+                        {dateModalToggle && clickDate === i.date ? (
+                          <ModalPortal>
+                            <Modal
+                              toggleClick={toggleClick}
+                              dateModalToggle={dateModalToggle}
+                              DateInfo={i}
+                              completeHandle={completeHandle}
+                            />
+                          </ModalPortal>
+                        ) : (
+                          <div style={{ color: "yellow", textAlign: "center" }}>
+                            <FontAwesomeIcon
+                              icon={faStar}
+                              className="scale1-4"
+                            />
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              );
+            }
+
             return (
               <div className="date-box" key={index}>
                 <div
@@ -182,7 +224,7 @@ const CalendarBody = ({
                   title={i.fulldate}
                   data-value={i.date}
                 >
-                  <div className={`ddate red`}>
+                  <div className={`ddate`}>
                     <div>{i.date}</div>
                     <div>
                       {dateModalToggle && clickDate === i.date ? (
@@ -195,46 +237,15 @@ const CalendarBody = ({
                           />
                         </ModalPortal>
                       ) : (
-                        <div style={{ color: "yellow", textAlign: "center" }}>
-                          <FontAwesomeIcon icon={faStar} className="scale1-4" />
-                        </div>
+                        ""
                       )}
                     </div>
                   </div>
                 </div>
               </div>
             );
-          }
-
-          return (
-            <div className="date-box" key={index}>
-              <div
-                className="date"
-                onClick={dateClick}
-                title={i.fulldate}
-                data-value={i.date}
-              >
-                <div className={`ddate`}>
-                  <div>{i.date}</div>
-                  <div>
-                    {dateModalToggle && clickDate === i.date ? (
-                      <ModalPortal>
-                        <Modal
-                          toggleClick={toggleClick}
-                          dateModalToggle={dateModalToggle}
-                          DateInfo={i}
-                          completeHandle={completeHandle}
-                        />
-                      </ModalPortal>
-                    ) : (
-                      ""
-                    )}
-                  </div>
-                </div>
-              </div>
-            </div>
-          );
-        })}
+          })
+        )}
       </CalendarDates>
     </CalendarBodyWrap>
   );
